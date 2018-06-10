@@ -3,7 +3,7 @@ $(function () {
         url: baseURL + 'bill/bill/list',
         datatype: "json",
         colModel: [			
-			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
+			// { label: 'id', name: 'id', index: 'id', width: 50, key: true },
 			{ label: '序号', name: 'serialNo', index: 'serial_no', width: 80 }, 			
 			{ label: '运单号', name: 'trackingNo', index: 'tracking_no', width: 80 }, 			
 			{ label: '提货日期', name: 'deliveryDate', index: 'delivery_date', width: 80 }, 			
@@ -20,12 +20,12 @@ $(function () {
 			{ label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 80 }, 			
 			{ label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 80 }, 			
 			{ label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80 }, 			
-			{ label: '备注', name: 'comment', index: 'comment', width: 80 }, 			
-			{ label: '', name: 'createAt', index: 'create_at', width: 80 }, 			
-			{ label: '', name: 'createBy', index: 'create_by', width: 80 }, 			
-			{ label: '', name: 'updateAt', index: 'update_at', width: 80 }, 			
-			{ label: '', name: 'updateBy', index: 'update_by', width: 80 }, 			
-			{ label: '', name: 'isDelete', index: 'is_delete', width: 80 }			
+			{ label: '备注', name: 'comment', index: 'comment', width: 80 }
+			// { label: '', name: 'createAt', index: 'create_at', width: 80 },
+			// { label: '', name: 'createBy', index: 'create_by', width: 80 },
+			// { label: '', name: 'updateAt', index: 'update_at', width: 80 },
+			// { label: '', name: 'updateBy', index: 'update_by', width: 80 },
+			// { label: '', name: 'isDelete', index: 'is_delete', width: 80 }
         ],
 		viewrecords: true,
         height: 385,
@@ -52,6 +52,7 @@ $(function () {
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
         }
     });
+    Datetime();
 });
 
 var vm = new Vue({
@@ -136,3 +137,4 @@ var vm = new Vue({
 		}
 	}
 });
+
