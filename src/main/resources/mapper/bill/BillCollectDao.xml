@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cq.xinrong.modules.bill.dao.BillCollectDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cq.xinrong.modules.bill.entity.BillCollectEntity" id="billCollectMap">
+        <result property="id" column="id"/>
+        <result property="serialNo" column="serial_no"/>
+        <result property="address" column="address"/>
+        <result property="transpotSupplier" column="transpot_supplier"/>
+        <result property="freightType" column="freight_type"/>
+        <result property="transpotNo" column="transpot_no"/>
+        <result property="date" column="date"/>
+        <result property="lineStart" column="line_start"/>
+        <result property="lineEnd" column="line_end"/>
+        <result property="transpotProduct" column="transpot_product"/>
+        <result property="transpotMode" column="transpot_mode"/>
+        <result property="motorcycleType" column="motorcycle_type"/>
+        <result property="transpotPrice" column="transpot_price"/>
+        <result property="quantity" column="quantity"/>
+        <result property="voluneSum" column="volune_sum"/>
+        <result property="weightSum" column="weight_sum"/>
+        <result property="deliveryFee" column="delivery_fee"/>
+        <result property="advanceFeeIncludeTax" column="advance_fee_include_tax"/>
+        <result property="advanceFeeNoTax" column="advance_fee_no_tax"/>
+        <result property="status" column="status"/>
+        <result property="comment" column="comment"/>
+        <result property="reserveOne" column="reserve_one"/>
+        <result property="reserveTwo" column="reserve_two"/>
+        <result property="createAt" column="create_at"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="isDelete" column="is_delete"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="cq.xinrong.modules.bill.entity.BillCollectEntity">
+		select * from bill_collect where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="cq.xinrong.modules.bill.entity.BillCollectEntity">
+		select * from bill_collect
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from bill_collect 
+	</select>
+	 
+	<insert id="save" parameterType="cq.xinrong.modules.bill.entity.BillCollectEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into bill_collect
+		(
+			`serial_no`, 
+			`address`, 
+			`transpot_supplier`, 
+			`freight_type`, 
+			`transpot_no`, 
+			`date`, 
+			`line_start`, 
+			`line_end`, 
+			`transpot_product`, 
+			`transpot_mode`, 
+			`motorcycle_type`, 
+			`transpot_price`, 
+			`quantity`, 
+			`volune_sum`, 
+			`weight_sum`, 
+			`delivery_fee`, 
+			`advance_fee_include_tax`, 
+			`advance_fee_no_tax`, 
+			`status`, 
+			`comment`, 
+			`reserve_one`, 
+			`reserve_two`, 
+			`create_at`, 
+			`create_by`, 
+			`update_at`, 
+			`update_by`, 
+			`is_delete`
+		)
+		values
+		(
+			#{serialNo}, 
+			#{address}, 
+			#{transpotSupplier}, 
+			#{freightType}, 
+			#{transpotNo}, 
+			#{date}, 
+			#{lineStart}, 
+			#{lineEnd}, 
+			#{transpotProduct}, 
+			#{transpotMode}, 
+			#{motorcycleType}, 
+			#{transpotPrice}, 
+			#{quantity}, 
+			#{voluneSum}, 
+			#{weightSum}, 
+			#{deliveryFee}, 
+			#{advanceFeeIncludeTax}, 
+			#{advanceFeeNoTax}, 
+			#{status}, 
+			#{comment}, 
+			#{reserveOne}, 
+			#{reserveTwo}, 
+			#{createAt}, 
+			#{createBy}, 
+			#{updateAt}, 
+			#{updateBy}, 
+			#{isDelete}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="cq.xinrong.modules.bill.entity.BillCollectEntity">
+		update bill_collect 
+		<set>
+			<if test="serialNo != null">`serial_no` = #{serialNo}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="transpotSupplier != null">`transpot_supplier` = #{transpotSupplier}, </if>
+			<if test="freightType != null">`freight_type` = #{freightType}, </if>
+			<if test="transpotNo != null">`transpot_no` = #{transpotNo}, </if>
+			<if test="date != null">`date` = #{date}, </if>
+			<if test="lineStart != null">`line_start` = #{lineStart}, </if>
+			<if test="lineEnd != null">`line_end` = #{lineEnd}, </if>
+			<if test="transpotProduct != null">`transpot_product` = #{transpotProduct}, </if>
+			<if test="transpotMode != null">`transpot_mode` = #{transpotMode}, </if>
+			<if test="motorcycleType != null">`motorcycle_type` = #{motorcycleType}, </if>
+			<if test="transpotPrice != null">`transpot_price` = #{transpotPrice}, </if>
+			<if test="quantity != null">`quantity` = #{quantity}, </if>
+			<if test="voluneSum != null">`volune_sum` = #{voluneSum}, </if>
+			<if test="weightSum != null">`weight_sum` = #{weightSum}, </if>
+			<if test="deliveryFee != null">`delivery_fee` = #{deliveryFee}, </if>
+			<if test="advanceFeeIncludeTax != null">`advance_fee_include_tax` = #{advanceFeeIncludeTax}, </if>
+			<if test="advanceFeeNoTax != null">`advance_fee_no_tax` = #{advanceFeeNoTax}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="comment != null">`comment` = #{comment}, </if>
+			<if test="reserveOne != null">`reserve_one` = #{reserveOne}, </if>
+			<if test="reserveTwo != null">`reserve_two` = #{reserveTwo}, </if>
+			<if test="createAt != null">`create_at` = #{createAt}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="updateAt != null">`update_at` = #{updateAt}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from bill_collect where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from bill_collect where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
