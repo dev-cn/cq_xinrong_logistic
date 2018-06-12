@@ -4,7 +4,7 @@ $(function () {
         datatype: "json",
         colModel: [			
 			// { label: 'id', name: 'id', index: 'id', width: 50, key: true },
-			{ label: '序号', name: 'serialNo', index: 'serial_no', width: 80 }, 			
+			// { label: '序号', name: 'serialNo', index: 'serial_no', width: 80 },
 			{ label: '地点', name: 'address', index: 'address', width: 80 }, 			
 			{ label: '运输供应商', name: 'transpotSupplier', index: 'transpot_supplier', width: 80 }, 			
 			{ label: '运费类型', name: 'freightType', index: 'freight_type', width: 80 }, 			
@@ -39,6 +39,8 @@ $(function () {
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
+        shrinkToFit:false,
+        autoScroll:true,
         multiselect: true,
         pager: "#jqGridPager",
         jsonReader : {
@@ -54,7 +56,7 @@ $(function () {
         },
         gridComplete:function(){
         	//隐藏grid底部滚动条
-        	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
+        	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "srcoll" });
         }
     });
 });

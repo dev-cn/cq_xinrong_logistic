@@ -1,10 +1,10 @@
-package cq.xinrong;
+package cq.anbu;
 
 
-import cq.xinrong.datasources.DataSourceTestService;
-import cq.xinrong.modules.app.entity.UserEntity;
-import cq.xinrong.datasources.DataSourceTestService;
-import cq.xinrong.modules.app.entity.UserEntity;
+import cq.anbu.datasources.DataSourceTestService;
+import cq.anbu.modules.app.entity.UserEntity;
+import cq.anbu.datasources.DataSourceTestService;
+import cq.anbu.modules.app.entity.UserEntity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;

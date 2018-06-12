@@ -4,23 +4,23 @@ $(function () {
         datatype: "json",
         colModel: [			
 			// { label: 'id', name: 'id', index: 'id', width: 50, key: true },
-			{ label: '序号', name: 'serialNo', index: 'serial_no', width: 80 }, 			
-			{ label: '运单号', name: 'trackingNo', index: 'tracking_no', width: 80 }, 			
-			{ label: '提货日期', name: 'deliveryDate', index: 'delivery_date', width: 80 }, 			
-			{ label: '到货日期', name: 'arrivalDate', index: 'arrival_date', width: 80 }, 			
-			{ label: '提货地点', name: 'deliveryAddr', index: 'delivery_addr', width: 80 }, 			
-			{ label: '到货地点', name: 'arrivalAddr', index: 'arrival_addr', width: 80 }, 			
-			{ label: '货物名称', name: 'goodsName', index: 'goods_name', width: 80 }, 			
-			{ label: '装载车型', name: 'loadingModel', index: 'loading_model', width: 80 }, 			
-			{ label: '车牌号', name: 'palteNo', index: 'palte_no', width: 80 }, 			
-			{ label: '车次', name: 'trainNo', index: 'train_no', width: 80 }, 			
-			{ label: '装载数量', name: 'shippedQuantity', index: 'shipped_quantity', width: 80 }, 			
-			{ label: '重量', name: 'weight', index: 'weight', width: 80 }, 			
-			{ label: '单价', name: 'price', index: 'price', width: 80 }, 			
-			{ label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 80 }, 			
-			{ label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 80 }, 			
-			{ label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80 }, 			
-			{ label: '备注', name: 'comment', index: 'comment', width: 80 }
+			// { label: '序号', name: 'serialNo', index: 'serial_no', width: 80 },
+			{ label: '运单号', name: 'trackingNo', index: 'tracking_no',align:"center", width: 120 },
+			{ label: '提货日期', name: 'deliveryDate', index: 'delivery_date',align:"center", width: 120 },
+			{ label: '到货日期', name: 'arrivalDate', index: 'arrival_date',align:"center", width: 120 },
+			{ label: '提货地点', name: 'deliveryAddr', index: 'delivery_addr', width: 180 },
+			{ label: '到货地点', name: 'arrivalAddr', index: 'arrival_addr', width: 180 },
+			{ label: '货物名称', name: 'goodsName', index: 'goods_name', width: 180 },
+			{ label: '装载车型', name: 'loadingModel', index: 'loading_model', width: 80 },
+			{ label: '车牌号', name: 'palteNo', index: 'palte_no', width: 120 },
+			{ label: '车次', name: 'trainNo', index: 'train_no', width: 80 },
+			{ label: '装载数量', name: 'shippedQuantity', index: 'shipped_quantity', width: 80 },
+			{ label: '重量', name: 'weight', index: 'weight', width: 80 },
+			{ label: '单价', name: 'price', index: 'price', width: 80 },
+			{ label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 80 },
+			{ label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 80 },
+			{ label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80 },
+			{ label: '备注', name: 'comment', index: 'comment', width: 180 }
 			// { label: '', name: 'createAt', index: 'create_at', width: 80 },
 			// { label: '', name: 'createBy', index: 'create_by', width: 80 },
 			// { label: '', name: 'updateAt', index: 'update_at', width: 80 },
@@ -35,6 +35,8 @@ $(function () {
         rownumWidth: 25, 
         autowidth:true,
         multiselect: true,
+		shrinkToFit:false,
+		autoScroll:true,
         pager: "#jqGridPager",
         jsonReader : {
             root: "page.list",
@@ -49,7 +51,7 @@ $(function () {
         },
         gridComplete:function(){
         	//隐藏grid底部滚动条
-        	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
+        	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "srcoll" });
         }
     });
     Datetime();
@@ -60,7 +62,9 @@ var vm = new Vue({
 	data:{
 		showList: true,
 		title: null,
-		bill: {}
+		bill: {
+            trackingNo: null
+		}
 	},
 	methods: {
 		query: function () {
@@ -131,7 +135,8 @@ var vm = new Vue({
 		reload: function (event) {
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
+			$("#jqGrid").jqGrid('setGridParam',{
+                postData:{'trackingNo': vm.bill.trackingNo},
                 page:page
             }).trigger("reloadGrid");
 		}

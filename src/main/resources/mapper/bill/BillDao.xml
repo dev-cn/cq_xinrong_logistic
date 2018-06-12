@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cq.xinrong.modules.bill.dao.BillDao">
+<mapper namespace="cq.anbu.modules.bill.dao.BillDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="cq.xinrong.modules.bill.entity.BillEntity" id="billMap">
+    <resultMap type="cq.anbu.modules.bill.entity.BillEntity" id="billMap">
         <result property="id" column="id"/>
         <result property="serialNo" column="serial_no"/>
         <result property="trackingNo" column="tracking_no"/>
@@ -30,12 +30,17 @@
         <result property="isDelete" column="is_delete"/>
     </resultMap>
 
-	<select id="queryObject" resultType="cq.xinrong.modules.bill.entity.BillEntity">
+	<select id="queryObject" resultType="cq.anbu.modules.bill.entity.BillEntity">
 		select * from bill where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="cq.xinrong.modules.bill.entity.BillEntity">
+	<select id="queryList" resultType="cq.anbu.modules.bill.entity.BillEntity">
 		select * from bill
+		<where>
+			<if test="trackingNo != null and trackingNo.trim() != ''">
+				and `tracking_no` like concat('%',#{trackingNo},'%')
+			</if>
+		</where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -53,7 +58,7 @@
 		select count(*) from bill 
 	</select>
 	 
-	<insert id="save" parameterType="cq.xinrong.modules.bill.entity.BillEntity" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="cq.anbu.modules.bill.entity.BillEntity" useGeneratedKeys="true" keyProperty="id">
 		insert into bill
 		(
 			`serial_no`, 
@@ -106,7 +111,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="cq.xinrong.modules.bill.entity.BillEntity">
+	<update id="update" parameterType="cq.anbu.modules.bill.entity.BillEntity">
 		update bill 
 		<set>
 			<if test="serialNo != null">`serial_no` = #{serialNo}, </if>

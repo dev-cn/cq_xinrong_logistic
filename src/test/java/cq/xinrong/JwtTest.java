@@ -1,7 +1,7 @@
-package cq.xinrong;
+package cq.anbu;
 
-import cq.xinrong.common.utils.JwtUtils;
-import cq.xinrong.common.utils.JwtUtils;
+import cq.anbu.common.utils.JwtUtils;
+import cq.anbu.common.utils.JwtUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

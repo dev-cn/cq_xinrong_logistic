@@ -1,8 +1,8 @@
-package cq.xinrong;
+package cq.anbu;
 
-import cq.xinrong.common.utils.RedisUtils;
-import cq.xinrong.common.utils.RedisUtils;
-import cq.xinrong.modules.sys.entity.SysUserEntity;
+import cq.anbu.common.utils.RedisUtils;
+import cq.anbu.common.utils.RedisUtils;
+import cq.anbu.modules.sys.entity.SysUserEntity;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;

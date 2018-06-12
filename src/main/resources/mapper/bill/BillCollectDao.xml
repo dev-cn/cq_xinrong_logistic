@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cq.xinrong.modules.bill.dao.BillCollectDao">
+<mapper namespace="cq.anbu.modules.bill.dao.BillCollectDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="cq.xinrong.modules.bill.entity.BillCollectEntity" id="billCollectMap">
+    <resultMap type="cq.anbu.modules.bill.entity.BillCollectEntity" id="billCollectMap">
         <result property="id" column="id"/>
         <result property="serialNo" column="serial_no"/>
         <result property="address" column="address"/>
@@ -35,11 +35,11 @@
         <result property="isDelete" column="is_delete"/>
     </resultMap>
 
-	<select id="queryObject" resultType="cq.xinrong.modules.bill.entity.BillCollectEntity">
+	<select id="queryObject" resultType="cq.anbu.modules.bill.entity.BillCollectEntity">
 		select * from bill_collect where id = #{value}
 	</select>
 
-	<select id="queryList" resultType="cq.xinrong.modules.bill.entity.BillCollectEntity">
+	<select id="queryList" resultType="cq.anbu.modules.bill.entity.BillCollectEntity">
 		select * from bill_collect
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
@@ -58,7 +58,7 @@
 		select count(*) from bill_collect 
 	</select>
 	 
-	<insert id="save" parameterType="cq.xinrong.modules.bill.entity.BillCollectEntity" useGeneratedKeys="true" keyProperty="id">
+	<insert id="save" parameterType="cq.anbu.modules.bill.entity.BillCollectEntity" useGeneratedKeys="true" keyProperty="id">
 		insert into bill_collect
 		(
 			`serial_no`, 
@@ -121,7 +121,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="cq.xinrong.modules.bill.entity.BillCollectEntity">
+	<update id="update" parameterType="cq.anbu.modules.bill.entity.BillCollectEntity">
 		update bill_collect 
 		<set>
 			<if test="serialNo != null">`serial_no` = #{serialNo}, </if>
