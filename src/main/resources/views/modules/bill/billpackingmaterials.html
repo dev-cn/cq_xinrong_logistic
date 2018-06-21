@@ -23,6 +23,18 @@
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
+			<div class="form-group col-sm-2" style="width:200px">
+				<input type="text" class="form-control" v-model="billPackingMaterials.transpotNo" @keyup.enter="query" placeholder="运输单号">
+			</div>
+			<div class="form-group col-sm-2" style="width:200px">
+				<input type="text" class="form-control" v-model="billPackingMaterials.transpotSupplier" @keyup.enter="query" placeholder="运输供应商">
+			</div>
+			<div class="form-group col-sm-2" style="width:200px">
+				<input type="text" class="form-control" v-model="billPackingMaterials.status" @keyup.enter="query" placeholder="状态">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+			<a class="btn btn-default" @click="reset">重置</a>
+			<a class="btn btn-default" @click="exccelExport">导出</a>
 			<a v-if="hasPermission('bill:billpackingmaterials:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			<a v-if="hasPermission('bill:billpackingmaterials:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
 			<a v-if="hasPermission('bill:billpackingmaterials:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
@@ -190,7 +202,7 @@
 			      <input type="text" class="form-control" v-model="billPackingMaterials.comment" placeholder="备注"/>
 			    </div>
 			</div>
-									<div class="form-group">
+									<!--<div class="form-group">
 			   	<div class="col-sm-2 control-label">预留字段1</div>
 			   	<div class="col-sm-10">
 			      <input type="text" class="form-control" v-model="billPackingMaterials.reserveOne" placeholder="预留字段1"/>
@@ -201,7 +213,7 @@
 			   	<div class="col-sm-10">
 			      <input type="text" class="form-control" v-model="billPackingMaterials.reserveTwo" placeholder="预留字段2"/>
 			    </div>
-			</div>
+			</div>-->
 									<!--<div class="form-group">
 			   	<div class="col-sm-2 control-label"></div>
 			   	<div class="col-sm-10">

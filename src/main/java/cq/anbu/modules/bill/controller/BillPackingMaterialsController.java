@@ -1,21 +1,19 @@
 package cq.anbu.modules.bill.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import cq.anbu.modules.bill.entity.BillPackingMaterialsEntity;
-import cq.anbu.modules.bill.service.BillPackingMaterialsService;
+import cq.anbu.common.base.BaseEntity;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
+import cq.anbu.modules.bill.entity.BillPackingMaterialsEntity;
+import cq.anbu.modules.bill.service.BillPackingMaterialsService;
+import cq.anbu.modules.sys.controller.AbstractController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 
 
@@ -29,7 +27,7 @@ import cq.anbu.common.utils.R;
  */
 @RestController
 @RequestMapping("/bill/billpackingmaterials")
-public class BillPackingMaterialsController {
+public class BillPackingMaterialsController extends AbstractController {
 	@Autowired
 	private BillPackingMaterialsService billPackingMaterialsService;
 	
@@ -94,5 +92,4 @@ public class BillPackingMaterialsController {
 		
 		return R.ok();
 	}
-	
 }

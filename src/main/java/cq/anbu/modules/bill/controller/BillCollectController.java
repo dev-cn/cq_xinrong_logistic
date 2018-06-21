@@ -5,6 +5,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.modules.bill.entity.BillCollectEntity;
 import cq.anbu.modules.bill.service.BillCollectService;
+import cq.anbu.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/bill/billcollect")
-public class BillCollectController {
+public class BillCollectController extends AbstractController {
 	@Autowired
 	private BillCollectService billCollectService;
 	
@@ -89,5 +90,5 @@ public class BillCollectController {
 		
 		return R.ok();
 	}
-	
+
 }

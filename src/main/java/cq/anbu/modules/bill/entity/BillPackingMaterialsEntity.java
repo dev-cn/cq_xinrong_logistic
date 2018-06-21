@@ -1,7 +1,7 @@
 package cq.anbu.modules.bill.entity;
 
-import java.io.Serializable;
-import java.util.Date;
+import cq.anbu.common.base.BaseEntity;
+
 import java.math.BigDecimal;
 
 
@@ -12,11 +12,8 @@ import java.math.BigDecimal;
  * @email java_tangzg@163.com
  * @date 2018-06-12 09:49:45
  */
-public class BillPackingMaterialsEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	//
-	private Long id;
+public class BillPackingMaterialsEntity  extends BaseEntity {
+
 	//序号
 	private Long serialNo;
 	//地点
@@ -28,7 +25,7 @@ public class BillPackingMaterialsEntity implements Serializable {
 	//运输单号
 	private String transpotNo;
 	//日期
-	private Date date;
+	private String date;
 	//起点
 	private String lineStart;
 	//线路终点
@@ -73,29 +70,7 @@ public class BillPackingMaterialsEntity implements Serializable {
 	private String reserveOne;
 	//预留字段2
 	private String reserveTwo;
-	//
-	private Date createAt;
-	//
-	private String createBy;
-	//
-	private Date updateAt;
-	//
-	private String updateBy;
-	//
-	private Integer isDelete;
 
-	/**
-	 * 设置：
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-	/**
-	 * 获取：
-	 */
-	public Long getId() {
-		return id;
-	}
 	/**
 	 * 设置：序号
 	 */
@@ -159,13 +134,13 @@ public class BillPackingMaterialsEntity implements Serializable {
 	/**
 	 * 设置：日期
 	 */
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	/**
 	 * 获取：日期
 	 */
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	/**
@@ -431,65 +406,5 @@ public class BillPackingMaterialsEntity implements Serializable {
 	 */
 	public String getReserveTwo() {
 		return reserveTwo;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getCreateAt() {
-		return createAt;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getCreateBy() {
-		return createBy;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getUpdateAt() {
-		return updateAt;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getUpdateBy() {
-		return updateBy;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setIsDelete(Integer isDelete) {
-		this.isDelete = isDelete;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getIsDelete() {
-		return isDelete;
 	}
 }
