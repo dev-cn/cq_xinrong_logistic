@@ -145,23 +145,8 @@ var vm = new Vue({
             if(ids == null){
                 return ;
             }
-            confirm('确定要导出选中的记录？', function(){
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "bill/bill/export",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function(r){
-                        if(r.code == 0){
-                            alert('操作成功', function(index){
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        }else{
-                            alert(r.msg);
-                        }
-                    }
-                });
-            });
+            location.href=baseURL + "bill/bill/export?ids="+ids+"&token="+token;
+            // document.location.href = baseURL + "bill/bill/export" + JSON.stringify(ids);
         },
         reset:function (event) {
             vm.bill.trackingNo = null;
