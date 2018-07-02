@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2018-07-02 19:59:58
+Date: 2018-07-02 20:00:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for bill_collect
+-- Table structure for bill_packing_materials
 -- ----------------------------
-DROP TABLE IF EXISTS `bill_collect`;
-CREATE TABLE `bill_collect` (
+DROP TABLE IF EXISTS `bill_packing_materials`;
+CREATE TABLE `bill_packing_materials` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `serial_no` bigint(20) DEFAULT NULL COMMENT '序号',
   `address` varchar(255) DEFAULT NULL COMMENT '地点',
@@ -33,11 +33,17 @@ CREATE TABLE `bill_collect` (
   `transpot_mode` varchar(255) DEFAULT NULL COMMENT '运输方式',
   `motorcycle_type` varchar(255) DEFAULT NULL COMMENT '车型',
   `transpot_price` decimal(20,2) DEFAULT NULL COMMENT '运输单价(含税保险)',
+  `carton` decimal(20,0) DEFAULT NULL COMMENT '纸箱',
+  `foam_one` decimal(20,0) DEFAULT NULL COMMENT '1#泡棉',
+  `foam_two` decimal(20,0) DEFAULT NULL COMMENT '2#泡棉',
+  `foam_three` decimal(20,0) DEFAULT NULL COMMENT '3#泡棉',
+  `foam_four` decimal(20,0) DEFAULT NULL COMMENT '4#泡棉',
+  `paper_brace` decimal(20,0) DEFAULT NULL COMMENT '纸角撑',
   `quantity` decimal(20,0) DEFAULT NULL COMMENT '数量',
   `volune_sum` decimal(20,2) DEFAULT NULL COMMENT '总体积',
   `weight_sum` decimal(20,2) DEFAULT NULL COMMENT '总重量',
   `delivery_fee` decimal(20,2) DEFAULT NULL COMMENT '提送运费',
-  `advance_fee_include_tax` decimal(20,2) DEFAULT NULL COMMENT '预提运费合计（含税10%',
+  `advance_fee_include_tax` decimal(20,2) DEFAULT NULL COMMENT '预提运费合计（含税10%）',
   `advance_fee_no_tax` decimal(20,2) DEFAULT NULL COMMENT '预提运费合计（不含税）',
   `status` tinyint(2) DEFAULT NULL,
   `comment` varchar(500) DEFAULT NULL COMMENT '备注',
@@ -49,4 +55,4 @@ CREATE TABLE `bill_collect` (
   `update_by` varchar(255) DEFAULT NULL,
   `is_delete` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='运费汇总表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='包材表';

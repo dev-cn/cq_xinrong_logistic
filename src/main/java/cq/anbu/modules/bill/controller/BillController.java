@@ -1,13 +1,12 @@
 package cq.anbu.modules.bill.controller;
 
+import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
-import cq.anbu.common.utils.excel.ExcelExportUtil;
 import cq.anbu.modules.bill.entity.BillEntity;
 import cq.anbu.modules.bill.service.BillService;
 import cq.anbu.modules.sys.controller.AbstractController;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static cn.afterturn.easypoi.excel.ExcelExportUtil.exportExcel;
 
 
 /**
@@ -100,7 +102,7 @@ public class BillController extends AbstractController {
 	}
 
 
-	@RequestMapping(value = "/export",method = RequestMethod.GET)
+	/*@RequestMapping(value = "/export",method = RequestMethod.GET)
 	public R export(HttpServletRequest request, HttpServletResponse response){
 		String ids = request.getParameter("ids");
 		String[] idsArray = ids.split(",", -1);
@@ -173,7 +175,7 @@ public class BillController extends AbstractController {
 			}
 			return R.ok();
 	}
-
+*/
 	/**
 	 * 导出
 	 * @param map
@@ -181,10 +183,12 @@ public class BillController extends AbstractController {
 	 * @param response
 	 */
 
-/*	@RequestMapping("/export")
-	public String downloadByPoiBaseView(HttpServletResponse response) {
+	@RequestMapping(value="/export",method = RequestMethod.GET)
+	public String downloadByPoiBaseView(HttpServletRequest request,HttpServletResponse response) {
+		String ids = request.getParameter("ids");
+		String[] idsArray = ids.split(",", -1);
 		// 获取workbook对象
-		Workbook workbook = exportSheetByTemplate() ;
+		Workbook workbook = exportSheetByTemplate(idsArray) ;
 		// 判断数据
 		if(workbook == null) {
 			return "fail";
@@ -197,7 +201,7 @@ public class BillController extends AbstractController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String dateStr = "["+excelName+"-"+sdf.format(new Date())+"]";
 		// 指定下载的文件名--设置响应头
-		response.setHeader("Content-Disposition", "attachment;filename=" +dateStr+".xls");
+		response.setHeader("Content-Disposition", "attachment;filename=" +dateStr+".xlsx");
 		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Cache-Control", "no-cache");
@@ -214,38 +218,47 @@ public class BillController extends AbstractController {
 			e.printStackTrace();
 		}
 		return "success";
-	}*/
+	}
 
 	/**
 	 * 模版单sheet导出示例
 	 * @return
 	 */
-	/*public Workbook exportSheetByTemplate(){
-		// 查询数据,此处省略
-		List list = new ArrayList<>();
-		int count1 = 0 ;
-		EasyPOIModel easyPOIModel11 = new EasyPOIModel(String.valueOf(count1++),"信科",new User("张三","男",20)) ;
-		EasyPOIModel easyPOIModel12 = new EasyPOIModel(String.valueOf(count1++),"信科",new User("李四","男",17)) ;
-		EasyPOIModel easyPOIModel13 = new EasyPOIModel(String.valueOf(count1++),"信科",new User("淑芬","女",34)) ;
-		EasyPOIModel easyPOIModel14 = new EasyPOIModel(String.valueOf(count1++),"信科",new User("仲达","男",55)) ;
-		list.add(easyPOIModel11) ;
-		easyPOIModel11 = null ;
-		list.add(easyPOIModel12) ;
-		easyPOIModel12 = null ;
-		list.add(easyPOIModel13) ;
-		easyPOIModel13 = null ;
-		list.add(easyPOIModel14) ;
-		easyPOIModel14 = null ;
+	public Workbook exportSheetByTemplate(String[] idsArray){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<BillEntity> billCollectEntityList = new ArrayList<>();
+		BillEntity billEntity;
+		for(String id : idsArray){
+			billEntity = billService.queryObject(Long.parseLong(id));
+			billCollectEntityList.add(billEntity);
+		}
+		List<Map<String, String>> listMap = getJavaBeanAttrAndValue(billCollectEntityList);
+		map.put("billMap",listMap);
 		// 设置导出配置
 		// 获取导出excel指定模版
-		TemplateExportParams params = new TemplateExportParams("d:/项目测试文件夹/easypoiExample.xlsx");
-		// 标题开始行
-		params.setHeadingStartRow(0);
-		// 标题行数
-		params.setHeadingRows(2);
-		// 设置sheetName，若不设置该参数，则使用得原本得sheet名称
-		params.setSheetName("班级信息");
+		TemplateExportParams params = new TemplateExportParams("excel/test.xlsx");
 		// 导出excel
-		return ExcelExportUtil.exportExcel(params, EasyPOIModel.class,list, new HashMap<>());
-	}*/
+		return exportExcel(params,map);
+	}
+
+
+	public static List<Map<String,String>> getJavaBeanAttrAndValue(List<BillEntity> clazzList){
+		List<Map<String,String>> resultList = new ArrayList<>();
+		for(BillEntity t : clazzList){
+			Field[] declaredFields = t.getClass().getDeclaredFields();
+			Field.setAccessible(declaredFields,true);
+			Map<String,String> map = new HashMap<>();
+			for(int i=0;i<declaredFields.length;i++){
+				try {
+					map.put(declaredFields[i].getName(),declaredFields[i].get(t)+"");
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+			resultList.add(map);
+		}
+		return resultList;
+	}
+
+
 }

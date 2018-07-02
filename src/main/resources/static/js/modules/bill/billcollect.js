@@ -59,6 +59,7 @@ $(function () {
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "srcoll" });
         }
     });
+    Datetime();
 });
 
 var vm = new Vue({
@@ -142,28 +143,12 @@ var vm = new Vue({
                 page:page
             }).trigger("reloadGrid");
 		},
-        exccelExport: function (event) {
+        exportExcel: function (event) {
             var ids = getSelectedRows();
             if(ids == null){
                 return ;
             }
-            confirm('确定要导出选中的记录？', function(){
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "bill/billcollect/export",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function(r){
-                        if(r.code == 0){
-                            alert('操作成功', function(index){
-                                $("#jqGrid").trigger("reloadGrid");
-                            });
-                        }else{
-                            alert(r.msg);
-                        }
-                    }
-                });
-            });
+            location.href=baseURL + "bill/billcollect/export?ids="+ids+"&token="+token;
         },
         reset:function (event) {
             vm.billCollect.transpotNo = null;
@@ -173,3 +158,18 @@ var vm = new Vue({
         }
 	}
 });
+
+function Datetime() {
+    $('#datetimepicker1').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),
+        autoclose: true,//选中自动关闭
+        todayBtn: true,//显示今日按钮
+        locale: moment.locale('zh-cn')
+    }).on('hide', function (ev) {
+        var date = $("#datetimepicker1").val();
+        vm.billCollect.date = date;
+    });
+}
