@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * shiro相关接口
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017-06-06 8:49
@@ -21,6 +22,7 @@ public interface ShiroService {
 
     /**
      * 根据用户ID，查询用户
+     *
      * @param userId
      */
     SysUserEntity queryUser(Long userId);

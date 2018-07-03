@@ -4,8 +4,9 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 
 /**
  * 预算
+ *
  * @author JueYue
- *   2014年12月27日 下午9:08:03
+ * 2014年12月27日 下午9:08:03
  */
 public class BudgetAccountsEntity {
 

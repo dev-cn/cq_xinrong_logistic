@@ -29,7 +29,7 @@ import java.util.Map;
 public class ShiroConfig {
 
     @Bean("sessionManager")
-    public SessionManager sessionManager(){
+    public SessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionValidationSchedulerEnabled(true);
         sessionManager.setSessionIdCookieEnabled(true);

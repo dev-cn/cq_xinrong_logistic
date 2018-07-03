@@ -12,6 +12,7 @@ import java.util.Date;
 
 /**
  * jwt工具类
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017/9/21 22:21
@@ -35,7 +36,7 @@ public class JwtUtils {
 
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
-                .setSubject(userId+"")
+                .setSubject(userId + "")
                 .setIssuedAt(nowDate)
                 .setExpiration(expireDate)
                 .signWith(SignatureAlgorithm.HS512, secret)
@@ -48,7 +49,7 @@ public class JwtUtils {
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.debug("validate is token error ", e);
             return null;
         }
@@ -56,7 +57,8 @@ public class JwtUtils {
 
     /**
      * token是否过期
-     * @return  true：过期
+     *
+     * @return true：过期
      */
     public boolean isTokenExpired(Date expiration) {
         return expiration.before(new Date());

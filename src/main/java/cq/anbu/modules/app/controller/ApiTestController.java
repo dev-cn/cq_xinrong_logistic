@@ -30,7 +30,7 @@ public class ApiTestController {
      */
     @Login
     @GetMapping("userInfo")
-    public R userInfo(@LoginUser UserEntity user){
+    public R userInfo(@LoginUser UserEntity user) {
         return R.ok().put("user", user);
     }
 
@@ -39,7 +39,7 @@ public class ApiTestController {
      */
     @Login
     @GetMapping("userId")
-    public R userInfo(@RequestAttribute("userId") Integer userId){
+    public R userInfo(@RequestAttribute("userId") Integer userId) {
         return R.ok().put("userId", userId);
     }
 
@@ -47,7 +47,7 @@ public class ApiTestController {
      * 忽略Token验证测试
      */
     @GetMapping("notToken")
-    public R notToken(){
+    public R notToken() {
         return R.ok().put("msg", "无需token也能访问。。。");
     }
 

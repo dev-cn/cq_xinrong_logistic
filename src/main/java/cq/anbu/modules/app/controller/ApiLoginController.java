@@ -36,7 +36,7 @@ public class ApiLoginController {
      * 登录
      */
     @PostMapping("login")
-    public R login(String mobile, String password){
+    public R login(String mobile, String password) {
         Assert.isBlank(mobile, "手机号不能为空");
         Assert.isBlank(password, "密码不能为空");
 

@@ -9,112 +9,118 @@ import java.util.List;
 
 /**
  * 角色
- * 
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年9月18日 上午9:27:38
  */
 public class SysRoleEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * 角色ID
-	 */
-	private Long roleId;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 角色名称
-	 */
-	@NotBlank(message="角色名称不能为空")
-	private String roleName;
+    /**
+     * 角色ID
+     */
+    private Long roleId;
 
-	/**
-	 * 备注
-	 */
-	private String remark;
-	
-	/**
-	 * 创建者ID
-	 */
-	private Long createUserId;
-	
-	private List<Long> menuIdList;
-	
-	/**
-	 * 创建时间
-	 */
-	private Date createTime;
+    /**
+     * 角色名称
+     */
+    @NotBlank(message = "角色名称不能为空")
+    private String roleName;
 
-	/**
-	 * 设置：
-	 * @param roleId 
-	 */
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
+    /**
+     * 备注
+     */
+    private String remark;
 
-	/**
-	 * 获取：
-	 * @return Long
-	 */
-	public Long getRoleId() {
-		return roleId;
-	}
-	
-	/**
-	 * 设置：角色名称
-	 * @param roleName 角色名称
-	 */
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    /**
+     * 创建者ID
+     */
+    private Long createUserId;
 
-	/**
-	 * 获取：角色名称
-	 * @return String
-	 */
-	public String getRoleName() {
-		return roleName;
-	}
-	
-	/**
-	 * 设置：备注
-	 * @param remark 备注
-	 */
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    private List<Long> menuIdList;
 
-	/**
-	 * 获取：备注
-	 * @return String
-	 */
-	public String getRemark() {
-		return remark;
-	}
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    /**
+     * 设置：
+     *
+     * @param roleId
+     */
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    /**
+     * 获取：
+     *
+     * @return Long
+     */
+    public Long getRoleId() {
+        return roleId;
+    }
 
-	public List<Long> getMenuIdList() {
-		return menuIdList;
-	}
+    /**
+     * 设置：角色名称
+     *
+     * @param roleName 角色名称
+     */
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
-	public void setMenuIdList(List<Long> menuIdList) {
-		this.menuIdList = menuIdList;
-	}
+    /**
+     * 获取：角色名称
+     *
+     * @return String
+     */
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public Long getCreateUserId() {
-		return createUserId;
-	}
+    /**
+     * 设置：备注
+     *
+     * @param remark 备注
+     */
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public void setCreateUserId(Long createUserId) {
-		this.createUserId = createUserId;
-	}
-	
+    /**
+     * 获取：备注
+     *
+     * @return String
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public List<Long> getMenuIdList() {
+        return menuIdList;
+    }
+
+    public void setMenuIdList(List<Long> menuIdList) {
+        this.menuIdList = menuIdList;
+    }
+
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
+    }
+
 }

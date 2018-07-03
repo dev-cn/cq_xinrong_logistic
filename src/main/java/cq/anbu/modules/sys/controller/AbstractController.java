@@ -10,28 +10,28 @@ import java.util.Date;
 
 /**
  * Controller公共组件
- * 
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2016年11月9日 下午9:42:26
  */
 public abstract class AbstractController {
-	protected Logger logger = LoggerFactory.getLogger(getClass());
-	
-	protected SysUserEntity getUser() {
-		return (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
-	}
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected Long getUserId() {
-		return getUser().getUserId();
-	}
+    protected SysUserEntity getUser() {
+        return (SysUserEntity) SecurityUtils.getSubject().getPrincipal();
+    }
 
-	public <T extends BaseEntity> T wrapperBaseEntity(T baseEntity){
-		baseEntity.setCreateAt(new Date());
-		baseEntity.setCreateBy(getUser().getUsername());
-		baseEntity.setUpdateAt(new Date());
-		baseEntity.setUpdateBy(getUser().getUsername());
-		baseEntity.setIsDelete(0);
-		return baseEntity;
-	}
+    protected Long getUserId() {
+        return getUser().getUserId();
+    }
+
+    public <T extends BaseEntity> T wrapperBaseEntity(T baseEntity) {
+        baseEntity.setCreateAt(new Date());
+        baseEntity.setCreateBy(getUser().getUsername());
+        baseEntity.setUpdateAt(new Date());
+        baseEntity.setUpdateBy(getUser().getUsername());
+        baseEntity.setIsDelete(0);
+        return baseEntity;
+    }
 }

@@ -1,228 +1,228 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>运费汇总表</title>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="stylesheet" href="../../css/bootstrap.min.css">
-<link rel="stylesheet" href="../../css/font-awesome.min.css">
-<link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
-<link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
-<link rel="stylesheet" href="../../css/main.css">
-<link href="../../css/datetime/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-<script src="../../libs/jquery.min.js"></script>
-<script src="../../plugins/layer/layer.js"></script>
-<script src="../../libs/bootstrap.min.js"></script>
-<script src="../../libs/vue.min.js"></script>
-<script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
-<script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
-<script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
-<script src="../../js/common.js"></script>
-<script src="../../js/datetime/moment-with-locales.js"></script>
-<script src="../../js/datetime/bootstrap-datetimepicker.min.js"></script>
-<script src="../../js/datetime/bootstrap-datetimepicker.zh-CN.js"></script>
+    <title>运费汇总表</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link href="../../css/datetime/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <script src="../../libs/jquery.min.js"></script>
+    <script src="../../plugins/layer/layer.js"></script>
+    <script src="../../libs/bootstrap.min.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/datetime/moment-with-locales.js"></script>
+    <script src="../../js/datetime/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../js/datetime/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
 <body>
 <div id="rrapp" v-cloak>
-	<div v-show="showList">
-		<div class="grid-btn">
-			<div class="form-group col-sm-2" style="width:200px">
-				<input id="transpotNo" type="text" class="form-control" v-model="billCollect.transpotNo" @keyup.enter="query" placeholder="运输单号">
-			</div>
-			<div class="form-group col-sm-2" style="width:200px">
-				<input id="transpotSupplier"type="text" class="form-control" v-model="billCollect.transpotSupplier" @keyup.enter="query" placeholder="运输供应商">
-			</div>
-			<div class="form-group col-sm-2" style="width:200px">
-				<input id="status" type="text" class="form-control" v-model="billCollect.status" @keyup.enter="query" placeholder="状态">
-			</div>
-			<a class="btn btn-default" @click="query">查询</a>
-			<a class="btn btn-default" @click="reset">重置</a>
-			<a class="btn btn-default" @click="exportExcel">导出</a>
-			<a v-if="hasPermission('bill:billcollect:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-			<a v-if="hasPermission('bill:billcollect:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			<a v-if="hasPermission('bill:billcollect:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-		</div>
-	    <table id="jqGrid"></table>
-	    <div id="jqGridPager"></div>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <div class="form-group col-sm-2" style="width:200px">
+                <input id="transpotNo" type="text" class="form-control" v-model="billCollect.transpotNo" @keyup.enter="query" placeholder="运输单号">
+            </div>
+            <div class="form-group col-sm-2" style="width:200px">
+                <input id="transpotSupplier" type="text" class="form-control" v-model="billCollect.transpotSupplier" @keyup.enter="query" placeholder="运输供应商">
+            </div>
+            <div class="form-group col-sm-2" style="width:200px">
+                <input id="status" type="text" class="form-control" v-model="billCollect.status" @keyup.enter="query" placeholder="状态">
+            </div>
+            <a class="btn btn-default" @click="query">查询</a>
+            <a class="btn btn-default" @click="reset">重置</a>
+            <a class="btn btn-default" @click="exportExcel">导出</a>
+            <a v-if="hasPermission('bill:billcollect:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a v-if="hasPermission('bill:billcollect:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a v-if="hasPermission('bill:billcollect:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
     </div>
-    
-    <div v-show="!showList" class="panel panel-default">
-		<div class="panel-heading">{{title}}</div>
-		<form class="form-horizontal">
-											<div class="form-group">
-			   	<div class="col-sm-2 control-label">序号</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.serialNo" placeholder="序号"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">地点</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.address" placeholder="地点"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">运输供应商</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.transpotSupplier" placeholder="运输供应商"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">运费类型</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.freightType" placeholder="运费类型"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">运输单号</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.transpotNo" placeholder="运输单号"/>
-			    </div>
-			</div>
 
-			<div class="form-group">
-				<div class="col-sm-2 control-label">日期</div>
-				<a class='input-group date' style="float: left;">
-					<input type='text' id='datetimepicker1' v-model="billCollect.date" class="form-control" style="width: 150px; height: 30px;"/>
-					<span class="input-group-addon" style="width: 50px; height: 30px;">
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">序号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.serialNo" placeholder="序号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">地点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.address" placeholder="地点"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运输供应商</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.transpotSupplier" placeholder="运输供应商"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运费类型</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.freightType" placeholder="运费类型"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运输单号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.transpotNo" placeholder="运输单号"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-2 control-label">日期</div>
+                <a class='input-group date' style="float: left;">
+                    <input type='text' id='datetimepicker1' v-model="billCollect.date" class="form-control" style="width: 150px; height: 30px;"/>
+                    <span class="input-group-addon" style="width: 50px; height: 30px;">
 						<span class="glyphicon glyphicon-calendar"></span>
 					 </span>
-				</a>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">起点</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.lineStart" placeholder="起点"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">线路终点</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.lineEnd" placeholder="线路终点"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">运输产品</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.transpotProduct" placeholder="运输产品"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">运输方式</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.transpotMode" placeholder="运输方式"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">车型</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.motorcycleType" placeholder="车型"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">运输单价(含税保险)</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.transpotPrice" placeholder="运输单价(含税保险)"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">数量</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.quantity" placeholder="数量"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">总体积</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.voluneSum" placeholder="总体积"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">总重量</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.weightSum" placeholder="总重量"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">提送运费</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.deliveryFee" placeholder="提送运费"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">预提运费合计（含税10%</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.advanceFeeIncludeTax" placeholder="预提运费合计（含税10%"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">预提运费合计（不含税）</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.advanceFeeNoTax" placeholder="预提运费合计（不含税）"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">状态</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.status" placeholder=""/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">备注</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.comment" placeholder="备注"/>
-			    </div>
-			</div>
-									<!--<div class="form-group">
-			   	<div class="col-sm-2 control-label">预留字段1</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.reserveOne" placeholder="预留字段1"/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">预留字段2</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.reserveTwo" placeholder="预留字段2"/>
-			    </div>-->
-			</div>
-								<!--	<div class="form-group">
-			   	<div class="col-sm-2 control-label">创建时间</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.createAt" placeholder=""/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">创建人</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.createBy" placeholder=""/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">修改时间</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.updateAt" placeholder=""/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">修改人</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.updateBy" placeholder=""/>
-			    </div>
-			</div>
-									<div class="form-group">
-			   	<div class="col-sm-2 control-label">是否删除</div>
-			   	<div class="col-sm-10">
-			      <input type="text" class="form-control" v-model="billCollect.isDelete" placeholder=""/>
-			    </div>
-			</div>-->
-							<div class="form-group">
-				<div class="col-sm-2 control-label"></div> 
-				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
-				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
-			</div>
-		</form>
-	</div>
+                </a>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">起点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.lineStart" placeholder="起点"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">线路终点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.lineEnd" placeholder="线路终点"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运输产品</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.transpotProduct" placeholder="运输产品"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运输方式</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.transpotMode" placeholder="运输方式"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">车型</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.motorcycleType" placeholder="车型"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运输单价(含税保险)</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.transpotPrice" placeholder="运输单价(含税保险)"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">数量</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.quantity" placeholder="数量"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">总体积</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.voluneSum" placeholder="总体积"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">总重量</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.weightSum" placeholder="总重量"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">提送运费</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.deliveryFee" placeholder="提送运费"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">预提运费合计（含税10%</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.advanceFeeIncludeTax" placeholder="预提运费合计（含税10%"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">预提运费合计（不含税）</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.advanceFeeNoTax" placeholder="预提运费合计（不含税）"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">状态</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.status" placeholder=""/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">备注</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="billCollect.comment" placeholder="备注"/>
+                </div>
+            </div>
+            <!--<div class="form-group">
+<div class="col-sm-2 control-label">预留字段1</div>
+<div class="col-sm-10">
+<input type="text" class="form-control" v-model="billCollect.reserveOne" placeholder="预留字段1"/>
+</div>
+</div>
+            <div class="form-group">
+<div class="col-sm-2 control-label">预留字段2</div>
+<div class="col-sm-10">
+<input type="text" class="form-control" v-model="billCollect.reserveTwo" placeholder="预留字段2"/>
+</div>-->
+    </div>
+    <!--	<div class="form-group">
+<div class="col-sm-2 control-label">创建时间</div>
+<div class="col-sm-10">
+<input type="text" class="form-control" v-model="billCollect.createAt" placeholder=""/>
+</div>
+</div>
+        <div class="form-group">
+<div class="col-sm-2 control-label">创建人</div>
+<div class="col-sm-10">
+<input type="text" class="form-control" v-model="billCollect.createBy" placeholder=""/>
+</div>
+</div>
+        <div class="form-group">
+<div class="col-sm-2 control-label">修改时间</div>
+<div class="col-sm-10">
+<input type="text" class="form-control" v-model="billCollect.updateAt" placeholder=""/>
+</div>
+</div>
+        <div class="form-group">
+<div class="col-sm-2 control-label">修改人</div>
+<div class="col-sm-10">
+<input type="text" class="form-control" v-model="billCollect.updateBy" placeholder=""/>
+</div>
+</div>
+        <div class="form-group">
+<div class="col-sm-2 control-label">是否删除</div>
+<div class="col-sm-10">
+<input type="text" class="form-control" v-model="billCollect.isDelete" placeholder=""/>
+</div>
+</div>-->
+    <div class="form-group">
+        <div class="col-sm-2 control-label"></div>
+        <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+        &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+    </div>
+    </form>
+</div>
 </div>
 
 <script src="../../js/modules/bill/billcollect.js"></script>
