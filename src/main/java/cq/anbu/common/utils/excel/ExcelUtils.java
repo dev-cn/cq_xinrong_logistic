@@ -37,6 +37,20 @@ public class ExcelUtils {
     }
 
     /**
+     * 模板导出:单个sheet
+     *
+     * @param targetExcelPath
+     * @param map
+     * @return
+     */
+    public static Workbook getWorkbookSingleSheet(String targetExcelPath, Map<String, Object> map) {
+        // 获取导出excel指定模版
+        TemplateExportParams params = new TemplateExportParams(targetExcelPath);
+        // 导出excel
+        return ExcelExportUtil.exportExcel(params, map);
+    }
+
+    /**
      * 模板导出：多sheet
      *
      * @param targetExcelPath
@@ -50,7 +64,12 @@ public class ExcelUtils {
         return ExcelExportUtil.exportExcel(sheetMap, params);
     }
 
-
+    /**
+     * 通过反射映射关系
+     *
+     * @param clazzList
+     * @return
+     */
     public static List<Map<String, String>> getJavaBeanAttrAndValue(List clazzList) {
         List<Map<String, String>> resultList = Lists.newArrayList();
         for (Object t : clazzList) {

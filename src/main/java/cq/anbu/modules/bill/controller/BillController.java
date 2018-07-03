@@ -121,14 +121,12 @@ public class BillController extends AbstractController {
     public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
         Map<Integer, Map<String, Object>> sheetMap = Maps.newHashMap();
         Map<String, Object> map = Maps.newHashMap();
-        String ids = request.getParameter("ids");
-        List<BillEntity> billEntityList = this.getBillEntityList(ids);
-        List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(billEntityList);
+        List<BillEntity> list = this.getBillEntityList(request.getParameter("ids"));
+        List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
         map.put("billMap", listMap);
         map.put("billMap1", listMap);
         sheetMap.put(0, map);
         sheetMap.put(1, map);
-
         Workbook workbook = ExcelUtils.getWorkbookManySheet(billTemplatePath, sheetMap);
         if (workbook == null) {
             return "fail";
@@ -140,12 +138,12 @@ public class BillController extends AbstractController {
 
     private List<BillEntity> getBillEntityList(String ids) {
         String[] idsArray = ids.split(",", -1);
-        List<BillEntity> billEntityList = Lists.newArrayList();
+        List<BillEntity> list = Lists.newArrayList();
         for (String id : idsArray) {
             BillEntity billEntity = billService.queryObject(Long.parseLong(id));
-            billEntityList.add(billEntity);
+            list.add(billEntity);
         }
-        return billEntityList;
+        return list;
     }
 
     @RequestMapping(value = "excelImport")

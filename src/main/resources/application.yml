@@ -54,4 +54,9 @@ excel:
     bill:
       excelName: 账单
       templatePath: excel/bill.xlsx
-
+    billCollect:
+      excelName: 运费汇总
+      templatePath: excel/billCollect.xlsx
+    billPackingMaterials:
+      excelName: 包材
+      templatePath: excel/billPackingMaterials.xlsx
