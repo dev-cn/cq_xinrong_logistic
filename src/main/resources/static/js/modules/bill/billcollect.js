@@ -154,12 +154,16 @@ var vm = new Vue({
             vm.billCollect.transpotNo = null;
             vm.billCollect.transpotSupplier = null;
             vm.billCollect.status = null;
+            $("#transpotNo").val("");
+            $("#transpotSupplier").val("");
+            $("#status").val("");
             vm.reload();
         }
 	}
 });
 
 function Datetime() {
+    $('#datetimepicker1').val("");
     $('#datetimepicker1').datetimepicker({
         language: 'zh-CN',//显示中文
         format: 'yyyy-mm-dd',//显示格式

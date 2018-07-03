@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
 <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
 <link rel="stylesheet" href="../../css/main.css">
+<link href="../../css/datetime/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <script src="../../libs/jquery.min.js"></script>
 <script src="../../plugins/layer/layer.js"></script>
 <script src="../../libs/bootstrap.min.js"></script>
@@ -18,19 +19,22 @@
 <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
 <script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
 <script src="../../js/common.js"></script>
+<script src="../../js/datetime/moment-with-locales.js"></script>
+<script src="../../js/datetime/bootstrap-datetimepicker.min.js"></script>
+<script src="../../js/datetime/bootstrap-datetimepicker.zh-CN.js"></script>
 </head>
 <body>
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
 			<div class="form-group col-sm-2" style="width:200px">
-				<input type="text" class="form-control" v-model="billPackingMaterials.transpotNo" @keyup.enter="query" placeholder="运输单号">
+				<input id="transpotNo" type="text" class="form-control" v-model="billPackingMaterials.transpotNo" @keyup.enter="query" placeholder="运输单号">
 			</div>
 			<div class="form-group col-sm-2" style="width:200px">
-				<input type="text" class="form-control" v-model="billPackingMaterials.transpotSupplier" @keyup.enter="query" placeholder="运输供应商">
+				<input id="transpotSupplier" type="text" class="form-control" v-model="billPackingMaterials.transpotSupplier" @keyup.enter="query" placeholder="运输供应商">
 			</div>
 			<div class="form-group col-sm-2" style="width:200px">
-				<input type="text" class="form-control" v-model="billPackingMaterials.status" @keyup.enter="query" placeholder="状态">
+				<input id="status" type="text" class="form-control" v-model="billPackingMaterials.status" @keyup.enter="query" placeholder="状态">
 			</div>
 			<a class="btn btn-default" @click="query">查询</a>
 			<a class="btn btn-default" @click="reset">重置</a>

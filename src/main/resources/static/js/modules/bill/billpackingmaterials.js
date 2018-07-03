@@ -159,6 +159,9 @@ var vm = new Vue({
             vm.billPackingMaterials.transpotNo = null;
             vm.billPackingMaterials.transpotSupplier = null;
             vm.billPackingMaterials.status = null;
+            $("#transpotNo").val("");
+            $("#transpotSupplier").val("");
+            $("#status").val("");
             vm.reload();
         }
 	}

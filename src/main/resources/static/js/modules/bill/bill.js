@@ -150,6 +150,7 @@ var vm = new Vue({
         },
         reset:function (event) {
             vm.bill.trackingNo = null;
+            $("#trackingNo").val("");
             vm.reload();
         }
     }
