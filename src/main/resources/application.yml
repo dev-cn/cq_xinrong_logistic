@@ -50,3 +50,8 @@ renren:
         expire: 604800
         header: token
 
+excel:
+    bill:
+      excelName: 账单
+      templatePath: excel/bill.xlsx
+

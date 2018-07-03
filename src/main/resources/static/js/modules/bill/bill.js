@@ -162,7 +162,7 @@ var vm = new Vue({
                 page:page
             }).trigger("reloadGrid");
         },
-        exccelExport: function (event) {
+        excelExport: function (event) {
             var ids = getSelectedRows();
             if(ids == null){
                 return ;
