@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface BillDao extends BaseDao<BillEntity> {
-	
+    BillEntity queryObjectByTrackingNo(String trackingNo);
 }

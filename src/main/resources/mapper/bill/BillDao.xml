@@ -34,6 +34,10 @@
 		select * from bill where id = #{value}
 	</select>
 
+	<select id="queryObjectByTrackingNo" resultType="cq.anbu.modules.bill.entity.BillEntity">
+		select * from bill where tracking_no = #{trackingNo}
+	</select>
+
 	<select id="queryList" resultType="cq.anbu.modules.bill.entity.BillEntity">
 		select * from bill
 		<where>

@@ -21,7 +21,12 @@ public class BillServiceImpl implements BillService {
 	public BillEntity queryObject(Long id){
 		return billDao.queryObject(id);
 	}
-	
+
+	@Override
+	public BillEntity queryObjectByTrackingNo(String trackingNo) {
+		return billDao.queryObjectByTrackingNo(trackingNo);
+	}
+
 	@Override
 	public List<BillEntity> queryList(Map<String, Object> map){
 		return billDao.queryList(map);

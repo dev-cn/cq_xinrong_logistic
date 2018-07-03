@@ -55,6 +55,28 @@ $(function () {
         }
     });
     Datetime();
+
+    new AjaxUpload('#excelImport', {
+        action: baseURL + 'bill/bill/excelImport?token=' + token,
+        name: 'file',
+        autoSubmit:true,
+        responseType:"json",
+        onSubmit:function(file, extension){
+            if (!(extension && /^(xlsx|xls)$/.test(extension.toLowerCase()))){
+                alert('只支持xlsx、xls格式的excel！');
+                return false;
+            }
+        },
+        onComplete : function (file, r){
+            if(r.code === 0){
+                alert(file+'导入成功', function(index){
+                    vm.reload();
+                });
+            } else {
+                alert(r.msg);
+            }
+        }
+    });
 });
 
 var vm = new Vue({
@@ -146,7 +168,6 @@ var vm = new Vue({
                 return ;
             }
             location.href=baseURL + "bill/bill/export?ids="+ids+"&token="+token;
-            // document.location.href = baseURL + "bill/bill/export" + JSON.stringify(ids);
         },
         reset:function (event) {
             vm.bill.trackingNo = null;

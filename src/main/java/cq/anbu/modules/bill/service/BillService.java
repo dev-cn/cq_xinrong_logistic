@@ -15,7 +15,9 @@ import java.util.Map;
 public interface BillService {
 	
 	BillEntity queryObject(Long id);
-	
+
+	BillEntity queryObjectByTrackingNo(String trackingNo);
+
 	List<BillEntity> queryList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);

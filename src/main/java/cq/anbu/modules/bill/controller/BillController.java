@@ -1,20 +1,27 @@
 package cq.anbu.modules.bill.controller;
 
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.modules.bill.entity.BillEntity;
 import cq.anbu.modules.bill.service.BillService;
 import cq.anbu.modules.sys.controller.AbstractController;
+import cq.anbu.modules.sys.oauth2.TokenGenerator;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
@@ -260,5 +267,54 @@ public class BillController extends AbstractController {
 		return resultList;
 	}
 
+	@RequestMapping(value="excelImport")
+	public R excelImport(@RequestParam("file") MultipartFile multfile,HttpServletRequest request) throws Exception {
+		if (multfile.isEmpty()) {
+			throw new RRException("上传文件不能为空");
+		}
+        // 获取文件名
+        String fileName = multfile.getOriginalFilename();
+        // 获取文件后缀
+        String prefix=fileName.substring(fileName.lastIndexOf("."));
+        // 用uuid作为文件名，防止生成的临时文件重复
+        final File excelFile = File.createTempFile(TokenGenerator.generateValue(), prefix);
+        // MultipartFile to File
+        multfile.transferTo(excelFile);
+        //设置导入参数
+        ImportParams params = new ImportParams();
+        params.setTitleRows(2);
+        params.setHeadRows(1);
+        List<BillEntity> billEntityList = ExcelImportUtil.importExcel(excelFile, BillEntity.class, params);
+        try{
+            for(BillEntity bill : billEntityList){
+                if(StringUtils.isNotBlank(bill.getTrackingNo())){
+                    BillEntity entity = billService.queryObjectByTrackingNo(bill.getTrackingNo());
+                    if(entity != null) {
+                        return R.error("数据已存在!");
+                    } else {
+                        billService.save(bill);
+                    }
+                } else {
+                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                }
+            }
+        } finally {
+            //程序结束时，删除临时文件
+            deleteFile(excelFile);
+        }
+        return R.ok();
+	}
 
+    /**
+     * 删除
+     *
+     * @param files
+     */
+    private void deleteFile(File... files) {
+        for (File file : files) {
+            if (file.exists()) {
+                file.delete();
+            }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package cq.anbu.modules.bill.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import cq.anbu.common.base.BaseEntity;
 
 import java.math.BigDecimal;
@@ -15,38 +16,55 @@ import java.math.BigDecimal;
 public class BillEntity  extends BaseEntity {
 
 	//序号
+	@Excel(name="序号")
 	private BigDecimal serialNo;
 	//运单号
+	@Excel(name="运单号")
 	private String trackingNo;
 	//提货日期
+	@Excel(name="提货日期")
 	private String deliveryDate;
 	//到货日期
+	@Excel(name="到货日期")
 	private String arrivalDate;
 	//提货地点
+	@Excel(name="提货地点")
 	private String deliveryAddr;
 	//到货地点
+	@Excel(name="到货地点")
 	private String arrivalAddr;
 	//货物名称
+	@Excel(name="货物名称")
 	private String goodsName;
 	//装载车型
+	@Excel(name="装载车型")
 	private String loadingModel;
 	//车牌号
+	@Excel(name="车牌号")
 	private String palteNo;
 	//车次
+	@Excel(name="车次")
 	private String trainNo;
-	//BigDecimal
+	//BigDecimal装载数量
+	@Excel(name="装载数量")
 	private BigDecimal shippedQuantity;
 	//重量
+	@Excel(name="重量")
 	private BigDecimal weight;
 	//单价
+	@Excel(name="单价")
 	private BigDecimal price;
 	//提货费
+	@Excel(name="提货费")
 	private BigDecimal pickUpCharge;
 	//送货费
+	@Excel(name="送货费")
 	private BigDecimal deliveryFee;
 	//费用合计
+	@Excel(name="费用合计")
 	private BigDecimal totalExpenses;
 	//备注
+	@Excel(name="备注")
 	private String comment;
 
 	/**
