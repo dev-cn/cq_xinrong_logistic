@@ -3,6 +3,7 @@ package cq.anbu.modules.bill.controller;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import com.google.common.collect.Maps;
 import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
@@ -119,7 +120,7 @@ public class BillController extends AbstractController {
 			billEntity = billService.queryObject(Long.parseLong(id));
 			billCollectEntityList.add(billEntity);
 		}
-		String templateFilePath = ExcelExportUtil.class.getClassLoader().getResource("excel/test.xlsx").getPath();
+		String templateFilePath = ExcelExportUtil.class.getClassLoader().getResource("excel/bill.xlsx").getPath();
 			ExcelExportUtil excel = new ExcelExportUtil();
 			List<Map<Integer, Object>> datalist = new ArrayList<Map<Integer, Object>>();
 			for(BillEntity entity : billCollectEntityList) {
@@ -187,7 +188,6 @@ public class BillController extends AbstractController {
     /**
      * 导出
      *
-     * @param map
      * @param request
      * @param response
      */
@@ -235,20 +235,23 @@ public class BillController extends AbstractController {
      * @return
      */
     public Workbook exportSheetByTemplate(String[] idsArray) {
+        Map<Integer, Map<String, Object>> sheetMap = Maps.newHashMap();
         Map<String, Object> map = new HashMap<String, Object>();
-        List<BillEntity> billCollectEntityList = new ArrayList<>();
-        BillEntity billEntity;
+        List<BillEntity> billEntityList = new ArrayList<>();
         for (String id : idsArray) {
-            billEntity = billService.queryObject(Long.parseLong(id));
-            billCollectEntityList.add(billEntity);
+            BillEntity billEntity = billService.queryObject(Long.parseLong(id));
+            billEntityList.add(billEntity);
         }
-        List<Map<String, String>> listMap = getJavaBeanAttrAndValue(billCollectEntityList);
+        List<Map<String, String>> listMap = getJavaBeanAttrAndValue(billEntityList);
         map.put("billMap", listMap);
+        map.put("billMap1", listMap);
+        sheetMap.put(0, map);
+        sheetMap.put(1, map);
         // 设置导出配置
         // 获取导出excel指定模版
-        TemplateExportParams params = new TemplateExportParams("excel/test.xlsx");
+        TemplateExportParams params = new TemplateExportParams("excel/bill.xlsx", true);
         // 导出excel
-        return exportExcel(params, map);
+        return exportExcel(sheetMap, params);
     }
 
 
