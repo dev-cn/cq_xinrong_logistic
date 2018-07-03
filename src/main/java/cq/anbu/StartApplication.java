@@ -9,12 +9,12 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 @SpringBootApplication
 public class StartApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StartApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StartApplication.class, args);
+    }
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(StartApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(StartApplication.class);
+    }
 }

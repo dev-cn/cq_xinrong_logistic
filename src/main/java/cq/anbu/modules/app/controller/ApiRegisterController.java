@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 注册
+ *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2017-03-26 17:27
@@ -28,7 +29,7 @@ public class ApiRegisterController {
      * 注册
      */
     @PostMapping("register")
-    public R register(String mobile, String password){
+    public R register(String mobile, String password) {
         Assert.isBlank(mobile, "手机号不能为空");
         Assert.isBlank(password, "密码不能为空");
 

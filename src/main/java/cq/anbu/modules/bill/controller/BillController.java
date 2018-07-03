@@ -33,7 +33,7 @@ import static cn.afterturn.easypoi.excel.ExcelExportUtil.exportExcel;
 
 /**
  * 账单表
- * 
+ *
  * @author tangzhonggui
  * @email java_tangzg@163.com
  * @date 2018-06-10 09:48:20
@@ -41,76 +41,76 @@ import static cn.afterturn.easypoi.excel.ExcelExportUtil.exportExcel;
 @RestController
 @RequestMapping("/bill/bill")
 public class BillController extends AbstractController {
-	@Autowired
-	private BillService billService;
-	
-	/**
-	 * 列表
-	 */
-	@RequestMapping("/list")
-	@RequiresPermissions("bill:bill:list")
-	public R list(@RequestParam Map<String, Object> params){
-		//查询列表数据
+    @Autowired
+    private BillService billService;
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/list")
+    @RequiresPermissions("bill:bill:list")
+    public R list(@RequestParam Map<String, Object> params) {
+        //查询列表数据
         Query query = new Query(params);
 
-		List<BillEntity> billList = billService.queryList(query);
-		int total = billService.queryTotal(query);
-		
-		PageUtils pageUtil = new PageUtils(billList, total, query.getLimit(), query.getPage());
-		
-		return R.ok().put("page", pageUtil);
-	}
-	
-	
-	/**
-	 * 信息
-	 */
-	@RequestMapping("/info/{id}")
-	@RequiresPermissions("bill:bill:info")
-	public R info(@PathVariable("id") Long id){
-		BillEntity bill = billService.queryObject(id);
-		
-		return R.ok().put("bill", bill);
-	}
-	
-	/**
-	 * 保存
-	 */
-	@RequestMapping("/save")
-	@RequiresPermissions("bill:bill:save")
-	public R save(@RequestBody BillEntity bill){
-		bill = wrapperBaseEntity(bill);
-		billService.save(bill);
-		
-		return R.ok();
-	}
-	
-	/**
-	 * 修改
-	 */
-	@RequestMapping("/update")
-	@RequiresPermissions("bill:bill:update")
-	public R update(@RequestBody BillEntity bill){
-		bill.setUpdateAt(new Date());
-		bill.setUpdateBy(getUser().getUsername());
-		billService.update(bill);
-		return R.ok();
-	}
-	
-	/**
-	 * 删除
-	 */
-	@RequestMapping("/delete")
-	@RequiresPermissions("bill:bill:delete")
-	public R delete(@RequestBody Long[] ids){
-		billService.deleteBatch(ids);
-		
-		return R.ok();
-	}
+        List<BillEntity> billList = billService.queryList(query);
+        int total = billService.queryTotal(query);
+
+        PageUtils pageUtil = new PageUtils(billList, total, query.getLimit(), query.getPage());
+
+        return R.ok().put("page", pageUtil);
+    }
+
+
+    /**
+     * 信息
+     */
+    @RequestMapping("/info/{id}")
+    @RequiresPermissions("bill:bill:info")
+    public R info(@PathVariable("id") Long id) {
+        BillEntity bill = billService.queryObject(id);
+
+        return R.ok().put("bill", bill);
+    }
+
+    /**
+     * 保存
+     */
+    @RequestMapping("/save")
+    @RequiresPermissions("bill:bill:save")
+    public R save(@RequestBody BillEntity bill) {
+        bill = wrapperBaseEntity(bill);
+        billService.save(bill);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改
+     */
+    @RequestMapping("/update")
+    @RequiresPermissions("bill:bill:update")
+    public R update(@RequestBody BillEntity bill) {
+        bill.setUpdateAt(new Date());
+        bill.setUpdateBy(getUser().getUsername());
+        billService.update(bill);
+        return R.ok();
+    }
+
+    /**
+     * 删除
+     */
+    @RequestMapping("/delete")
+    @RequiresPermissions("bill:bill:delete")
+    public R delete(@RequestBody Long[] ids) {
+        billService.deleteBatch(ids);
+
+        return R.ok();
+    }
 
 
 	/*@RequestMapping(value = "/export",method = RequestMethod.GET)
-	public R export(HttpServletRequest request, HttpServletResponse response){
+    public R export(HttpServletRequest request, HttpServletResponse response){
 		String ids = request.getParameter("ids");
 		String[] idsArray = ids.split(",", -1);
 		List<BillEntity> billCollectEntityList = new ArrayList<>();
@@ -183,99 +183,102 @@ public class BillController extends AbstractController {
 			return R.ok();
 	}
 */
-	/**
-	 * 导出
-	 * @param map
-	 * @param request
-	 * @param response
-	 */
 
-	@RequestMapping(value="/export",method = RequestMethod.GET)
-	public String downloadByPoiBaseView(HttpServletRequest request,HttpServletResponse response) {
-		String ids = request.getParameter("ids");
-		String[] idsArray = ids.split(",", -1);
-		// 获取workbook对象
-		Workbook workbook = exportSheetByTemplate(idsArray) ;
-		// 判断数据
-		if(workbook == null) {
-			return "fail";
-		}
-		// 设置excel的文件名称
-		String excelName = "测试excel" ;
-		// 重置响应对象
-		response.reset();
-		// 当前日期，用于导出文件名称
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String dateStr = "["+excelName+"-"+sdf.format(new Date())+"]";
-		// 指定下载的文件名--设置响应头
-		response.setHeader("Content-Disposition", "attachment;filename=" +dateStr+".xlsx");
-		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-		response.setHeader("Pragma", "no-cache");
-		response.setHeader("Cache-Control", "no-cache");
-		response.setDateHeader("Expires", 0);
-		// 写出数据输出流到页面
-		try {
-			OutputStream output = response.getOutputStream();
-			BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
-			workbook.write(bufferedOutPut);
-			bufferedOutPut.flush();
-			bufferedOutPut.close();
-			output.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "success";
-	}
+    /**
+     * 导出
+     *
+     * @param map
+     * @param request
+     * @param response
+     */
 
-	/**
-	 * 模版单sheet导出示例
-	 * @return
-	 */
-	public Workbook exportSheetByTemplate(String[] idsArray){
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<BillEntity> billCollectEntityList = new ArrayList<>();
-		BillEntity billEntity;
-		for(String id : idsArray){
-			billEntity = billService.queryObject(Long.parseLong(id));
-			billCollectEntityList.add(billEntity);
-		}
-		List<Map<String, String>> listMap = getJavaBeanAttrAndValue(billCollectEntityList);
-		map.put("billMap",listMap);
-		// 设置导出配置
-		// 获取导出excel指定模版
-		TemplateExportParams params = new TemplateExportParams("excel/test.xlsx");
-		// 导出excel
-		return exportExcel(params,map);
-	}
+    @RequestMapping(value = "/export", method = RequestMethod.GET)
+    public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
+        String ids = request.getParameter("ids");
+        String[] idsArray = ids.split(",", -1);
+        // 获取workbook对象
+        Workbook workbook = exportSheetByTemplate(idsArray);
+        // 判断数据
+        if (workbook == null) {
+            return "fail";
+        }
+        // 设置excel的文件名称
+        String excelName = "测试excel";
+        // 重置响应对象
+        response.reset();
+        // 当前日期，用于导出文件名称
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String dateStr = "[" + excelName + "-" + sdf.format(new Date()) + "]";
+        // 指定下载的文件名--设置响应头
+        response.setHeader("Content-Disposition", "attachment;filename=" + dateStr + ".xlsx");
+        response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        // 写出数据输出流到页面
+        try {
+            OutputStream output = response.getOutputStream();
+            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
+            workbook.write(bufferedOutPut);
+            bufferedOutPut.flush();
+            bufferedOutPut.close();
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "success";
+    }
+
+    /**
+     * 模版单sheet导出示例
+     *
+     * @return
+     */
+    public Workbook exportSheetByTemplate(String[] idsArray) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<BillEntity> billCollectEntityList = new ArrayList<>();
+        BillEntity billEntity;
+        for (String id : idsArray) {
+            billEntity = billService.queryObject(Long.parseLong(id));
+            billCollectEntityList.add(billEntity);
+        }
+        List<Map<String, String>> listMap = getJavaBeanAttrAndValue(billCollectEntityList);
+        map.put("billMap", listMap);
+        // 设置导出配置
+        // 获取导出excel指定模版
+        TemplateExportParams params = new TemplateExportParams("excel/test.xlsx");
+        // 导出excel
+        return exportExcel(params, map);
+    }
 
 
-	public static List<Map<String,String>> getJavaBeanAttrAndValue(List<BillEntity> clazzList){
-		List<Map<String,String>> resultList = new ArrayList<>();
-		for(BillEntity t : clazzList){
-			Field[] declaredFields = t.getClass().getDeclaredFields();
-			Field.setAccessible(declaredFields,true);
-			Map<String,String> map = new HashMap<>();
-			for(int i=0;i<declaredFields.length;i++){
-				try {
-					map.put(declaredFields[i].getName(),declaredFields[i].get(t)+"");
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-			resultList.add(map);
-		}
-		return resultList;
-	}
+    public static List<Map<String, String>> getJavaBeanAttrAndValue(List<BillEntity> clazzList) {
+        List<Map<String, String>> resultList = new ArrayList<>();
+        for (BillEntity t : clazzList) {
+            Field[] declaredFields = t.getClass().getDeclaredFields();
+            Field.setAccessible(declaredFields, true);
+            Map<String, String> map = new HashMap<>();
+            for (int i = 0; i < declaredFields.length; i++) {
+                try {
+                    map.put(declaredFields[i].getName(), declaredFields[i].get(t) + "");
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            resultList.add(map);
+        }
+        return resultList;
+    }
 
-	@RequestMapping(value="excelImport")
-	public R excelImport(@RequestParam("file") MultipartFile multfile,HttpServletRequest request) throws Exception {
-		if (multfile.isEmpty()) {
-			throw new RRException("上传文件不能为空");
-		}
+    @RequestMapping(value = "excelImport")
+    public R excelImport(@RequestParam("file") MultipartFile multfile, HttpServletRequest request) throws Exception {
+        if (multfile.isEmpty()) {
+            throw new RRException("上传文件不能为空");
+        }
         // 获取文件名
         String fileName = multfile.getOriginalFilename();
         // 获取文件后缀
-        String prefix=fileName.substring(fileName.lastIndexOf("."));
+        String prefix = fileName.substring(fileName.lastIndexOf("."));
         // 用uuid作为文件名，防止生成的临时文件重复
         final File excelFile = File.createTempFile(TokenGenerator.generateValue(), prefix);
         // MultipartFile to File
@@ -285,11 +288,11 @@ public class BillController extends AbstractController {
         params.setTitleRows(2);
         params.setHeadRows(1);
         List<BillEntity> billEntityList = ExcelImportUtil.importExcel(excelFile, BillEntity.class, params);
-        try{
-            for(BillEntity bill : billEntityList){
-                if(StringUtils.isNotBlank(bill.getTrackingNo())){
+        try {
+            for (BillEntity bill : billEntityList) {
+                if (StringUtils.isNotBlank(bill.getTrackingNo())) {
                     BillEntity entity = billService.queryObjectByTrackingNo(bill.getTrackingNo());
-                    if(entity != null) {
+                    if (entity != null) {
                         return R.error("数据已存在!");
                     } else {
                         billService.save(bill);
@@ -303,7 +306,7 @@ public class BillController extends AbstractController {
             deleteFile(excelFile);
         }
         return R.ok();
-	}
+    }
 
     /**
      * 删除

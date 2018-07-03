@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 账单表
- * 
+ *
  * @author tangzhonggui
  * @email java_tangzg@163.com
  * @date 2018-06-10 09:48:20

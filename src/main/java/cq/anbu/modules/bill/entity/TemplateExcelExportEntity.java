@@ -9,36 +9,37 @@ import java.util.List;
 
 /**
  * 模板导出 测试类
+ *
  * @author JueYue
- *   2014年12月26日 上午9:39:13
+ * 2014年12月26日 上午9:39:13
  */
 public class TemplateExcelExportEntity implements Serializable {
 
     /**
-     * 
+     *
      */
-    private static final long          serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Excel(name = "序号")
-    private String                     index;
+    private String index;
 
     @Excel(name = "资金性质")
-    private String                     accountType;
+    private String accountType;
 
     @ExcelCollection(name = "预算科目")
     private List<BudgetAccountsEntity> budgetAccounts;
 
     @Excel(name = "项目名称")
-    private String                     projectName;
+    private String projectName;
 
     @ExcelEntity(name = "收款人")
-    private PayeeEntity                payee;
+    private PayeeEntity payee;
 
     @Excel(name = "申请金额")
-    private String                     amountApplied;
+    private String amountApplied;
 
     @Excel(name = "核定金额")
-    private String                     approvedAmount;
+    private String approvedAmount;
 
     public String getIndex() {
         return index;
