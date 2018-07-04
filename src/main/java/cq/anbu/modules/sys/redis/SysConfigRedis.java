@@ -3,9 +3,6 @@ package cq.anbu.modules.sys.redis;
 import cq.anbu.common.utils.RedisKeys;
 import cq.anbu.common.utils.RedisUtils;
 import cq.anbu.modules.sys.entity.SysConfigEntity;
-import cq.anbu.common.utils.RedisKeys;
-import cq.anbu.common.utils.RedisUtils;
-import cq.anbu.modules.sys.entity.SysConfigEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

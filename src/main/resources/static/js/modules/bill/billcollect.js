@@ -144,11 +144,7 @@ var vm = new Vue({
             }).trigger("reloadGrid");
 		},
         exportExcel: function (event) {
-            var ids = getSelectedRows();
-            if(ids == null){
-                return ;
-            }
-            location.href=baseURL + "bill/billcollect/export?ids="+ids+"&token="+token;
+            excelExport(baseURL + "bill/billcollect/export?token=" + token);
         },
         reset:function (event) {
             vm.billCollect.transpotNo = null;

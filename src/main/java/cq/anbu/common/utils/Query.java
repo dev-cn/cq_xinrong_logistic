@@ -1,7 +1,6 @@
 package cq.anbu.common.utils;
 
 import cq.anbu.common.xss.SQLFilter;
-import cq.anbu.common.xss.SQLFilter;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.LinkedHashMap;

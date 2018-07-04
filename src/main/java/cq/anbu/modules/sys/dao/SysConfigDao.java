@@ -1,7 +1,6 @@
 package cq.anbu.modules.sys.dao;
 
 import cq.anbu.modules.sys.entity.SysConfigEntity;
-import cq.anbu.modules.sys.entity.SysConfigEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

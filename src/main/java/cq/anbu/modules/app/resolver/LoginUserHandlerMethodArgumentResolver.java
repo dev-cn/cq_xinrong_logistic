@@ -1,7 +1,5 @@
 package cq.anbu.modules.app.resolver;
 
-import cq.anbu.modules.app.entity.UserEntity;
-import cq.anbu.modules.app.service.UserService;
 import cq.anbu.modules.app.annotation.LoginUser;
 import cq.anbu.modules.app.entity.UserEntity;
 import cq.anbu.modules.app.interceptor.AuthorizationInterceptor;

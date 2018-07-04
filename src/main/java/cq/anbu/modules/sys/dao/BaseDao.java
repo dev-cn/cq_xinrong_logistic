@@ -1,7 +1,5 @@
 package cq.anbu.modules.sys.dao;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 import java.util.Map;
 

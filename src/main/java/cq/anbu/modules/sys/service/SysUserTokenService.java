@@ -2,7 +2,6 @@ package cq.anbu.modules.sys.service;
 
 import cq.anbu.common.utils.R;
 import cq.anbu.modules.sys.entity.SysUserTokenEntity;
-import cq.anbu.common.utils.R;
 
 /**
  * 用户Token

@@ -1,7 +1,6 @@
 package cq.anbu.config;
 
 import cq.anbu.common.xss.XssFilter;
-import cq.anbu.common.xss.XssFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

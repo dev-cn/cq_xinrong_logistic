@@ -1,7 +1,6 @@
 package cq.anbu.modules.bill.controller;
 
 import com.google.common.collect.Lists;
-import cq.anbu.common.utils.IOUtils;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
@@ -9,7 +8,6 @@ import cq.anbu.common.utils.excel.ExcelUtils;
 import cq.anbu.modules.bill.entity.BillCollectEntity;
 import cq.anbu.modules.bill.service.BillCollectService;
 import cq.anbu.modules.sys.controller.AbstractController;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -114,13 +112,7 @@ public class BillCollectController extends AbstractController {
         List<BillCollectEntity> list = this.getBillCollectEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
         map.put("billCollectMap", listMap);
-        Workbook workbook = ExcelUtils.getWorkbookSingleSheet(billCollectTemplatePath, map);
-        if (workbook == null) {
-            return "fail";
-        }
-        String fileName = ExcelUtils.getExcelName(billCollectExcelName);
-        IOUtils.writeExcel(response, workbook, fileName);
-        return "success";
+        return ExcelUtils.writeSingleExcel(response, billCollectTemplatePath, billCollectExcelName, map);
     }
 
     private List<BillCollectEntity> getBillCollectEntityList(String ids) {

@@ -2,8 +2,6 @@ package cq.anbu.modules.sys.service.impl;
 
 import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.Constant;
-import cq.anbu.common.exception.RRException;
-import cq.anbu.common.utils.Constant;
 import cq.anbu.modules.sys.dao.SysUserDao;
 import cq.anbu.modules.sys.entity.SysUserEntity;
 import cq.anbu.modules.sys.service.SysRoleService;
@@ -11,7 +9,6 @@ import cq.anbu.modules.sys.service.SysUserRoleService;
 import cq.anbu.modules.sys.service.SysUserService;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
-
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

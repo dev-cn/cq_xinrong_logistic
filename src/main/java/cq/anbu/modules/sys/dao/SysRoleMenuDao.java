@@ -1,7 +1,6 @@
 package cq.anbu.modules.sys.dao;
 
 import cq.anbu.modules.sys.entity.SysRoleMenuEntity;
-import cq.anbu.modules.sys.entity.SysRoleMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

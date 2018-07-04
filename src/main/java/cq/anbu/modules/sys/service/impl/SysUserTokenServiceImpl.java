@@ -3,9 +3,8 @@ package cq.anbu.modules.sys.service.impl;
 import cq.anbu.common.utils.R;
 import cq.anbu.modules.sys.dao.SysUserTokenDao;
 import cq.anbu.modules.sys.entity.SysUserTokenEntity;
-import cq.anbu.modules.sys.service.SysUserTokenService;
-import cq.anbu.common.utils.R;
 import cq.anbu.modules.sys.oauth2.TokenGenerator;
+import cq.anbu.modules.sys.service.SysUserTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

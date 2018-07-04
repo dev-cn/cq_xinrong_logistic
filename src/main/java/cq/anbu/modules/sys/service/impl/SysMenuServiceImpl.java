@@ -1,19 +1,17 @@
 package cq.anbu.modules.sys.service.impl;
 
 import cq.anbu.common.utils.Constant;
-import cq.anbu.common.utils.Constant;
 import cq.anbu.modules.sys.dao.SysMenuDao;
 import cq.anbu.modules.sys.entity.SysMenuEntity;
 import cq.anbu.modules.sys.service.SysMenuService;
-import cq.anbu.modules.sys.service.SysRoleMenuService;
 import cq.anbu.modules.sys.service.SysUserService;
-import cq.anbu.common.utils.Constant.MenuType;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 @Service("sysMenuService")

@@ -1,7 +1,6 @@
 package cq.anbu.datasources;
 
 import cq.anbu.datasources.annotation.DataSource;
-import cq.anbu.datasources.annotation.DataSource;
 import cq.anbu.modules.app.entity.UserEntity;
 import cq.anbu.modules.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

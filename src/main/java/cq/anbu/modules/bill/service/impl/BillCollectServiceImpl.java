@@ -1,14 +1,13 @@
 package cq.anbu.modules.bill.service.impl;
 
+import cq.anbu.modules.bill.dao.BillCollectDao;
+import cq.anbu.modules.bill.entity.BillCollectEntity;
+import cq.anbu.modules.bill.service.BillCollectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
-import cq.anbu.modules.bill.dao.BillCollectDao;
-import cq.anbu.modules.bill.entity.BillCollectEntity;
-import cq.anbu.modules.bill.service.BillCollectService;
 
 
 @Service("billCollectService")

@@ -1,7 +1,6 @@
 package cq.anbu.modules.sys.oauth2;
 
 import cq.anbu.common.exception.RRException;
-import cq.anbu.common.exception.RRException;
 
 import java.security.MessageDigest;
 import java.util.UUID;

@@ -8,16 +8,13 @@ import cq.anbu.modules.sys.service.SysRoleMenuService;
 import cq.anbu.modules.sys.service.SysRoleService;
 import cq.anbu.modules.sys.service.SysUserRoleService;
 import cq.anbu.modules.sys.service.SysUserService;
-import cq.anbu.common.utils.Constant;
-import cq.anbu.common.exception.RRException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 /**

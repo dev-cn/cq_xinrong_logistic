@@ -1,7 +1,6 @@
 package cq.anbu.modules.sys.dao;
 
 import cq.anbu.modules.sys.entity.SysUserEntity;
-import cq.anbu.modules.sys.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

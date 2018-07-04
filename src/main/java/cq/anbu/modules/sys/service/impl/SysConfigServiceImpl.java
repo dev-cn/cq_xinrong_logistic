@@ -2,7 +2,6 @@ package cq.anbu.modules.sys.service.impl;
 
 import com.google.gson.Gson;
 import cq.anbu.common.exception.RRException;
-import cq.anbu.common.exception.RRException;
 import cq.anbu.modules.sys.dao.SysConfigDao;
 import cq.anbu.modules.sys.entity.SysConfigEntity;
 import cq.anbu.modules.sys.redis.SysConfigRedis;
