@@ -9,6 +9,7 @@ import cq.anbu.common.utils.IOUtils;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
+import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
 import cq.anbu.modules.bill.entity.BillEntity;
 import cq.anbu.modules.bill.service.BillService;
@@ -122,7 +123,9 @@ public class BillController extends AbstractController {
         Map<Integer, Map<String, Object>> sheetMap = Maps.newHashMap();
         Map<String, Object> map = Maps.newHashMap();
         List<BillEntity> list = this.getBillEntityList(request.getParameter("ids"));
+        list = BeanUtils.nullToBlankList(list);
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
+
         map.put("billMap", listMap);
         map.put("billMap1", listMap);
         sheetMap.put(0, map);
@@ -196,4 +199,5 @@ public class BillController extends AbstractController {
             }
         }
     }
+
 }
