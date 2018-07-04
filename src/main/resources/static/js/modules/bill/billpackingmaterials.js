@@ -149,11 +149,7 @@ var vm = new Vue({
             }).trigger("reloadGrid");
 		},
         excelExport: function (event) {
-			var ids = getSelectedRows();
-			if(ids == null){
-				return ;
-			}
-			location.href=baseURL + "bill/billpackingmaterials/export?ids="+ids+"&token="+token;
+            excelExport(baseURL + "bill/billpackingmaterials/export?token=" + token);
 		},
         reset:function (event) {
             vm.billPackingMaterials.transpotNo = null;
