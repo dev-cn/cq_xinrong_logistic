@@ -1,7 +1,6 @@
 package cq.anbu.modules.bill.controller;
 
 import com.google.common.collect.Lists;
-import cq.anbu.common.utils.IOUtils;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
@@ -9,7 +8,6 @@ import cq.anbu.common.utils.excel.ExcelUtils;
 import cq.anbu.modules.bill.entity.BillPackingMaterialsEntity;
 import cq.anbu.modules.bill.service.BillPackingMaterialsService;
 import cq.anbu.modules.sys.controller.AbstractController;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -109,13 +107,7 @@ public class BillPackingMaterialsController extends AbstractController {
         Map<String, Object> map = new HashMap<String, Object>();
         List<BillPackingMaterialsEntity> list = this.getBillPackingMaterialsEntityList(request.getParameter("ids"));
         map.put("billPackingMaterials", ExcelUtils.getJavaBeanAttrAndValue(list));
-        Workbook workbook = ExcelUtils.getWorkbookSingleSheet(billPackingMaterialsTemplatePath, map);
-        if (workbook == null) {
-            return "fail";
-        }
-        String fileName = ExcelUtils.getExcelName(billPackingMaterialsExcelName);
-        IOUtils.writeExcel(response, workbook, fileName);
-        return "success";
+        return ExcelUtils.writeSingleExcel(response, billPackingMaterialsTemplatePath, billPackingMaterialsExcelName, map);
     }
 
     private List<BillPackingMaterialsEntity> getBillPackingMaterialsEntityList(String ids) {

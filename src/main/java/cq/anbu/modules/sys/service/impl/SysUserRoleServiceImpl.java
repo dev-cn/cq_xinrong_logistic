@@ -2,13 +2,12 @@ package cq.anbu.modules.sys.service.impl;
 
 import cq.anbu.modules.sys.dao.SysUserRoleDao;
 import cq.anbu.modules.sys.service.SysUserRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 
 /**

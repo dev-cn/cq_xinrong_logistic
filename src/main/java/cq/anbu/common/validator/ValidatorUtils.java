@@ -1,7 +1,6 @@
 package cq.anbu.common.validator;
 
 import cq.anbu.common.exception.RRException;
-import cq.anbu.common.exception.RRException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

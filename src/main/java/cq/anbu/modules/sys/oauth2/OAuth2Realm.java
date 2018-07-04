@@ -1,6 +1,5 @@
 package cq.anbu.modules.sys.oauth2;
 
-import cq.anbu.modules.sys.service.ShiroService;
 import cq.anbu.modules.sys.entity.SysUserEntity;
 import cq.anbu.modules.sys.entity.SysUserTokenEntity;
 import cq.anbu.modules.sys.service.ShiroService;

@@ -2,7 +2,6 @@ package cq.anbu.modules.sys.oauth2;
 
 import com.google.gson.Gson;
 import cq.anbu.common.utils.R;
-import cq.anbu.common.utils.R;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.shiro.authc.AuthenticationException;

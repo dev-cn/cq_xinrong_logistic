@@ -1,7 +1,6 @@
 package cq.anbu.modules.sys.service.impl;
 
 import cq.anbu.common.utils.Constant;
-import cq.anbu.common.utils.Constant;
 import cq.anbu.modules.sys.dao.SysMenuDao;
 import cq.anbu.modules.sys.dao.SysUserDao;
 import cq.anbu.modules.sys.dao.SysUserTokenDao;

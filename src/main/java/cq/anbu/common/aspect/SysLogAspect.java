@@ -1,8 +1,6 @@
 package cq.anbu.common.aspect;
 
 import com.google.gson.Gson;
-import cq.anbu.common.utils.HttpContextUtils;
-import cq.anbu.common.utils.IPUtils;
 import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.utils.HttpContextUtils;
 import cq.anbu.common.utils.IPUtils;

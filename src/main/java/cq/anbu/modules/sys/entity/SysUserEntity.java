@@ -2,8 +2,6 @@ package cq.anbu.modules.sys.entity;
 
 import cq.anbu.common.validator.group.AddGroup;
 import cq.anbu.common.validator.group.UpdateGroup;
-import cq.anbu.common.validator.group.AddGroup;
-import cq.anbu.common.validator.group.UpdateGroup;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 

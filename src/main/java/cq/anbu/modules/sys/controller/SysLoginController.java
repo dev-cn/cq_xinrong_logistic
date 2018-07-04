@@ -4,8 +4,6 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.ShiroUtils;
-import cq.anbu.common.utils.R;
-import cq.anbu.common.utils.ShiroUtils;
 import cq.anbu.modules.sys.entity.SysUserEntity;
 import cq.anbu.modules.sys.service.SysUserService;
 import cq.anbu.modules.sys.service.SysUserTokenService;

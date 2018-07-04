@@ -1,7 +1,6 @@
 package cq.anbu.modules.sys.dao;
 
 import cq.anbu.modules.sys.entity.SysUserTokenEntity;
-import cq.anbu.modules.sys.entity.SysUserTokenEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

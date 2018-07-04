@@ -5,7 +5,6 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import cq.anbu.common.exception.RRException;
-import cq.anbu.common.utils.IOUtils;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
@@ -15,7 +14,6 @@ import cq.anbu.modules.bill.service.BillService;
 import cq.anbu.modules.sys.controller.AbstractController;
 import cq.anbu.modules.sys.oauth2.TokenGenerator;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -127,13 +125,7 @@ public class BillController extends AbstractController {
         map.put("billMap1", listMap);
         sheetMap.put(0, map);
         sheetMap.put(1, map);
-        Workbook workbook = ExcelUtils.getWorkbookManySheet(billTemplatePath, sheetMap);
-        if (workbook == null) {
-            return "fail";
-        }
-        String fileName = ExcelUtils.getExcelName(billExcelName);
-        IOUtils.writeExcel(response, workbook, fileName);
-        return "success";
+        return ExcelUtils.writeManyExcel(response, billTemplatePath, billExcelName, sheetMap);
     }
 
     private List<BillEntity> getBillEntityList(String ids) {

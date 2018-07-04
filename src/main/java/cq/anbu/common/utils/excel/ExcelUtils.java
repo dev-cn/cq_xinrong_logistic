@@ -10,10 +10,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class ExcelUtils {
@@ -62,6 +66,26 @@ public class ExcelUtils {
         TemplateExportParams params = new TemplateExportParams(targetExcelPath, true);
         // 导出excel
         return ExcelExportUtil.exportExcel(sheetMap, params);
+    }
+
+    public static String writeSingleExcel(HttpServletResponse response, String targetExcelPath, String excelName, Map<String, Object> map) {
+        Workbook workbook = ExcelUtils.getWorkbookSingleSheet(targetExcelPath, map);
+        if (workbook == null) {
+            return "fail";
+        }
+        String fileName = ExcelUtils.getExcelName(excelName);
+        IOUtils.writeExcel(response, workbook, fileName);
+        return "success";
+    }
+
+    public static String writeManyExcel(HttpServletResponse response, String targetExcelPath, String excelName, Map<Integer, Map<String, Object>> sheetMap) {
+        Workbook workbook = ExcelUtils.getWorkbookManySheet(targetExcelPath, sheetMap);
+        if (workbook == null) {
+            return "fail";
+        }
+        String fileName = ExcelUtils.getExcelName(excelName);
+        IOUtils.writeExcel(response, workbook, fileName);
+        return "success";
     }
 
     /**
