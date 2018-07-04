@@ -1,7 +1,6 @@
 package cq.anbu.common.exception;
 
 import cq.anbu.common.utils.R;
-import cq.anbu.common.utils.R;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,6 @@ public class RRExceptionHandler {
         R r = new R();
         r.put("code", e.getCode());
         r.put("msg", e.getMessage());
-
         return r;
     }
 
