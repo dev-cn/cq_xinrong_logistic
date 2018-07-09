@@ -8,7 +8,6 @@ import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
-import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
 import cq.anbu.modules.bill.entity.BillEntity;
 import cq.anbu.modules.bill.service.BillService;
@@ -120,14 +119,13 @@ public class BillController extends AbstractController {
     public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
         Map<Integer, Map<String, Object>> sheetMap = Maps.newHashMap();
         Map<String, Object> map = Maps.newHashMap();
+        Map<String, Object> mapOne = Maps.newHashMap();
         List<BillEntity> list = this.getBillEntityList(request.getParameter("ids"));
-        list = BeanUtils.nullToBlankList(list);
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
-
         map.put("billMap", listMap);
-        map.put("billMap1", listMap);
         sheetMap.put(0, map);
-        sheetMap.put(1, map);
+        mapOne.put("billMapOne", listMap);
+        sheetMap.put(1, mapOne);
         return ExcelUtils.writeManyExcel(response, billTemplatePath, billExcelName, sheetMap);
     }
 
@@ -177,19 +175,6 @@ public class BillController extends AbstractController {
             deleteFile(excelFile);
         }
         return R.ok();
-    }
-
-    /**
-     * 删除
-     *
-     * @param files
-     */
-    private void deleteFile(File... files) {
-        for (File file : files) {
-            if (file.exists()) {
-                file.delete();
-            }
-        }
     }
 
 }

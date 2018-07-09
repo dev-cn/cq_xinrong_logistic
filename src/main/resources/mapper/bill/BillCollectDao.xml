@@ -39,6 +39,10 @@
 		select * from bill_collect where id = #{value}
 	</select>
 
+	<select id="queryObjectByTranspotNo" resultType="cq.anbu.modules.bill.entity.BillEntity">
+		select * from bill_collect where transpot_no = #{transpotNo}
+	</select>
+
 	<select id="queryList" resultType="cq.anbu.modules.bill.entity.BillCollectEntity">
 		select * from bill_collect
 		<where>

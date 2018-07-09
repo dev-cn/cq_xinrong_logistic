@@ -2,6 +2,7 @@ package cq.anbu.common.utils.excel;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelStyleType;
 import com.google.common.collect.Lists;
 import cq.anbu.common.utils.DateUtils;
 import cq.anbu.common.utils.IOUtils;
@@ -64,6 +65,8 @@ public class ExcelUtils {
     public static Workbook getWorkbookManySheet(String targetExcelPath, Map<Integer, Map<String, Object>> sheetMap) {
         // 获取导出excel指定模版
         TemplateExportParams params = new TemplateExportParams(targetExcelPath, true);
+        params.setHeadingRows(2);
+        params.setStyle(ExcelStyleType.BORDER.getClazz());
         // 导出excel
         return ExcelExportUtil.exportExcel(sheetMap, params);
     }

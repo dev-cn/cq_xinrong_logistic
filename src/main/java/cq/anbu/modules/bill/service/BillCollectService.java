@@ -16,6 +16,8 @@ public interface BillCollectService {
 
     BillCollectEntity queryObject(Long id);
 
+    BillCollectEntity queryObjectByTranspotNo(String transpotNo);
+
     List<BillCollectEntity> queryList(Map<String, Object> map);
 
     int queryTotal(Map<String, Object> map);

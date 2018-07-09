@@ -1,5 +1,6 @@
 package cq.anbu.modules.bill.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import cq.anbu.common.base.BaseEntity;
 
 import java.math.BigDecimal;
@@ -15,56 +16,82 @@ import java.math.BigDecimal;
 public class BillPackingMaterialsEntity extends BaseEntity {
 
     //序号
+    @Excel(name = "序号")
     private Long serialNo;
     //地点
+    @Excel(name = "地点")
     private String address;
     //运输供应商
+    @Excel(name = "运输供应商")
     private String transpotSupplier;
     //运费类型
+    @Excel(name = "运费类型")
     private String freightType;
     //运输单号
+    @Excel(name = "运输单号")
     private String transpotNo;
     //日期
+    @Excel(name = "日期")
     private String date;
     //起点
+    @Excel(name = "起点")
     private String lineStart;
     //线路终点
+    @Excel(name = "线路终点")
     private String lineEnd;
     //运输产品
+    @Excel(name = "运输产品")
     private String transpotProduct;
     //运输方式
+    @Excel(name = "运输方式")
     private String transpotMode;
     //车型
+    @Excel(name = "车型")
     private String motorcycleType;
     //运输单价(含税保险)
+    @Excel(name = "运输单价")
     private BigDecimal transpotPrice;
     //纸箱
+    @Excel(name = "纸箱")
     private BigDecimal carton;
     //1#泡棉
+    @Excel(name = "1#泡棉")
     private BigDecimal foamOne;
     //2#泡棉
+    @Excel(name = "2#泡棉")
     private BigDecimal foamTwo;
     //3#泡棉
+    @Excel(name = "3#泡棉")
     private BigDecimal foamThree;
     //4#泡棉
+    @Excel(name = "4#泡棉")
     private BigDecimal foamFour;
     //纸角撑
+    @Excel(name = "纸角撑")
     private BigDecimal paperBrace;
     //数量
+    @Excel(name = "数量")
     private BigDecimal quantity;
     //总体积
+    @Excel(name = "总体积")
     private BigDecimal voluneSum;
     //总重量
+    @Excel(name = "总重量")
     private BigDecimal weightSum;
     //提送运费
+    @Excel(name = "提送运费")
     private BigDecimal deliveryFee;
     //预提运费合计（含税10%）
+    @Excel(name = "预提运费合计（含税10%）")
     private BigDecimal advanceFeeIncludeTax;
     //预提运费合计（不含税）
+    @Excel(name = "预提运费合计（不含税）")
     private BigDecimal advanceFeeNoTax;
     //
+    @Excel(name = "状态")
     private Integer status;
     //备注
+    @Excel(name = "备注")
     private String comment;
     //预留字段1
     private String reserveOne;

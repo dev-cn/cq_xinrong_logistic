@@ -16,6 +16,8 @@ public interface BillPackingMaterialsService {
 
     BillPackingMaterialsEntity queryObject(Long id);
 
+    BillPackingMaterialsEntity queryObjectByTranspotNo(String transpotNo);
+
     List<BillPackingMaterialsEntity> queryList(Map<String, Object> map);
 
     int queryTotal(Map<String, Object> map);

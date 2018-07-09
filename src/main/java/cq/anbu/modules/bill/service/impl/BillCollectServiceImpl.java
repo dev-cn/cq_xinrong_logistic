@@ -21,6 +21,11 @@ public class BillCollectServiceImpl implements BillCollectService {
     }
 
     @Override
+    public BillCollectEntity queryObjectByTranspotNo(String transpotNo) {
+        return billCollectDao.queryObjectByTranspotNo(transpotNo);
+    }
+
+    @Override
     public List<BillCollectEntity> queryList(Map<String, Object> map) {
         return billCollectDao.queryList(map);
     }

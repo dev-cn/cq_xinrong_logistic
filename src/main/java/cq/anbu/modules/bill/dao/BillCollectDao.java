@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface BillCollectDao extends BaseDao<BillCollectEntity> {
-
+    BillCollectEntity queryObjectByTranspotNo(String transpotNo);
 }

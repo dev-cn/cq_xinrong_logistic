@@ -21,6 +21,11 @@ public class BillPackingMaterialsServiceImpl implements BillPackingMaterialsServ
     }
 
     @Override
+    public BillPackingMaterialsEntity queryObjectByTranspotNo(String transpotNo) {
+        return billPackingMaterialsDao.queryObjectByTranspotNo(transpotNo);
+    }
+
+    @Override
     public List<BillPackingMaterialsEntity> queryList(Map<String, Object> map) {
         return billPackingMaterialsDao.queryList(map);
     }

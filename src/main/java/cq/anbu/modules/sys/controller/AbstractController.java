@@ -6,6 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -33,5 +34,18 @@ public abstract class AbstractController {
         baseEntity.setUpdateBy(getUser().getUsername());
         baseEntity.setIsDelete(0);
         return baseEntity;
+    }
+
+    /**
+     * 删除
+     *
+     * @param files
+     */
+    public void deleteFile(File... files) {
+        for (File file : files) {
+            if (file.exists()) {
+                file.delete();
+            }
+        }
     }
 }
