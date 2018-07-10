@@ -3,9 +3,16 @@ package cq.anbu.common.utils.excel;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelStyleType;
+import cn.afterturn.easypoi.excel.entity.params.ExcelExportEntity;
+import cn.afterturn.easypoi.excel.entity.params.ExcelForEachParams;
+import cn.afterturn.easypoi.excel.export.styler.IExcelExportStyler;
+import cn.afterturn.easypoi.excel.export.template.ExcelExportOfTemplateUtil;
 import com.google.common.collect.Lists;
 import cq.anbu.common.utils.DateUtils;
 import cq.anbu.common.utils.IOUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +75,34 @@ public class ExcelUtils {
         params.setHeadingRows(2);
         params.setStyle(ExcelStyleType.BORDER.getClazz());
         // 导出excel
-        return ExcelExportUtil.exportExcel(sheetMap, params);
+        ExcelExportOfTemplateUtil excelExportOfTemplateUtil = new ExcelExportOfTemplateUtil();
+        excelExportOfTemplateUtil.setExcelExportStyler(new IExcelExportStyler(){
+            @Override
+            public CellStyle getHeaderStyle(short headerColor) {
+                return null;
+            }
+
+            @Override
+            public CellStyle getTitleStyle(short color) {
+                return null;
+            }
+
+            @Override
+            public CellStyle getStyles(boolean parity, ExcelExportEntity entity) {
+                return null;
+            }
+
+            @Override
+            public CellStyle getStyles(Cell cell, int dataRow, ExcelExportEntity entity, Object obj, Object data) {
+                return null;
+            }
+
+            @Override
+            public CellStyle getTemplateStyles(boolean isSingle, ExcelForEachParams excelForEachParams) {
+                return null;
+            }
+        });
+        return excelExportOfTemplateUtil.createExcleByTemplate(params,sheetMap);
     }
 
     public static String writeSingleExcel(HttpServletResponse response, String targetExcelPath, String excelName, Map<String, Object> map) {
