@@ -5,8 +5,10 @@ import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.Constant;
 import cq.anbu.common.utils.R;
 import cq.anbu.modules.sys.entity.SysMenuEntity;
+import cq.anbu.modules.sys.entity.SysMenuUpdateEntity;
 import cq.anbu.modules.sys.service.ShiroService;
 import cq.anbu.modules.sys.service.SysMenuService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -106,11 +109,19 @@ public class SysMenuController extends AbstractController {
     @SysLog("修改菜单")
     @RequestMapping("/update")
     @RequiresPermissions("sys:menu:update")
-    public R update(@RequestBody SysMenuEntity menu) {
+    public R update(@RequestBody SysMenuUpdateEntity sysMenuUpdateEntity) {
+        SysMenuEntity menu = new SysMenuEntity();
+        try {
+            BeanUtils.copyProperties(menu,sysMenuUpdateEntity);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
         //数据校验
         verifyForm(menu);
 
-        sysMenuService.update(menu);
+        sysMenuService.update((SysMenuEntity)menu);
 
         return R.ok();
     }
