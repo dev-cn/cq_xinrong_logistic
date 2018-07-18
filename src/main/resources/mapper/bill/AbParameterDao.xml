@@ -3,7 +3,7 @@
 
 <mapper namespace="cq.anbu.modules.bill.dao.AbParameterDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cq.anbu.modules.bill.entity.AbParameterEntity" id="abParameterMap">
         <result property="id" column="id"/>
         <result property="paraCode" column="para_code"/>
@@ -17,94 +17,94 @@
         <result property="isDelete" column="is_delete"/>
     </resultMap>
 
-	<select id="queryObject" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
-		select * from ab_parameter where id = #{value}
-	</select>
+    <select id="queryObject" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
+        select * from ab_parameter where id = #{value}
+    </select>
 
-	<select id="queryParamList" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
-		select * from ab_parameter where para_parent_code = #{paraParentCode}
-	</select>
+    <select id="queryParamList" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
+        select * from ab_parameter where para_parent_code = #{paraParentCode}
+    </select>
 
-	<select id="queryList" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
-		select * from ab_parameter
-		<where>
-			<if test="paraDesc != null and paraDesc.trim() != ''">
-				and `para_desc` like concat('%',#{paraDesc},'%')
-			</if>
-			<if test="paraParentCode != null and paraParentCode.trim() != ''">
-				and `para_parent_code` like concat('%',#{paraParentCode},'%')
-			</if>
-		</where>
+    <select id="queryList" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
+        select * from ab_parameter
+        <where>
+            <if test="paraDesc != null and paraDesc.trim() != ''">
+                and `para_desc` like concat('%',#{paraDesc},'%')
+            </if>
+            <if test="paraParentCode != null and paraParentCode.trim() != ''">
+                and `para_parent_code` like concat('%',#{paraParentCode},'%')
+            </if>
+        </where>
 
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from ab_parameter 
-	</select>
-	 
-	<insert id="save" parameterType="cq.anbu.modules.bill.entity.AbParameterEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into ab_parameter
-		(
-			`para_code`, 
-			`para_desc`, 
-			`para_parent_code`, 
-			`seq`, 
-			`create_at`, 
-			`create_by`, 
-			`update_at`, 
-			`update_by`, 
-			`is_delete`
-		)
-		values
-		(
-			#{paraCode}, 
-			#{paraDesc}, 
-			#{paraParentCode}, 
-			#{seq}, 
-			#{createAt}, 
-			#{createBy}, 
-			#{updateAt}, 
-			#{updateBy}, 
-			#{isDelete}
-		)
-	</insert>
-	 
-	<update id="update" parameterType="cq.anbu.modules.bill.entity.AbParameterEntity">
-		update ab_parameter 
-		<set>
-			<if test="paraCode != null">`para_code` = #{paraCode}, </if>
-			<if test="paraDesc != null">`para_desc` = #{paraDesc}, </if>
-			<if test="paraParentCode != null">`para_parent_code` = #{paraParentCode}, </if>
-			<if test="seq != null">`seq` = #{seq}, </if>
-			<if test="createAt != null">`create_at` = #{createAt}, </if>
-			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="updateAt != null">`update_at` = #{updateAt}, </if>
-			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
-			<if test="isDelete != null">`is_delete` = #{isDelete}</if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="delete">
-		delete from ab_parameter where id = #{value}
-	</delete>
-	
-	<delete id="deleteBatch">
-		delete from ab_parameter where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from ab_parameter
+    </select>
+
+    <insert id="save" parameterType="cq.anbu.modules.bill.entity.AbParameterEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into ab_parameter
+        (
+        `para_code`,
+        `para_desc`,
+        `para_parent_code`,
+        `seq`,
+        `create_at`,
+        `create_by`,
+        `update_at`,
+        `update_by`,
+        `is_delete`
+        )
+        values
+        (
+        #{paraCode},
+        #{paraDesc},
+        #{paraParentCode},
+        #{seq},
+        #{createAt},
+        #{createBy},
+        #{updateAt},
+        #{updateBy},
+        #{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="cq.anbu.modules.bill.entity.AbParameterEntity">
+        update ab_parameter
+        <set>
+            <if test="paraCode != null">`para_code` = #{paraCode},</if>
+            <if test="paraDesc != null">`para_desc` = #{paraDesc},</if>
+            <if test="paraParentCode != null">`para_parent_code` = #{paraParentCode},</if>
+            <if test="seq != null">`seq` = #{seq},</if>
+            <if test="createAt != null">`create_at` = #{createAt},</if>
+            <if test="createBy != null">`create_by` = #{createBy},</if>
+            <if test="updateAt != null">`update_at` = #{updateAt},</if>
+            <if test="updateBy != null">`update_by` = #{updateBy},</if>
+            <if test="isDelete != null">`is_delete` = #{isDelete}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from ab_parameter where id = #{value}
+    </delete>
+
+    <delete id="deleteBatch">
+        delete from ab_parameter where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

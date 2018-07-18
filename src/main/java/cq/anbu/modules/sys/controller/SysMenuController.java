@@ -112,7 +112,7 @@ public class SysMenuController extends AbstractController {
     public R update(@RequestBody SysMenuUpdateEntity sysMenuUpdateEntity) {
         SysMenuEntity menu = new SysMenuEntity();
         try {
-            BeanUtils.copyProperties(menu,sysMenuUpdateEntity);
+            BeanUtils.copyProperties(menu, sysMenuUpdateEntity);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -121,7 +121,7 @@ public class SysMenuController extends AbstractController {
         //数据校验
         verifyForm(menu);
 
-        sysMenuService.update((SysMenuEntity)menu);
+        sysMenuService.update((SysMenuEntity) menu);
 
         return R.ok();
     }

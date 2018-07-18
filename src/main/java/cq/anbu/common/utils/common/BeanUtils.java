@@ -13,13 +13,13 @@ public class BeanUtils {
         for (int i = 0; i < declaredFields.length; i++) {
             try {
                 Object object = declaredFields[i].get(bean);
-                if("class java.lang.String".equalsIgnoreCase(declaredFields[i].getGenericType().toString())){
-                    if(object == null) {
-                        declaredFields[i].set(bean,"");
+                if ("class java.lang.String".equalsIgnoreCase(declaredFields[i].getGenericType().toString())) {
+                    if (object == null) {
+                        declaredFields[i].set(bean, "");
                     }
-                } else if("class java.math.BigDecimal".equalsIgnoreCase(declaredFields[i].getGenericType().toString())) {
-                    if(object == null) {
-                        declaredFields[i].set(bean,new BigDecimal(0));
+                } else if ("class java.math.BigDecimal".equalsIgnoreCase(declaredFields[i].getGenericType().toString())) {
+                    if (object == null) {
+                        declaredFields[i].set(bean, new BigDecimal(0));
                     }
                 }
             } catch (IllegalAccessException e) {
@@ -32,10 +32,10 @@ public class BeanUtils {
 
     public static <T> List<T> nullToBlankList(List<T> beanList) {
         List<T> list = new ArrayList<>();
-        if(beanList == null) {
+        if (beanList == null) {
             return list;
         }
-        for(T t:beanList){
+        for (T t : beanList) {
             nullToBlank(t);
             list.add(t);
         }

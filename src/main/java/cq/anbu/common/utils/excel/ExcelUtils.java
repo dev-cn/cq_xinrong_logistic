@@ -76,7 +76,7 @@ public class ExcelUtils {
         params.setStyle(ExcelStyleType.BORDER.getClazz());
         // 导出excel
         ExcelExportOfTemplateUtil excelExportOfTemplateUtil = new ExcelExportOfTemplateUtil();
-        excelExportOfTemplateUtil.setExcelExportStyler(new IExcelExportStyler(){
+        excelExportOfTemplateUtil.setExcelExportStyler(new IExcelExportStyler() {
             @Override
             public CellStyle getHeaderStyle(short headerColor) {
                 return null;
@@ -102,7 +102,7 @@ public class ExcelUtils {
                 return null;
             }
         });
-        return excelExportOfTemplateUtil.createExcleByTemplate(params,sheetMap);
+        return excelExportOfTemplateUtil.createExcleByTemplate(params, sheetMap);
     }
 
     public static String writeSingleExcel(HttpServletResponse response, String targetExcelPath, String excelName, Map<String, Object> map) {

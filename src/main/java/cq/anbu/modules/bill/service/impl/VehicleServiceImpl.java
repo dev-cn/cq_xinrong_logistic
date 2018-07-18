@@ -11,45 +11,44 @@ import cq.anbu.modules.bill.entity.VehicleEntity;
 import cq.anbu.modules.bill.service.VehicleService;
 
 
-
 @Service("vehicleService")
 public class VehicleServiceImpl implements VehicleService {
-	@Autowired
-	private VehicleDao vehicleDao;
-	
-	@Override
-	public VehicleEntity queryObject(Long id){
-		return vehicleDao.queryObject(id);
-	}
-	
-	@Override
-	public List<VehicleEntity> queryList(Map<String, Object> map){
-		return vehicleDao.queryList(map);
-	}
-	
-	@Override
-	public int queryTotal(Map<String, Object> map){
-		return vehicleDao.queryTotal(map);
-	}
-	
-	@Override
-	public void save(VehicleEntity vehicle){
-		vehicleDao.save(vehicle);
-	}
-	
-	@Override
-	public void update(VehicleEntity vehicle){
-		vehicleDao.update(vehicle);
-	}
-	
-	@Override
-	public void delete(Long id){
-		vehicleDao.delete(id);
-	}
-	
-	@Override
-	public void deleteBatch(Long[] ids){
-		vehicleDao.deleteBatch(ids);
-	}
-	
+    @Autowired
+    private VehicleDao vehicleDao;
+
+    @Override
+    public VehicleEntity queryObject(Long id) {
+        return vehicleDao.queryObject(id);
+    }
+
+    @Override
+    public List<VehicleEntity> queryList(Map<String, Object> map) {
+        return vehicleDao.queryList(map);
+    }
+
+    @Override
+    public int queryTotal(Map<String, Object> map) {
+        return vehicleDao.queryTotal(map);
+    }
+
+    @Override
+    public void save(VehicleEntity vehicle) {
+        vehicleDao.save(vehicle);
+    }
+
+    @Override
+    public void update(VehicleEntity vehicle) {
+        vehicleDao.update(vehicle);
+    }
+
+    @Override
+    public void delete(Long id) {
+        vehicleDao.delete(id);
+    }
+
+    @Override
+    public void deleteBatch(Long[] ids) {
+        vehicleDao.deleteBatch(ids);
+    }
+
 }

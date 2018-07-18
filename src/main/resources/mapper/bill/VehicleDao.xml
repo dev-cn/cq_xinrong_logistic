@@ -3,7 +3,7 @@
 
 <mapper namespace="cq.anbu.modules.bill.dao.VehicleDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="cq.anbu.modules.bill.entity.VehicleEntity" id="vehicleMap">
         <result property="id" column="id"/>
         <result property="palteNo" column="palte_no"/>
@@ -19,87 +19,87 @@
         <result property="isDelete" column="is_delete"/>
     </resultMap>
 
-	<select id="queryObject" resultType="cq.anbu.modules.bill.entity.VehicleEntity">
-		select * from t_vehicle where id = #{value}
-	</select>
+    <select id="queryObject" resultType="cq.anbu.modules.bill.entity.VehicleEntity">
+        select * from t_vehicle where id = #{value}
+    </select>
 
-	<select id="queryList" resultType="cq.anbu.modules.bill.entity.VehicleEntity">
-		select * from t_vehicle
+    <select id="queryList" resultType="cq.anbu.modules.bill.entity.VehicleEntity">
+        select * from t_vehicle
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
             </when>
-			<otherwise>
+            <otherwise>
                 order by id desc
-			</otherwise>
+            </otherwise>
         </choose>
-		<if test="offset != null and limit != null">
-			limit #{offset}, #{limit}
-		</if>
-	</select>
-	
- 	<select id="queryTotal" resultType="int">
-		select count(*) from t_vehicle 
-	</select>
-	 
-	<insert id="save" parameterType="cq.anbu.modules.bill.entity.VehicleEntity" useGeneratedKeys="true" keyProperty="id">
-		insert into t_vehicle
-		(
-			`palte_no`, 
-			`driver`, 
-			`loading_model`, 
-			`shipped_quantity`, 
-			`belong_area`, 
-			`comment`, 
-			`create_at`, 
-			`create_by`, 
-			`update_at`, 
-			`update_by`, 
-			`is_delete`
-		)
-		values
-		(
-			#{palteNo}, 
-			#{driver}, 
-			#{loadingModel}, 
-			#{shippedQuantity}, 
-			#{belongArea}, 
-			#{comment}, 
-			#{createAt}, 
-			#{createBy}, 
-			#{updateAt}, 
-			#{updateBy}, 
-			#{isDelete}
-		)
-	</insert>
-	 
-	<update id="update" parameterType="cq.anbu.modules.bill.entity.VehicleEntity">
-		update t_vehicle 
-		<set>
-			<if test="palteNo != null">`palte_no` = #{palteNo}, </if>
-			<if test="driver != null">`driver` = #{driver}, </if>
-			<if test="loadingModel != null">`loading_model` = #{loadingModel}, </if>
-			<if test="shippedQuantity != null">`shipped_quantity` = #{shippedQuantity}, </if>
-			<if test="belongArea != null">`belong_area` = #{belongArea}, </if>
-			<if test="comment != null">`comment` = #{comment}, </if>
-			<if test="createAt != null">`create_at` = #{createAt}, </if>
-			<if test="createBy != null">`create_by` = #{createBy}, </if>
-			<if test="updateAt != null">`update_at` = #{updateAt}, </if>
-			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
-			<if test="isDelete != null">`is_delete` = #{isDelete}</if>
-		</set>
-		where id = #{id}
-	</update>
-	
-	<delete id="delete">
-		delete from t_vehicle where id = #{value}
-	</delete>
-	
-	<delete id="deleteBatch">
-		delete from t_vehicle where id in 
-		<foreach item="id" collection="array" open="(" separator="," close=")">
-			#{id}
-		</foreach>
-	</delete>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from t_vehicle
+    </select>
+
+    <insert id="save" parameterType="cq.anbu.modules.bill.entity.VehicleEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into t_vehicle
+        (
+        `palte_no`,
+        `driver`,
+        `loading_model`,
+        `shipped_quantity`,
+        `belong_area`,
+        `comment`,
+        `create_at`,
+        `create_by`,
+        `update_at`,
+        `update_by`,
+        `is_delete`
+        )
+        values
+        (
+        #{palteNo},
+        #{driver},
+        #{loadingModel},
+        #{shippedQuantity},
+        #{belongArea},
+        #{comment},
+        #{createAt},
+        #{createBy},
+        #{updateAt},
+        #{updateBy},
+        #{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="cq.anbu.modules.bill.entity.VehicleEntity">
+        update t_vehicle
+        <set>
+            <if test="palteNo != null">`palte_no` = #{palteNo},</if>
+            <if test="driver != null">`driver` = #{driver},</if>
+            <if test="loadingModel != null">`loading_model` = #{loadingModel},</if>
+            <if test="shippedQuantity != null">`shipped_quantity` = #{shippedQuantity},</if>
+            <if test="belongArea != null">`belong_area` = #{belongArea},</if>
+            <if test="comment != null">`comment` = #{comment},</if>
+            <if test="createAt != null">`create_at` = #{createAt},</if>
+            <if test="createBy != null">`create_by` = #{createBy},</if>
+            <if test="updateAt != null">`update_at` = #{updateAt},</if>
+            <if test="updateBy != null">`update_by` = #{updateBy},</if>
+            <if test="isDelete != null">`is_delete` = #{isDelete}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from t_vehicle where id = #{value}
+    </delete>
+
+    <delete id="deleteBatch">
+        delete from t_vehicle where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 
 </mapper>

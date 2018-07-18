@@ -15,12 +15,7 @@ $(function () {
 			{ label: '地址', name: 'address', index: 'address', width: 80 }, 			
 			{ label: '建档时间', name: 'ctime', index: 'ctime', width: 80 }, 			
 			{ label: '级别', name: 'level', index: 'level', width: 80 }, 			
-			{ label: '备注', name: 'comment', index: 'comment', width: 80 }, 			
-			{ label: '', name: 'createAt', index: 'create_at', width: 80 }, 			
-			{ label: '', name: 'createBy', index: 'create_by', width: 80 }, 			
-			{ label: '', name: 'updateAt', index: 'update_at', width: 80 }, 			
-			{ label: '', name: 'updateBy', index: 'update_by', width: 80 }, 			
-			{ label: '', name: 'isDelete', index: 'is_delete', width: 80 }			
+			{ label: '备注', name: 'comment', index: 'comment', width: 80 }
         ],
 		viewrecords: true,
         height: 385,
@@ -68,7 +63,6 @@ var vm = new Vue({
 		update: function (event) {
 			var id = getSelectedRow();
 			if(id == null){
-				return ;
 			}
 			vm.showList = false;
             vm.title = "修改";

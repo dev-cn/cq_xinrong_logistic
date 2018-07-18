@@ -9,12 +9,7 @@ $(function () {
 			{ label: '装载车型', name: 'loadingModel', index: 'loading_model', width: 80 }, 			
 			{ label: '车载量', name: 'shippedQuantity', index: 'shipped_quantity', width: 80 }, 			
 			{ label: '所属区域', name: 'belongArea', index: 'belong_area', width: 80 }, 			
-			{ label: '备注', name: 'comment', index: 'comment', width: 80 }, 			
-			{ label: '', name: 'createAt', index: 'create_at', width: 80 }, 			
-			{ label: '', name: 'createBy', index: 'create_by', width: 80 }, 			
-			{ label: '', name: 'updateAt', index: 'update_at', width: 80 }, 			
-			{ label: '', name: 'updateBy', index: 'update_by', width: 80 }, 			
-			{ label: '', name: 'isDelete', index: 'is_delete', width: 80 }			
+			{ label: '备注', name: 'comment', index: 'comment', width: 80 }
         ],
 		viewrecords: true,
         height: 385,
