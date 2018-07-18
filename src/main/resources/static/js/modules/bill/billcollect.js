@@ -1,3 +1,4 @@
+var statusList = [];
 $(function () {
     $("#jqGrid").jqGrid({
         url: baseURL + 'bill/billcollect/list',
@@ -22,7 +23,21 @@ $(function () {
 			{ label: '提送运费', name: 'deliveryFee', index: 'delivery_fee', width: 80 }, 			
 			{ label: '预提合计(含税10%)', name: 'advanceFeeIncludeTax', index: 'advance_fee_include_tax', width: 180 },
 			{ label: '预提合计(不含税)', name: 'advanceFeeNoTax', index: 'advance_fee_no_tax', width: 180 },
-			{ label: '状态', name: 'status', index: 'status', width: 80 },
+			{ label: '状态', name: 'status', index: 'status', width: 80,
+				formatter:function (value,row,index) {
+					var status = '';
+					for(i = 0; i < statusList.length;i++){
+						if(value == statusList[i].paraCode){
+							return status = statusList[i].paraDesc;
+						}
+					}
+                    if (status == '') {
+						return value;
+                    } else {
+						return status;
+					}
+                }
+			},
 			{ label: '备注', name: 'comment', index: 'comment', width: 80 }
 			// { label: '预留字段1', name: 'reserveOne', index: 'reserve_one', width: 80 },
 			// { label: '预留字段2', name: 'reserveTwo', index: 'reserve_two', width: 80 },
@@ -60,6 +75,7 @@ $(function () {
         }
     });
     Datetime();
+    queryStatusParams();
 
     new AjaxUpload('#excelImport', {
         action: baseURL + 'bill/billcollect/excelImport?token=' + token,
@@ -195,3 +211,4 @@ function Datetime() {
         vm.billCollect.date = date;
     });
 }
+
