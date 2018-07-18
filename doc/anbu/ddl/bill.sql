@@ -28,10 +28,7 @@ CREATE TABLE `bill` (
   `delivery_addr` varchar(255) DEFAULT NULL COMMENT '提货地点',
   `arrival_addr` varchar(255) DEFAULT NULL COMMENT '到货地点',
   `goods_name` varchar(255) DEFAULT NULL COMMENT '货物名称',
-  `loading_model` varchar(255) DEFAULT NULL COMMENT '装载车型',
-  `palte_no` varchar(255) DEFAULT NULL COMMENT '车牌号',
   `train_no` varchar(255) DEFAULT NULL COMMENT '车次',
-  `shipped_quantity` decimal(20,0) DEFAULT NULL COMMENT '装载数量',
   `weight` decimal(20,2) DEFAULT NULL COMMENT '重量',
   `price` decimal(20,2) DEFAULT NULL COMMENT '单价',
   `pick_up_charge` decimal(20,2) DEFAULT NULL COMMENT '提货费',
@@ -43,5 +40,9 @@ CREATE TABLE `bill` (
   `update_at` datetime DEFAULT NULL,
   `update_by` varchar(255) DEFAULT NULL,
   `is_delete` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `t_customer_id` bigint(20),
+  `t_vehicle_id` bigint(20),
+  PRIMARY KEY (`id`),
+  CONSTRAINT fk_t_customer FOREIGN KEY (t_customer_id) REFERENCES t_customer(id),
+  CONSTRAINT fk_t_vehicle FOREIGN KEY (t_vehicle_id) REFERENCES t_vehicle(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='账单表';
