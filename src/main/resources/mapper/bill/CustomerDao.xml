@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cq.anbu.modules.bill.dao.CustomerDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cq.anbu.modules.bill.entity.CustomerEntity" id="customerMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="nameEn" column="name_en"/>
+        <result property="nameDesc" column="name_desc"/>
+        <result property="mobile" column="mobile"/>
+        <result property="email" column="email"/>
+        <result property="qq" column="qq"/>
+        <result property="wechat" column="wechat"/>
+        <result property="website" column="website"/>
+        <result property="address" column="address"/>
+        <result property="ctime" column="ctime"/>
+        <result property="level" column="level"/>
+        <result property="comment" column="comment"/>
+        <result property="createAt" column="create_at"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="isDelete" column="is_delete"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="cq.anbu.modules.bill.entity.CustomerEntity">
+		select * from t_customer where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="cq.anbu.modules.bill.entity.CustomerEntity">
+		select * from t_customer
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from t_customer 
+	</select>
+	 
+	<insert id="save" parameterType="cq.anbu.modules.bill.entity.CustomerEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into t_customer
+		(
+			`name`, 
+			`name_en`, 
+			`name_desc`, 
+			`mobile`, 
+			`email`, 
+			`qq`, 
+			`wechat`, 
+			`website`, 
+			`address`, 
+			`ctime`, 
+			`level`, 
+			`comment`, 
+			`create_at`, 
+			`create_by`, 
+			`update_at`, 
+			`update_by`, 
+			`is_delete`
+		)
+		values
+		(
+			#{name}, 
+			#{nameEn}, 
+			#{nameDesc}, 
+			#{mobile}, 
+			#{email}, 
+			#{qq}, 
+			#{wechat}, 
+			#{website}, 
+			#{address}, 
+			#{ctime}, 
+			#{level}, 
+			#{comment}, 
+			#{createAt}, 
+			#{createBy}, 
+			#{updateAt}, 
+			#{updateBy}, 
+			#{isDelete}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="cq.anbu.modules.bill.entity.CustomerEntity">
+		update t_customer 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="nameEn != null">`name_en` = #{nameEn}, </if>
+			<if test="nameDesc != null">`name_desc` = #{nameDesc}, </if>
+			<if test="mobile != null">`mobile` = #{mobile}, </if>
+			<if test="email != null">`email` = #{email}, </if>
+			<if test="qq != null">`qq` = #{qq}, </if>
+			<if test="wechat != null">`wechat` = #{wechat}, </if>
+			<if test="website != null">`website` = #{website}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="ctime != null">`ctime` = #{ctime}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="comment != null">`comment` = #{comment}, </if>
+			<if test="createAt != null">`create_at` = #{createAt}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="updateAt != null">`update_at` = #{updateAt}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from t_customer where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from t_customer where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
