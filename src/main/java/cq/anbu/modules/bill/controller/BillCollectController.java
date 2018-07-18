@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,7 @@ public class BillCollectController extends AbstractController {
     @RequestMapping("/save")
     @RequiresPermissions("bill:billcollect:save")
     public R save(@RequestBody BillCollectEntity billCollect) {
+        billCollect = wrapperBaseEntity(billCollect);
         billCollectService.save(billCollect);
 
         return R.ok();
@@ -90,6 +92,8 @@ public class BillCollectController extends AbstractController {
     @RequestMapping("/update")
     @RequiresPermissions("bill:billcollect:update")
     public R update(@RequestBody BillCollectEntity billCollect) {
+        billCollect.setUpdateAt(new Date());
+        billCollect.setUpdateBy(getUser().getUsername());
         billCollectService.update(billCollect);
 
         return R.ok();

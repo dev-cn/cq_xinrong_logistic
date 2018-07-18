@@ -126,4 +126,23 @@ function excelExport(url) {
     location.href = url + "&ids=" + ids;
 }
 
+function queryStatusParams() {
+    var paraParentCode = "orderStatus";
+    var data = { paraParentCode : paraParentCode };
+    var url = "bill/abparameter/queryParams";
+    $.ajax({
+        type : "POST",
+        url : baseURL+url,
+        data : JSON.stringify(data),
+        contentType : "application/json",
+        success : function (r) {
+            var res = r.paramList;
+            statusList = res;
+            $("select[name='status']").append("<option selected value=''>请选择状态</option>")
+            for(var i = 0;i < res.length; i++){
+                $("select[name='status']").append("<option value=" + res[i].paraCode + ">" + res[i].paraDesc + "</option>");
+            }
+        }
+    });
+}
 
