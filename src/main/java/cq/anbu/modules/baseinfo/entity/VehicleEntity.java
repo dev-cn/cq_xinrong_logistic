@@ -1,5 +1,7 @@
 package cq.anbu.modules.baseinfo.entity;
 
+import cq.anbu.common.base.BaseEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.math.BigDecimal;
@@ -12,8 +14,7 @@ import java.math.BigDecimal;
  * @email java_tangzg@163.com
  * @date 2018-07-18 18:47:04
  */
-public class VehicleEntity implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class VehicleEntity extends BaseEntity {
 
     //
     private Long id;
@@ -136,75 +137,5 @@ public class VehicleEntity implements Serializable {
      */
     public String getComment() {
         return comment;
-    }
-
-    /**
-     * 设置：
-     */
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
-    }
-
-    /**
-     * 获取：
-     */
-    public Date getCreateAt() {
-        return createAt;
-    }
-
-    /**
-     * 设置：
-     */
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    /**
-     * 获取：
-     */
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    /**
-     * 设置：
-     */
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    /**
-     * 获取：
-     */
-    public Date getUpdateAt() {
-        return updateAt;
-    }
-
-    /**
-     * 设置：
-     */
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    /**
-     * 获取：
-     */
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    /**
-     * 设置：
-     */
-    public void setIsDelete(String isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    /**
-     * 获取：
-     */
-    public String getIsDelete() {
-        return isDelete;
     }
 }

@@ -5,10 +5,12 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.modules.baseinfo.entity.CustomerEntity;
 import cq.anbu.modules.baseinfo.service.CustomerService;
+import cq.anbu.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/baseinfo/customer")
-public class CustomerController {
+public class CustomerController extends AbstractController {
     @Autowired
     private CustomerService customerService;
 
@@ -61,6 +63,7 @@ public class CustomerController {
     @RequestMapping("/save")
     @RequiresPermissions("baseinfo:customer:save")
     public R save(@RequestBody CustomerEntity customer) {
+        customer = wrapperBaseEntity(customer);
         customerService.save(customer);
 
         return R.ok();
@@ -72,6 +75,8 @@ public class CustomerController {
     @RequestMapping("/update")
     @RequiresPermissions("baseinfo:customer:update")
     public R update(@RequestBody CustomerEntity customer) {
+        customer.setUpdateAt(new Date());
+        customer.setUpdateBy(getUser().getUsername());
         customerService.update(customer);
 
         return R.ok();

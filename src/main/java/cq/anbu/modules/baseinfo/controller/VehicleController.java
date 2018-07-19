@@ -5,10 +5,12 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.modules.baseinfo.entity.VehicleEntity;
 import cq.anbu.modules.baseinfo.service.VehicleService;
+import cq.anbu.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +24,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/baseinfo/vehicle")
-public class VehicleController {
+public class VehicleController extends AbstractController {
     @Autowired
     private VehicleService vehicleService;
 
@@ -72,6 +74,8 @@ public class VehicleController {
     @RequestMapping("/update")
     @RequiresPermissions("baseinfo:vehicle:update")
     public R update(@RequestBody VehicleEntity vehicle) {
+        vehicle.setUpdateAt(new Date());
+        vehicle.setUpdateBy(getUser().getUsername());
         vehicleService.update(vehicle);
 
         return R.ok();
