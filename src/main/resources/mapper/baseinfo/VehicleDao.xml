@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cq.anbu.modules.bill.dao.VehicleDao">
+<mapper namespace="cq.anbu.modules.baseinfo.dao.VehicleDao">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="cq.anbu.modules.bill.entity.VehicleEntity" id="vehicleMap">
+    <resultMap type="cq.anbu.modules.baseinfo.entity.VehicleEntity" id="vehicleMap">
         <result property="id" column="id"/>
         <result property="palteNo" column="palte_no"/>
         <result property="driver" column="driver"/>
@@ -19,12 +19,17 @@
         <result property="isDelete" column="is_delete"/>
     </resultMap>
 
-    <select id="queryObject" resultType="cq.anbu.modules.bill.entity.VehicleEntity">
+    <select id="queryObject" resultType="cq.anbu.modules.baseinfo.entity.VehicleEntity">
         select * from t_vehicle where id = #{value}
     </select>
 
-    <select id="queryList" resultType="cq.anbu.modules.bill.entity.VehicleEntity">
+    <select id="queryList" resultType="cq.anbu.modules.baseinfo.entity.VehicleEntity">
         select * from t_vehicle
+        <where>
+            <if test="palteNo != null and palteNo.trim() != ''">
+                and `palte_no` like concat('%',#{palteNo},'%')
+            </if>
+        </where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -42,7 +47,7 @@
         select count(*) from t_vehicle
     </select>
 
-    <insert id="save" parameterType="cq.anbu.modules.bill.entity.VehicleEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="cq.anbu.modules.baseinfo.entity.VehicleEntity" useGeneratedKeys="true" keyProperty="id">
         insert into t_vehicle
         (
         `palte_no`,
@@ -73,7 +78,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="cq.anbu.modules.bill.entity.VehicleEntity">
+    <update id="update" parameterType="cq.anbu.modules.baseinfo.entity.VehicleEntity">
         update t_vehicle
         <set>
             <if test="palteNo != null">`palte_no` = #{palteNo},</if>

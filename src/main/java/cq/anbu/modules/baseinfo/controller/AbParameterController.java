@@ -1,10 +1,10 @@
-package cq.anbu.modules.bill.controller;
+package cq.anbu.modules.baseinfo.controller;
 
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
-import cq.anbu.modules.bill.entity.AbParameterEntity;
-import cq.anbu.modules.bill.service.AbParameterService;
+import cq.anbu.modules.baseinfo.entity.AbParameterEntity;
+import cq.anbu.modules.baseinfo.service.AbParameterService;
 import cq.anbu.modules.sys.controller.AbstractController;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -25,7 +25,7 @@ import java.util.Map;
  * @date 2018-07-18 13:28:53
  */
 @RestController
-@RequestMapping("/bill/abparameter")
+@RequestMapping("/baseinfo/abparameter")
 public class AbParameterController extends AbstractController {
     @Autowired
     private AbParameterService abParameterService;
@@ -34,7 +34,7 @@ public class AbParameterController extends AbstractController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("bill:abparameter:list")
+    @RequiresPermissions("baseinfo:abparameter:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
@@ -52,7 +52,7 @@ public class AbParameterController extends AbstractController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("bill:abparameter:info")
+    @RequiresPermissions("baseinfo:abparameter:info")
     public R info(@PathVariable("id") Long id) {
         AbParameterEntity abParameter = abParameterService.queryObject(id);
 
@@ -63,7 +63,7 @@ public class AbParameterController extends AbstractController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("bill:abparameter:save")
+    @RequiresPermissions("baseinfo:abparameter:save")
     public R save(@RequestBody AbParameterEntity abParameter) {
         abParameter = wrapperBaseEntity(abParameter);
         abParameterService.save(abParameter);
@@ -75,7 +75,7 @@ public class AbParameterController extends AbstractController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("bill:abparameter:update")
+    @RequiresPermissions("baseinfo:abparameter:update")
     public R update(@RequestBody AbParameterEntity abParameter) {
         abParameter.setUpdateAt(new Date());
         abParameter.setUpdateBy(getUser().getUsername());
@@ -87,7 +87,7 @@ public class AbParameterController extends AbstractController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("bill:abparameter:delete")
+    @RequiresPermissions("baseinfo:abparameter:delete")
     public R delete(@RequestBody Long[] ids) {
         abParameterService.deleteBatch(ids);
 

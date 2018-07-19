@@ -31,9 +31,9 @@
         <div class="grid-btn">
             <a class="btn btn-default" @click="query">查询</a>
             <a class="btn btn-default" @click="reset">重置</a>
-            <a v-if="hasPermission('bill:abparameter:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            <a v-if="hasPermission('bill:abparameter:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-            <a v-if="hasPermission('bill:abparameter:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            <a v-if="hasPermission('baseinfo:abparameter:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a v-if="hasPermission('baseinfo:abparameter:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a v-if="hasPermission('baseinfo:abparameter:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
         </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
@@ -105,6 +105,6 @@
     </div>
 </div>
 
-<script src="../../js/modules/bill/abparameter.js"></script>
+<script src="../../js/modules/baseinfo/abparameter.js"></script>
 </body>
 </html>

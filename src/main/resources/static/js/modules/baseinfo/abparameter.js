@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'bill/abparameter/list',
+        url: baseURL + 'baseinfo/abparameter/list',
         datatype: "json",
         colModel: [			
 			// { label: 'id', name: 'id', index: 'id', width: 50, key: true },
@@ -68,7 +68,7 @@ var vm = new Vue({
             vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.abParameter.id == null ? "bill/abparameter/save" : "bill/abparameter/update";
+			var url = vm.abParameter.id == null ? "baseinfo/abparameter/save" : "baseinfo/abparameter/update";
 			$.ajax({
 				type: "POST",
 			    url: baseURL + url,
@@ -94,7 +94,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: baseURL + "bill/abparameter/delete",
+				    url: baseURL + "baseinfo/abparameter/delete",
                     contentType: "application/json",
 				    data: JSON.stringify(ids),
 				    success: function(r){
@@ -110,7 +110,7 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(id){
-			$.get(baseURL + "bill/abparameter/info/"+id, function(r){
+			$.get(baseURL + "baseinfo/abparameter/info/"+id, function(r){
                 vm.abParameter = r.abParameter;
             });
 		},

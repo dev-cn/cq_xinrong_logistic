@@ -1,4 +1,4 @@
-package cq.anbu.modules.bill.service.impl;
+package cq.anbu.modules.baseinfo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-import cq.anbu.modules.bill.dao.AbParameterDao;
-import cq.anbu.modules.bill.entity.AbParameterEntity;
-import cq.anbu.modules.bill.service.AbParameterService;
+import cq.anbu.modules.baseinfo.dao.AbParameterDao;
+import cq.anbu.modules.baseinfo.entity.AbParameterEntity;
+import cq.anbu.modules.baseinfo.service.AbParameterService;
 
 
 @Service("abParameterService")

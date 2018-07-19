@@ -1,4 +1,4 @@
-package cq.anbu.modules.bill.service.impl;
+package cq.anbu.modules.baseinfo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-import cq.anbu.modules.bill.dao.CustomerDao;
-import cq.anbu.modules.bill.entity.CustomerEntity;
-import cq.anbu.modules.bill.service.CustomerService;
+import cq.anbu.modules.baseinfo.dao.CustomerDao;
+import cq.anbu.modules.baseinfo.entity.CustomerEntity;
+import cq.anbu.modules.baseinfo.service.CustomerService;
 
 
 @Service("customerService")

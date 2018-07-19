@@ -1,9 +1,9 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'bill/vehicle/list',
+        url: baseURL + 'baseinfo/vehicle/list',
         datatype: "json",
         colModel: [			
-			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
+			// { label: 'id', name: 'id', index: 'id', width: 50, key: true },
 			{ label: '车牌号', name: 'palteNo', index: 'palte_no', width: 80 }, 			
 			{ label: '驾驶人', name: 'driver', index: 'driver', width: 80 }, 			
 			{ label: '装载车型', name: 'loadingModel', index: 'loading_model', width: 80 }, 			
@@ -65,7 +65,7 @@ var vm = new Vue({
             vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.vehicle.id == null ? "bill/vehicle/save" : "bill/vehicle/update";
+			var url = vm.vehicle.id == null ? "baseinfo/vehicle/save" : "baseinfo/vehicle/update";
 			$.ajax({
 				type: "POST",
 			    url: baseURL + url,
@@ -91,7 +91,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: baseURL + "bill/vehicle/delete",
+				    url: baseURL + "baseinfo/vehicle/delete",
                     contentType: "application/json",
 				    data: JSON.stringify(ids),
 				    success: function(r){
@@ -107,16 +107,22 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(id){
-			$.get(baseURL + "bill/vehicle/info/"+id, function(r){
+			$.get(baseURL + "baseinfo/vehicle/info/"+id, function(r){
                 vm.vehicle = r.vehicle;
             });
 		},
 		reload: function (event) {
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
+			$("#jqGrid").jqGrid('setGridParam',{
+				postData:{'palteNo':vm.vehicle.palteNo},
                 page:page
             }).trigger("reloadGrid");
-		}
+		},
+        reset:function (event) {
+            vm.vehicle.palteNo = null;
+            $("#palteNo").val("");
+            vm.reload();
+        }
 	}
 });

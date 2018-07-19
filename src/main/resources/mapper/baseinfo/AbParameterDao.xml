@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cq.anbu.modules.bill.dao.AbParameterDao">
+<mapper namespace="cq.anbu.modules.baseinfo.dao.AbParameterDao">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="cq.anbu.modules.bill.entity.AbParameterEntity" id="abParameterMap">
+    <resultMap type="cq.anbu.modules.baseinfo.entity.AbParameterEntity" id="abParameterMap">
         <result property="id" column="id"/>
         <result property="paraCode" column="para_code"/>
         <result property="paraDesc" column="para_desc"/>
@@ -17,15 +17,15 @@
         <result property="isDelete" column="is_delete"/>
     </resultMap>
 
-    <select id="queryObject" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
+    <select id="queryObject" resultType="cq.anbu.modules.baseinfo.entity.AbParameterEntity">
         select * from ab_parameter where id = #{value}
     </select>
 
-    <select id="queryParamList" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
+    <select id="queryParamList" resultType="cq.anbu.modules.baseinfo.entity.AbParameterEntity">
         select * from ab_parameter where para_parent_code = #{paraParentCode}
     </select>
 
-    <select id="queryList" resultType="cq.anbu.modules.bill.entity.AbParameterEntity">
+    <select id="queryList" resultType="cq.anbu.modules.baseinfo.entity.AbParameterEntity">
         select * from ab_parameter
         <where>
             <if test="paraDesc != null and paraDesc.trim() != ''">
@@ -53,7 +53,7 @@
         select count(*) from ab_parameter
     </select>
 
-    <insert id="save" parameterType="cq.anbu.modules.bill.entity.AbParameterEntity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="save" parameterType="cq.anbu.modules.baseinfo.entity.AbParameterEntity" useGeneratedKeys="true" keyProperty="id">
         insert into ab_parameter
         (
         `para_code`,
@@ -80,7 +80,7 @@
         )
     </insert>
 
-    <update id="update" parameterType="cq.anbu.modules.bill.entity.AbParameterEntity">
+    <update id="update" parameterType="cq.anbu.modules.baseinfo.entity.AbParameterEntity">
         update ab_parameter
         <set>
             <if test="paraCode != null">`para_code` = #{paraCode},</if>

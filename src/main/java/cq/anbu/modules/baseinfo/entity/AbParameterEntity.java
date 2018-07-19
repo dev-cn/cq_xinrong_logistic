@@ -1,4 +1,4 @@
-package cq.anbu.modules.bill.entity;
+package cq.anbu.modules.baseinfo.entity;
 
 import cq.anbu.common.base.BaseEntity;
 

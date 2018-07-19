@@ -1,6 +1,6 @@
-package cq.anbu.modules.bill.dao;
+package cq.anbu.modules.baseinfo.dao;
 
-import cq.anbu.modules.bill.entity.AbParameterEntity;
+import cq.anbu.modules.baseinfo.entity.AbParameterEntity;
 import cq.anbu.modules.sys.dao.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 

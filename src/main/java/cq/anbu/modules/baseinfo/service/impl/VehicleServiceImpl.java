@@ -1,4 +1,4 @@
-package cq.anbu.modules.bill.service.impl;
+package cq.anbu.modules.baseinfo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-import cq.anbu.modules.bill.dao.VehicleDao;
-import cq.anbu.modules.bill.entity.VehicleEntity;
-import cq.anbu.modules.bill.service.VehicleService;
+import cq.anbu.modules.baseinfo.dao.VehicleDao;
+import cq.anbu.modules.baseinfo.entity.VehicleEntity;
+import cq.anbu.modules.baseinfo.service.VehicleService;
 
 
 @Service("vehicleService")

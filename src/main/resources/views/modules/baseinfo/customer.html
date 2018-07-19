@@ -22,10 +22,15 @@
 <body>
 <div id="rrapp" v-cloak>
     <div v-show="showList">
+        <div class="form-group col-sm-2" style="width:200px">
+            <input id="name" type="text" class="form-control" v-model="customer.name" @keyup.enter="query" placeholder="客户名称">
+        </div>
         <div class="grid-btn">
-            <a v-if="hasPermission('bill:customer:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            <a v-if="hasPermission('bill:customer:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-            <a v-if="hasPermission('bill:customer:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            <a class="btn btn-default" @click="query">查询</a>
+            <a class="btn btn-default" @click="reset">重置</a>
+            <a v-if="hasPermission('baseinfo:customer:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a v-if="hasPermission('baseinfo:customer:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a v-if="hasPermission('baseinfo:customer:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
         </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
@@ -35,19 +40,19 @@
         <div class="panel-heading">{{title}}</div>
         <form class="form-horizontal">
             <div class="form-group">
-                <div class="col-sm-2 control-label">客户名</div>
+                <div class="col-sm-2 control-label">客户名称</div>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" v-model="customer.name" placeholder="客户名"/>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-2 control-label">英文名</div>
+                <div class="col-sm-2 control-label">英文名称</div>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" v-model="customer.nameEn" placeholder="英文名"/>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-2 control-label">客户名简称</div>
+                <div class="col-sm-2 control-label">客户简称</div>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" v-model="customer.nameDesc" placeholder="客户名简称"/>
                 </div>
@@ -115,6 +120,6 @@
     </div>
 </div>
 
-<script src="../../js/modules/bill/customer.js"></script>
+<script src="../../js/modules/baseinfo/customer.js"></script>
 </body>
 </html>

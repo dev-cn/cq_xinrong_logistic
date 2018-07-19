@@ -1,6 +1,6 @@
-package cq.anbu.modules.bill.service;
+package cq.anbu.modules.baseinfo.service;
 
-import cq.anbu.modules.bill.entity.AbParameterEntity;
+import cq.anbu.modules.baseinfo.entity.AbParameterEntity;
 
 import java.util.List;
 import java.util.Map;

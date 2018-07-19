@@ -1,10 +1,10 @@
-package cq.anbu.modules.bill.controller;
+package cq.anbu.modules.baseinfo.controller;
 
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
-import cq.anbu.modules.bill.entity.VehicleEntity;
-import cq.anbu.modules.bill.service.VehicleService;
+import cq.anbu.modules.baseinfo.entity.CustomerEntity;
+import cq.anbu.modules.baseinfo.service.CustomerService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,31 +14,31 @@ import java.util.Map;
 
 
 /**
- * 车辆信息表
+ * 客户信息表
  *
  * @author tangzhonggui
  * @email java_tangzg@163.com
  * @date 2018-07-18 18:47:04
  */
 @RestController
-@RequestMapping("/bill/vehicle")
-public class VehicleController {
+@RequestMapping("/baseinfo/customer")
+public class CustomerController {
     @Autowired
-    private VehicleService vehicleService;
+    private CustomerService customerService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("bill:vehicle:list")
+    @RequiresPermissions("baseinfo:customer:list")
     public R list(@RequestParam Map<String, Object> params) {
         //查询列表数据
         Query query = new Query(params);
 
-        List<VehicleEntity> vehicleList = vehicleService.queryList(query);
-        int total = vehicleService.queryTotal(query);
+        List<CustomerEntity> customerList = customerService.queryList(query);
+        int total = customerService.queryTotal(query);
 
-        PageUtils pageUtil = new PageUtils(vehicleList, total, query.getLimit(), query.getPage());
+        PageUtils pageUtil = new PageUtils(customerList, total, query.getLimit(), query.getPage());
 
         return R.ok().put("page", pageUtil);
     }
@@ -48,20 +48,20 @@ public class VehicleController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("bill:vehicle:info")
+    @RequiresPermissions("baseinfo:customer:info")
     public R info(@PathVariable("id") Long id) {
-        VehicleEntity vehicle = vehicleService.queryObject(id);
+        CustomerEntity customer = customerService.queryObject(id);
 
-        return R.ok().put("vehicle", vehicle);
+        return R.ok().put("customer", customer);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("bill:vehicle:save")
-    public R save(@RequestBody VehicleEntity vehicle) {
-        vehicleService.save(vehicle);
+    @RequiresPermissions("baseinfo:customer:save")
+    public R save(@RequestBody CustomerEntity customer) {
+        customerService.save(customer);
 
         return R.ok();
     }
@@ -70,9 +70,9 @@ public class VehicleController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("bill:vehicle:update")
-    public R update(@RequestBody VehicleEntity vehicle) {
-        vehicleService.update(vehicle);
+    @RequiresPermissions("baseinfo:customer:update")
+    public R update(@RequestBody CustomerEntity customer) {
+        customerService.update(customer);
 
         return R.ok();
     }
@@ -81,9 +81,9 @@ public class VehicleController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("bill:vehicle:delete")
+    @RequiresPermissions("baseinfo:customer:delete")
     public R delete(@RequestBody Long[] ids) {
-        vehicleService.deleteBatch(ids);
+        customerService.deleteBatch(ids);
 
         return R.ok();
     }

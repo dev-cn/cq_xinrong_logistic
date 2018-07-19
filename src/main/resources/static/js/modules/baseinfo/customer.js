@@ -1,12 +1,12 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'bill/customer/list',
+        url: baseURL + 'baseinfo/customer/list',
         datatype: "json",
         colModel: [			
-			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
-			{ label: '客户名', name: 'name', index: 'name', width: 80 }, 			
-			{ label: '英文名', name: 'nameEn', index: 'name_en', width: 80 }, 			
-			{ label: '客户名简称', name: 'nameDesc', index: 'name_desc', width: 80 }, 			
+			// { label: 'id', name: 'id', index: 'id', width: 50, key: true },
+			{ label: '客户名称', name: 'name', index: 'name', width: 80 },
+			{ label: '英文名称', name: 'nameEn', index: 'name_en', width: 80 },
+			{ label: '客户简称', name: 'nameDesc', index: 'name_desc', width: 80 },
 			{ label: '联系方式', name: 'mobile', index: 'mobile', width: 80 }, 			
 			{ label: '邮箱', name: 'email', index: 'email', width: 80 }, 			
 			{ label: 'QQ', name: 'qq', index: 'qq', width: 80 }, 			
@@ -70,7 +70,7 @@ var vm = new Vue({
             vm.getInfo(id)
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.customer.id == null ? "bill/customer/save" : "bill/customer/update";
+			var url = vm.customer.id == null ? "baseinfo/customer/save" : "baseinfo/customer/update";
 			$.ajax({
 				type: "POST",
 			    url: baseURL + url,
@@ -96,7 +96,7 @@ var vm = new Vue({
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: baseURL + "bill/customer/delete",
+				    url: baseURL + "baseinfo/customer/delete",
                     contentType: "application/json",
 				    data: JSON.stringify(ids),
 				    success: function(r){
@@ -112,16 +112,22 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(id){
-			$.get(baseURL + "bill/customer/info/"+id, function(r){
+			$.get(baseURL + "baseinfo/customer/info/"+id, function(r){
                 vm.customer = r.customer;
             });
 		},
 		reload: function (event) {
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
+			$("#jqGrid").jqGrid('setGridParam',{
+                postData:{'name': vm.customer.name},
                 page:page
             }).trigger("reloadGrid");
-		}
+		},
+        reset:function (event) {
+            vm.customer.name = null;
+            $("#name").val("");
+            vm.reload();
+        }
 	}
 });
