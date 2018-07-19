@@ -35,7 +35,7 @@ public class CustomerEntity implements Serializable {
     //地址
     private String address;
     //建档时间
-    private Date ctime;
+    private String ctime;
     //级别
     private String level;
     //备注
@@ -194,14 +194,14 @@ public class CustomerEntity implements Serializable {
     /**
      * 设置：建档时间
      */
-    public void setCtime(Date ctime) {
+    public void setCtime(String ctime) {
         this.ctime = ctime;
     }
 
     /**
      * 获取：建档时间
      */
-    public Date getCtime() {
+    public String getCtime() {
         return ctime;
     }
 
