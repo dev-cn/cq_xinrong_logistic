@@ -3,6 +3,7 @@ package cq.anbu.modules.bill.controller;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.google.common.collect.Lists;
+import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
@@ -76,6 +77,7 @@ public class BillPackingMaterialsController extends AbstractController {
     /**
      * 保存
      */
+    @SysLog("保存包材")
     @RequestMapping("/save")
     @RequiresPermissions("bill:billpackingmaterials:save")
     public R save(@RequestBody BillPackingMaterialsEntity billPackingMaterials) {
@@ -87,6 +89,7 @@ public class BillPackingMaterialsController extends AbstractController {
     /**
      * 修改
      */
+    @SysLog("修改包材")
     @RequestMapping("/update")
     @RequiresPermissions("bill:billpackingmaterials:update")
     public R update(@RequestBody BillPackingMaterialsEntity billPackingMaterials) {
@@ -99,6 +102,7 @@ public class BillPackingMaterialsController extends AbstractController {
     /**
      * 删除
      */
+    @SysLog("删除包材")
     @RequestMapping("/delete")
     @RequiresPermissions("bill:billpackingmaterials:delete")
     public R delete(@RequestBody Long[] ids) {
@@ -113,6 +117,7 @@ public class BillPackingMaterialsController extends AbstractController {
      * @param response
      * @return
      */
+    @SysLog("导出包材")
     @RequestMapping(value = "/export", method = RequestMethod.GET)
     public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -131,6 +136,14 @@ public class BillPackingMaterialsController extends AbstractController {
         return list;
     }
 
+    /**
+     * 导入
+     * @param multfile
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @SysLog("导入包材")
     @RequestMapping(value = "excelImport")
     public R excelImport(@RequestParam("file") MultipartFile multfile, HttpServletRequest request) throws Exception {
         if (multfile.isEmpty()) {

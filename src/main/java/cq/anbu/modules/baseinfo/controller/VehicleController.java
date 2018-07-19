@@ -1,5 +1,6 @@
 package cq.anbu.modules.baseinfo.controller;
 
+import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
@@ -60,6 +61,7 @@ public class VehicleController extends AbstractController {
     /**
      * 保存
      */
+    @SysLog("保存车辆信息")
     @RequestMapping("/save")
     @RequiresPermissions("baseinfo:vehicle:save")
     public R save(@RequestBody VehicleEntity vehicle) {
@@ -71,6 +73,7 @@ public class VehicleController extends AbstractController {
     /**
      * 修改
      */
+    @SysLog("修改车辆信息")
     @RequestMapping("/update")
     @RequiresPermissions("baseinfo:vehicle:update")
     public R update(@RequestBody VehicleEntity vehicle) {
@@ -84,6 +87,7 @@ public class VehicleController extends AbstractController {
     /**
      * 删除
      */
+    @SysLog("删除车辆信息")
     @RequestMapping("/delete")
     @RequiresPermissions("baseinfo:vehicle:delete")
     public R delete(@RequestBody Long[] ids) {

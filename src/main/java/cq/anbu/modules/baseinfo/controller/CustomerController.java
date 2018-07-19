@@ -1,5 +1,6 @@
 package cq.anbu.modules.baseinfo.controller;
 
+import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
@@ -60,6 +61,7 @@ public class CustomerController extends AbstractController {
     /**
      * 保存
      */
+    @SysLog("保存客户信息")
     @RequestMapping("/save")
     @RequiresPermissions("baseinfo:customer:save")
     public R save(@RequestBody CustomerEntity customer) {
@@ -72,6 +74,7 @@ public class CustomerController extends AbstractController {
     /**
      * 修改
      */
+    @SysLog("修改客户信息")
     @RequestMapping("/update")
     @RequiresPermissions("baseinfo:customer:update")
     public R update(@RequestBody CustomerEntity customer) {
@@ -85,6 +88,7 @@ public class CustomerController extends AbstractController {
     /**
      * 删除
      */
+    @SysLog("删除客户信息")
     @RequestMapping("/delete")
     @RequiresPermissions("baseinfo:customer:delete")
     public R delete(@RequestBody Long[] ids) {

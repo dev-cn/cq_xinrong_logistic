@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
@@ -77,6 +78,7 @@ public class BillController extends AbstractController {
     /**
      * 保存
      */
+    @SysLog("保存账单")
     @RequestMapping("/save")
     @RequiresPermissions("bill:bill:save")
     public R save(@RequestBody BillEntity bill) {
@@ -89,6 +91,7 @@ public class BillController extends AbstractController {
     /**
      * 修改
      */
+    @SysLog("修改账单")
     @RequestMapping("/update")
     @RequiresPermissions("bill:bill:update")
     public R update(@RequestBody BillEntity bill) {
@@ -101,6 +104,7 @@ public class BillController extends AbstractController {
     /**
      * 删除
      */
+    @SysLog("删除账单")
     @RequestMapping("/delete")
     @RequiresPermissions("bill:bill:delete")
     public R delete(@RequestBody Long[] ids) {
@@ -191,6 +195,7 @@ public class BillController extends AbstractController {
      * @param request
      * @param response
      */
+    @SysLog("导出账单")
     @RequestMapping(value = "/export", method = RequestMethod.GET)
     public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
         Map<Integer, Map<String, Object>> sheetMap = Maps.newHashMap();
@@ -215,6 +220,7 @@ public class BillController extends AbstractController {
         return list;
     }
 
+    @SysLog("导入账单")
     @RequestMapping(value = "excelImport")
     public R excelImport(@RequestParam("file") MultipartFile multfile, HttpServletRequest request) throws Exception {
         if (multfile.isEmpty()) {
