@@ -44,6 +44,10 @@
 			<if test="trackingNo != null and trackingNo.trim() != ''">
 				and `tracking_no` like concat('%',#{trackingNo},'%')
 			</if>
+
+			<if test="beginDate != null and beginDate.trim() != ''">
+				and `create_at` between #{beginDate} and #{endDate}
+			</if>
 		</where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">

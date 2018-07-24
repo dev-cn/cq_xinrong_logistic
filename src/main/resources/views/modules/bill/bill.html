@@ -29,17 +29,32 @@
 <div id="rrapp" v-cloak>
     <div v-show="showList">
         <div class="grid-btn">
-            <div class="form-group col-sm-2">
-                <input id="trackingNo" type="text" class="form-control" v-model="bill.trackingNo" @keyup.enter="query" placeholder="运单号">
+            <div style="height: 30px;min-width: 800px">
+                <div class="form-group col-sm-2">
+                    <input id="trackingNo" type="text" class="form-control" v-model="bill.trackingNo" @keyup.enter="query" placeholder="运单号">
+                </div>
+                <label class="col-sm-1 control-label" style="top:8px">
+                    开始日期
+                </label>
+                <div class="form-group col-sm-2">
+                    <input id="beginDate" type="date" class="form-control"  @keyup.enter="query">
+                </div>
+                <label class="col-sm-1 control-label" style="top:8px">
+                    结束日期
+                </label>
+                <div class="form-group col-sm-2">
+                    <input id="endDate" type="date" class="form-control" @keyup.enter="query">
+                </div>
             </div>
-            <a class="btn btn-default" @click="query">查询</a>
-            <a class="btn btn-default" @click="reset">重置</a>
-            <a class="btn btn-default" id="excelImport"><i class="fa fa-plus"></i>&nbsp;导入</a>
-            <a class="btn btn-default" @click="excelExport">导出</a>
-            <a v-if="hasPermission('bill:bill:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            <a v-if="hasPermission('bill:bill:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-            <a v-if="hasPermission('bill:bill:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-        </div>
+            <div style="display: inline-block;height: 40px;min-width: auto">
+                <a class="btn btn-default" @click="query">查询</a>
+                <a class="btn btn-default" @click="reset">重置</a>
+                <a class="btn btn-default" id="excelImport"><i class="fa fa-plus"></i>&nbsp;导入</a>
+                <a class="btn btn-default" @click="excelExport">导出</a>
+                <a v-if="hasPermission('bill:bill:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                <a v-if="hasPermission('bill:bill:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+                <a v-if="hasPermission('bill:bill:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
     </div>

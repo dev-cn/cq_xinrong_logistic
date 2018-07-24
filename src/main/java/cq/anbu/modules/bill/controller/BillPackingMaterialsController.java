@@ -114,11 +114,11 @@ public class BillPackingMaterialsController extends AbstractController {
      * @return
      */
     @RequestMapping(value = "/export", method = RequestMethod.GET)
-    public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
+    public void downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<BillPackingMaterialsEntity> list = this.getBillPackingMaterialsEntityList(request.getParameter("ids"));
         map.put("billPackingMaterials", ExcelUtils.getJavaBeanAttrAndValue(list));
-        return ExcelUtils.writeSingleExcel(response, billPackingMaterialsTemplatePath, billPackingMaterialsExcelName, map);
+         ExcelUtils.writeSingleExcel(response, billPackingMaterialsTemplatePath, billPackingMaterialsExcelName, map);
     }
 
     private List<BillPackingMaterialsEntity> getBillPackingMaterialsEntityList(String ids) {

@@ -8,6 +8,7 @@ import cq.anbu.common.exception.RRException;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
+import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
 import cq.anbu.modules.bill.entity.BillEntity;
 import cq.anbu.modules.bill.service.BillService;
@@ -192,17 +193,21 @@ public class BillController extends AbstractController {
      * @param response
      */
     @RequestMapping(value = "/export", method = RequestMethod.GET)
-    public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
-        Map<Integer, Map<String, Object>> sheetMap = Maps.newHashMap();
+    public void downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
+//        Map<Integer, Map<String, Object>> sheetMap = Maps.newHashMap();
         Map<String, Object> map = Maps.newHashMap();
-        Map<String, Object> mapOne = Maps.newHashMap();
+//        Map<String, Object> mapOne = Maps.newHashMap();
         List<BillEntity> list = this.getBillEntityList(request.getParameter("ids"));
-        List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
-        map.put("billMap", listMap);
+        List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
+        map.put("billMap",listMap);
+//        目前只需单sheet导出
+         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
+//        多sheet导出
+     /*   map.put("billMap", listMap);
         sheetMap.put(0, map);
         mapOne.put("billMapOne", listMap);
         sheetMap.put(1, mapOne);
-        return ExcelUtils.writeManyExcel(response, billTemplatePath, billExcelName, sheetMap);
+        return ExcelUtils.writeManyExcel(response, billTemplatePath, billExcelName, sheetMap);*/
     }
 
     private List<BillEntity> getBillEntityList(String ids) {
