@@ -1,7 +1,7 @@
 package cq.xinrong.dao;
 
-import cq.anbu.modules.bill.entity.AbParameterEntity;
-import cq.anbu.modules.bill.service.AbParameterService;
+import cq.anbu.modules.baseinfo.entity.AbParameterEntity;
+import cq.anbu.modules.baseinfo.service.AbParameterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

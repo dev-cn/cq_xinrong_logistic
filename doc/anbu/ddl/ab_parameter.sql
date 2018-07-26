@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `ab_parameter`;
 CREATE TABLE `ab_parameter` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `para_code` varchar(32) NOT NULL,
   `para_desc` varchar(100) DEFAULT NULL,
   `para_parent_code` varchar(32) DEFAULT NULL,
