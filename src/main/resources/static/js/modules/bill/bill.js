@@ -157,8 +157,19 @@ var vm = new Vue({
         reload: function (event) {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+            var beginDate = $("#beginDate").val();
+            var endDate = $("#endDate").val();
+            if(beginDate != "" && endDate!="") {
+                if(beginDate>endDate){
+                    alert("选择的开始日期不能大于结束日期，请重新选择日期");
+                    return;
+                }
+            }
+            if(endDate.trim() =="" || endDate==null){
+                endDate = new Date().Format("yyyy-MM-dd");
+            }
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'trackingNo': vm.bill.trackingNo},
+                postData: {'trackingNo': vm.bill.trackingNo,'beginDate':beginDate,'endDate':endDate},
                 page: page
             }).trigger("reloadGrid");
         },
@@ -167,6 +178,8 @@ var vm = new Vue({
         },
         reset: function (event) {
             vm.bill.trackingNo = null;
+            $("#beginDate").val("");
+            $("#endDate").val("");
             $("#trackingNo").val("");
             vm.reload();
         }

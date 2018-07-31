@@ -122,12 +122,12 @@ public class BillCollectController extends AbstractController {
      */
     @SysLog("导出汇总")
     @RequestMapping(value = "/export", method = RequestMethod.GET)
-    public String downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
+    public void downloadByPoiBaseView(HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> map = new HashMap<String, Object>();
         List<BillCollectEntity> list = this.getBillCollectEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
         map.put("billCollectMap", listMap);
-        return ExcelUtils.writeSingleExcel(response, billCollectTemplatePath, billCollectExcelName, map);
+         ExcelUtils.writeSingleExcel(response, billCollectTemplatePath, billCollectExcelName, map);
     }
 
     private List<BillCollectEntity> getBillCollectEntityList(String ids) {

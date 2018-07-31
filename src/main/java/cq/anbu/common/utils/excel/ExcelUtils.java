@@ -10,7 +10,6 @@ import cn.afterturn.easypoi.excel.export.template.ExcelExportOfTemplateUtil;
 import com.google.common.collect.Lists;
 import cq.anbu.common.utils.DateUtils;
 import cq.anbu.common.utils.IOUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -105,14 +104,13 @@ public class ExcelUtils {
         return excelExportOfTemplateUtil.createExcleByTemplate(params, sheetMap);
     }
 
-    public static String writeSingleExcel(HttpServletResponse response, String targetExcelPath, String excelName, Map<String, Object> map) {
+    public static void writeSingleExcel(HttpServletResponse response, String targetExcelPath, String excelName, Map<String, Object> map) {
         Workbook workbook = ExcelUtils.getWorkbookSingleSheet(targetExcelPath, map);
         if (workbook == null) {
-            return "fail";
+            LOGGER.info("获取workbook为空！");
         }
         String fileName = ExcelUtils.getExcelName(excelName);
         IOUtils.writeExcel(response, workbook, fileName);
-        return "success";
     }
 
     public static String writeManyExcel(HttpServletResponse response, String targetExcelPath, String excelName, Map<Integer, Map<String, Object>> sheetMap) {

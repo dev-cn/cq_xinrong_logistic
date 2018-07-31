@@ -165,9 +165,3 @@ Date.prototype.Format = function (fmt) { //author: meizz
     return fmt;
 }
 
-// 调用：
-// var time1 = new Date().Format("yyyy-MM-dd");
-// var time2 = new Date().Format("yyyy-MM-dd HH:mm:ss");
-//
-// var nowTime=new Date();
-// nowTime.setMonth(nowTime.getMonth()-1);

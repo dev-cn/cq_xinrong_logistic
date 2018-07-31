@@ -38,13 +38,17 @@
         select * from bill where tracking_no = #{trackingNo}
     </select>
 
-    <select id="queryList" resultType="cq.anbu.modules.bill.entity.BillEntity">
-        select * from bill
-        <where>
-            <if test="trackingNo != null and trackingNo.trim() != ''">
-                and `tracking_no` like concat('%',#{trackingNo},'%')
-            </if>
-        </where>
+	<select id="queryList" resultType="cq.anbu.modules.bill.entity.BillEntity">
+		select * from bill
+		<where>
+			<if test="trackingNo != null and trackingNo.trim() != ''">
+				and `tracking_no` like concat('%',#{trackingNo},'%')
+			</if>
+
+			<if test="beginDate != null and beginDate.trim() != ''">
+				and `create_at` between #{beginDate} and #{endDate}
+			</if>
+		</where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}

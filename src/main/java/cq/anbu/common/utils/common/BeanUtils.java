@@ -14,11 +14,11 @@ public class BeanUtils {
             try {
                 Object object = declaredFields[i].get(bean);
                 if ("class java.lang.String".equalsIgnoreCase(declaredFields[i].getGenericType().toString())) {
-                    if (object == null) {
+                    if (object == null || "null".equals(object)) {
                         declaredFields[i].set(bean, "");
                     }
                 } else if ("class java.math.BigDecimal".equalsIgnoreCase(declaredFields[i].getGenericType().toString())) {
-                    if (object == null) {
+                    if (object == null || "null".equals(object)) {
                         declaredFields[i].set(bean, new BigDecimal(0));
                     }
                 }

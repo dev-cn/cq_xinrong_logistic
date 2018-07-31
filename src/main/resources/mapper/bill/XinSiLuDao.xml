@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cq.anbu.modules.bill.dao.XinSiLuDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cq.anbu.modules.bill.entity.XinSiLuEntity" id="xinSiLuMap">
+        <result property="id" column="id"/>
+        <result property="serialNo" column="serial_no"/>
+        <result property="trackingNo" column="tracking_no"/>
+        <result property="deliveryDate" column="delivery_date"/>
+        <result property="arrivalDate" column="arrival_date"/>
+        <result property="deliveryAddr" column="delivery_addr"/>
+        <result property="arrivalAddr" column="arrival_addr"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="loadingModel" column="loading_model"/>
+        <result property="palteNo" column="palte_no"/>
+        <result property="trainNo" column="train_no"/>
+        <result property="shippedQuantity" column="shipped_quantity"/>
+        <result property="weight" column="weight"/>
+        <result property="price" column="price"/>
+        <result property="pickUpCharge" column="pick_up_charge"/>
+        <result property="deliveryFee" column="delivery_fee"/>
+        <result property="totalExpenses" column="total_expenses"/>
+        <result property="comment" column="comment"/>
+        <result property="createAt" column="create_at"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="isDelete" column="is_delete"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="cq.anbu.modules.bill.entity.XinSiLuEntity">
+		select * from ab_bill_xin_si_lu where id = #{value}
+	</select>
+
+    <select id="queryObjectByTrackingNo" resultType="cq.anbu.modules.bill.entity.XinSiLuEntity">
+		select * from ab_bill_xin_si_lu where tracking_no = #{trackingNo}
+	</select>
+
+
+    <select id="queryList" resultType="cq.anbu.modules.bill.entity.XinSiLuEntity">
+		select * from ab_bill_xin_si_lu
+        <where>
+            <if test="trackingNo != null and trackingNo.trim() != ''">
+                and `tracking_no` like concat('%',#{trackingNo},'%')
+            </if>
+
+            <if test="beginDate != null and beginDate.trim() != ''">
+                and `create_at` between #{beginDate} and #{endDate}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from ab_bill_xin_si_lu 
+	</select>
+	 
+	<insert id="save" parameterType="cq.anbu.modules.bill.entity.XinSiLuEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into ab_bill_xin_si_lu
+		(
+			`serial_no`, 
+			`tracking_no`, 
+			`delivery_date`, 
+			`arrival_date`, 
+			`delivery_addr`, 
+			`arrival_addr`, 
+			`goods_name`, 
+			`loading_model`, 
+			`palte_no`, 
+			`train_no`, 
+			`shipped_quantity`, 
+			`weight`, 
+			`price`, 
+			`pick_up_charge`, 
+			`delivery_fee`, 
+			`total_expenses`, 
+			`comment`, 
+			`create_at`, 
+			`create_by`, 
+			`update_at`, 
+			`update_by`, 
+			`is_delete`
+		)
+		values
+		(
+			#{serialNo}, 
+			#{trackingNo}, 
+			#{deliveryDate}, 
+			#{arrivalDate}, 
+			#{deliveryAddr}, 
+			#{arrivalAddr}, 
+			#{goodsName}, 
+			#{loadingModel}, 
+			#{palteNo}, 
+			#{trainNo}, 
+			#{shippedQuantity}, 
+			#{weight}, 
+			#{price}, 
+			#{pickUpCharge}, 
+			#{deliveryFee}, 
+			#{totalExpenses}, 
+			#{comment}, 
+			#{createAt}, 
+			#{createBy}, 
+			#{updateAt}, 
+			#{updateBy}, 
+			#{isDelete}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="cq.anbu.modules.bill.entity.XinSiLuEntity">
+		update ab_bill_xin_si_lu 
+		<set>
+			<if test="serialNo != null">`serial_no` = #{serialNo}, </if>
+			<if test="trackingNo != null">`tracking_no` = #{trackingNo}, </if>
+			<if test="deliveryDate != null">`delivery_date` = #{deliveryDate}, </if>
+			<if test="arrivalDate != null">`arrival_date` = #{arrivalDate}, </if>
+			<if test="deliveryAddr != null">`delivery_addr` = #{deliveryAddr}, </if>
+			<if test="arrivalAddr != null">`arrival_addr` = #{arrivalAddr}, </if>
+			<if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+			<if test="loadingModel != null">`loading_model` = #{loadingModel}, </if>
+			<if test="palteNo != null">`palte_no` = #{palteNo}, </if>
+			<if test="trainNo != null">`train_no` = #{trainNo}, </if>
+			<if test="shippedQuantity != null">`shipped_quantity` = #{shippedQuantity}, </if>
+			<if test="weight != null">`weight` = #{weight}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="pickUpCharge != null">`pick_up_charge` = #{pickUpCharge}, </if>
+			<if test="deliveryFee != null">`delivery_fee` = #{deliveryFee}, </if>
+			<if test="totalExpenses != null">`total_expenses` = #{totalExpenses}, </if>
+			<if test="comment != null">`comment` = #{comment}, </if>
+			<if test="createAt != null">`create_at` = #{createAt}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="updateAt != null">`update_at` = #{updateAt}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="isDelete != null">`is_delete` = #{isDelete}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from ab_bill_xin_si_lu where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from ab_bill_xin_si_lu where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -67,6 +67,10 @@ public class BillEntity extends BaseEntity {
     @Excel(name = "备注")
     private String comment;
 
+    private String beginDate;
+
+    private String endDate;
+
     /**
      * 设置：序号
      */
@@ -303,5 +307,21 @@ public class BillEntity extends BaseEntity {
      */
     public String getComment() {
         return comment;
+    }
+
+    public String getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }
