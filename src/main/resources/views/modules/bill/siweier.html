@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>四维尔账单表</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link href="../../css/datetime/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+    <script src="../../libs/jquery.min.js"></script>
+    <script src="../../plugins/layer/layer.js"></script>
+    <script src="../../libs/bootstrap.min.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../libs/ajaxupload.js"></script>
+    <script src="../../js/datetime/moment-with-locales.js"></script>
+    <script src="../../js/datetime/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../js/datetime/bootstrap-datetimepicker.zh-CN.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <div style="height: 30px;min-width: 800px">
+                <div class="form-group col-sm-2">
+                    <input id="trackingNo" type="text" class="form-control" v-model="siWeiEr.trackingNo" @keyup.enter="query" placeholder="运单号">
+                </div>
+                <label class="col-sm-1 control-label" style="top:8px">
+                    开始日期
+                </label>
+                <div class="form-group col-sm-2">
+                    <input id="beginDate" type="date" class="form-control"  @keyup.enter="query">
+                </div>
+                <label class="col-sm-1 control-label" style="top:8px">
+                    结束日期
+                </label>
+                <div class="form-group col-sm-2">
+                    <input id="endDate" type="date" class="form-control" @keyup.enter="query">
+                </div>
+            </div>
+            <div style="display: inline-block;height: 40px;min-width: auto">
+                <a class="btn btn-default" @click="query">查询</a>
+                <a class="btn btn-default" @click="reset">重置</a>
+                <a class="btn btn-default" id="excelImport"><i class="fa fa-plus"></i>&nbsp;导入</a>
+                <a class="btn btn-default" @click="excelExport">导出</a>
+                <a v-if="hasPermission('bill:siweier:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                <a v-if="hasPermission('bill:siweier:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+                <a v-if="hasPermission('bill:siweier:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            </div>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+                                                                            <div class="form-group">
+                        <div class="col-sm-2 control-label">序号</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.serialNo" placeholder="序号"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">运单号</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.trackingNo" placeholder="运单号"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">提货日期</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.deliveryDate" placeholder="提货日期"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">到货日期</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.arrivalDate" placeholder="到货日期"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">提货地点</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.deliveryAddr" placeholder="提货地点"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">到货地点</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.arrivalAddr" placeholder="到货地点"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">货物名称</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.goodsName" placeholder="货物名称"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">装载车型</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.loadingModel" placeholder="装载车型"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">车牌号</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.palteNo" placeholder="车牌号"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">车次</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.trainNo" placeholder="车次"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">装载数量</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.shippedQuantity" placeholder="装载数量"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">重量</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.weight" placeholder="重量"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">单价</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.price" placeholder="单价"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">提货费</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.pickUpCharge" placeholder="提货费"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">送货费</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.deliveryFee" placeholder="送货费"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">费用合计</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.totalExpenses" placeholder="费用合计"/>
+                        </div>
+                    </div>
+                                                                <div class="form-group">
+                        <div class="col-sm-2 control-label">备注</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="siWeiEr.comment" placeholder="备注"/>
+                        </div>
+                    </div>
+                                        <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="../../js/modules/bill/siweier.js"></script>
+</body>
+</html>
