@@ -5,7 +5,7 @@
 	<groupId>cq.anbu</groupId>
 	<artifactId>logistics-manage</artifactId>
 	<version>1.2.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<description>logistics-manage</description>
 
 	<parent>
