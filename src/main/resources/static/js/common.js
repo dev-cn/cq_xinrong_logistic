@@ -129,7 +129,7 @@ function excelExport(url) {
 function queryStatusParams() {
     var paraParentCode = "orderStatus";
     var data = {paraParentCode: paraParentCode};
-    var url = "bill/abparameter/queryParams";
+    var url = "baseinfo/abparameter/queryParams";
     $.ajax({
         type: "POST",
         url: baseURL + url,
