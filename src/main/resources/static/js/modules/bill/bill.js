@@ -55,6 +55,8 @@ $(function () {
         }
     });
     Datetime();
+    vm.getCustomerSelect();
+    vm.getVehicleSelect();
 
     new AjaxUpload('#excelImport', {
         action: baseURL + 'bill/bill/excelImport?token=' + token,
@@ -86,7 +88,9 @@ var vm = new Vue({
         title: null,
         bill: {
             trackingNo: null
-        }
+        },
+        customerList: {},
+        vehicleList: {}
     },
     methods: {
         query: function () {
@@ -108,12 +112,13 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
             var url = vm.bill.id == null ? "bill/bill/save" : "bill/bill/update";
+            var data = JSON.stringify(vm.bill);
             // v
             $.ajax({
                 type: "POST",
                 url: baseURL + url,
                 contentType: "application/json",
-                data: JSON.stringify(vm.bill),
+                data: data,
                 success: function (r) {
                     if (r.code === 0) {
                         alert('操作成功', function (index) {
@@ -182,6 +187,26 @@ var vm = new Vue({
             $("#endDate").val("");
             $("#trackingNo").val("");
             vm.reload();
+        },
+        getCustomerSelect: function (event) {
+            $.ajax({
+                type: "POST",
+                url: baseURL + "baseinfo/customer/list/select",
+                contentType: "application/json",
+                success: function (r) {
+                    vm.customerList = r.select;
+                }
+            });
+        },
+        getVehicleSelect: function (event) {
+            $.ajax({
+                type: "POST",
+                url: baseURL + "baseinfo/vehicle/list/select",
+                contentType: "application/json",
+                success: function (r) {
+                    vm.vehicleList = r.select;
+                }
+            });
         }
     }
 });
@@ -202,4 +227,3 @@ function Datetime() {
         vm.bill.arrivalDate = arrivalDate;
     });
 }
-

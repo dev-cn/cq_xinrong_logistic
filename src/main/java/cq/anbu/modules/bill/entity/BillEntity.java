@@ -66,6 +66,7 @@ public class BillEntity extends BaseEntity {
     //
     @Excel(name = "车辆信息ID")
     private Long tVehicleId;
+
     private String beginDate;
 
     private String endDate;
@@ -280,32 +281,20 @@ public class BillEntity extends BaseEntity {
         return comment;
     }
 
-    /**
-     * 设置：
-     */
-    public void setTCustomerId(Long tCustomerId) {
-        this.tCustomerId = tCustomerId;
-    }
-
-    /**
-     * 获取：
-     */
-    public Long getTCustomerId() {
+    public Long gettCustomerId() {
         return tCustomerId;
     }
 
-    /**
-     * 设置：
-     */
-    public void setTVehicleId(Long tVehicleId) {
-        this.tVehicleId = tVehicleId;
+    public void settCustomerId(Long tCustomerId) {
+        this.tCustomerId = tCustomerId;
     }
 
-    /**
-     * 获取：
-     */
-    public Long getTVehicleId() {
+    public Long gettVehicleId() {
         return tVehicleId;
+    }
+
+    public void settVehicleId(Long tVehicleId) {
+        this.tVehicleId = tVehicleId;
     }
 
     public String getBeginDate() {

@@ -1,5 +1,6 @@
 package cq.anbu.modules.baseinfo.controller;
 
+import com.google.common.collect.Maps;
 import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
@@ -44,6 +45,15 @@ public class VehicleController extends AbstractController {
         PageUtils pageUtil = new PageUtils(vehicleList, total, query.getLimit(), query.getPage());
 
         return R.ok().put("page", pageUtil);
+    }
+
+    /**
+     * 下拉框
+     */
+    @RequestMapping("/list/select")
+    @RequiresPermissions("baseinfo:vehicle:list:select")
+    public R select() {
+        return R.ok().put("select", vehicleService.queryList(Maps.newHashMap()));
     }
 
 

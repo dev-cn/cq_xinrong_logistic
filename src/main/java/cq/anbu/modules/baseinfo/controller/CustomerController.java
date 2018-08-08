@@ -1,5 +1,6 @@
 package cq.anbu.modules.baseinfo.controller;
 
+import com.google.common.collect.Maps;
 import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
@@ -46,6 +47,14 @@ public class CustomerController extends AbstractController {
         return R.ok().put("page", pageUtil);
     }
 
+    /**
+     * 下拉框
+     */
+    @RequestMapping("/list/select")
+    @RequiresPermissions("baseinfo:customer:list:select")
+    public R select() {
+        return R.ok().put("select", customerService.queryList(Maps.newHashMap()));
+    }
 
     /**
      * 信息
