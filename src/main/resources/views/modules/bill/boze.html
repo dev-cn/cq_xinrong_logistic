@@ -36,7 +36,7 @@
                     开始日期
                 </label>
                 <div class="form-group col-sm-2">
-                    <input id="beginDate" type="date" class="form-control"  @keyup.enter="query">
+                    <input id="beginDate" type="date" class="form-control" @keyup.enter="query">
                 </div>
                 <label class="col-sm-1 control-label" style="top:8px">
                     结束日期
@@ -62,109 +62,109 @@
     <div v-show="!showList" class="panel panel-default">
         <div class="panel-heading">{{title}}</div>
         <form class="form-horizontal">
-                                                                            <div class="form-group">
-                        <div class="col-sm-2 control-label">序号</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.serialNo" placeholder="序号"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">运单号</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.trackingNo" placeholder="运单号"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">提货日期</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.deliveryDate" placeholder="提货日期"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">到货日期</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.arrivalDate" placeholder="到货日期"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">提货地点</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.deliveryAddr" placeholder="提货地点"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">到货地点</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.arrivalAddr" placeholder="到货地点"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">货物名称</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.goodsName" placeholder="货物名称"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">装载车型</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.loadingModel" placeholder="装载车型"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">车牌号</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.palteNo" placeholder="车牌号"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">车次</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.trainNo" placeholder="车次"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">装载数量</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.shippedQuantity" placeholder="装载数量"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">重量</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.weight" placeholder="重量"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">单价</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.price" placeholder="单价"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">提货费</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.pickUpCharge" placeholder="提货费"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">送货费</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.deliveryFee" placeholder="送货费"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">费用合计</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.totalExpenses" placeholder="费用合计"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">备注</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="boZe.comment" placeholder="备注"/>
-                        </div>
-                    </div>
-                                        <div class="form-group">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">序号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.serialNo" placeholder="序号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运单号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.trackingNo" placeholder="运单号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">提货日期</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.deliveryDate" placeholder="提货日期"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">到货日期</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.arrivalDate" placeholder="到货日期"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">提货地点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.deliveryAddr" placeholder="提货地点"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">到货地点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.arrivalAddr" placeholder="到货地点"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">货物名称</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.goodsName" placeholder="货物名称"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">装载车型</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.loadingModel" placeholder="装载车型"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">车牌号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.palteNo" placeholder="车牌号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">车次</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.trainNo" placeholder="车次"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">装载数量</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.shippedQuantity" placeholder="装载数量"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">重量</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.weight" placeholder="重量"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">单价</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.price" placeholder="单价"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">提货费</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.pickUpCharge" placeholder="提货费"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">送货费</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.deliveryFee" placeholder="送货费"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">费用合计</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.totalExpenses" placeholder="费用合计"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">备注</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="boZe.comment" placeholder="备注"/>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-2 control-label"></div>
                 <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
                 &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>

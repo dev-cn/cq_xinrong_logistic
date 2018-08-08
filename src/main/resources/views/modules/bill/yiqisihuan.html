@@ -36,7 +36,7 @@
                     开始日期
                 </label>
                 <div class="form-group col-sm-2">
-                    <input id="beginDate" type="date" class="form-control"  @keyup.enter="query">
+                    <input id="beginDate" type="date" class="form-control" @keyup.enter="query">
                 </div>
                 <label class="col-sm-1 control-label" style="top:8px">
                     结束日期
@@ -62,109 +62,109 @@
     <div v-show="!showList" class="panel panel-default">
         <div class="panel-heading">{{title}}</div>
         <form class="form-horizontal">
-                                                                            <div class="form-group">
-                        <div class="col-sm-2 control-label">序号</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.serialNo" placeholder="序号"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">运单号</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.trackingNo" placeholder="运单号"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">提货日期</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.deliveryDate" placeholder="提货日期"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">到货日期</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.arrivalDate" placeholder="到货日期"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">提货地点</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.deliveryAddr" placeholder="提货地点"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">到货地点</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.arrivalAddr" placeholder="到货地点"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">货物名称</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.goodsName" placeholder="货物名称"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">装载车型</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.loadingModel" placeholder="装载车型"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">车牌号</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.palteNo" placeholder="车牌号"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">车次</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.trainNo" placeholder="车次"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">装载数量</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.shippedQuantity" placeholder="装载数量"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">重量</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.weight" placeholder="重量"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">单价</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.price" placeholder="单价"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">提货费</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.pickUpCharge" placeholder="提货费"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">送货费</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.deliveryFee" placeholder="送货费"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">费用合计</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.totalExpenses" placeholder="费用合计"/>
-                        </div>
-                    </div>
-                                                                <div class="form-group">
-                        <div class="col-sm-2 control-label">备注</div>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="yiQiSiHuan.comment" placeholder="备注"/>
-                        </div>
-                    </div>
-                                        <div class="form-group">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">序号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.serialNo" placeholder="序号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">运单号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.trackingNo" placeholder="运单号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">提货日期</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.deliveryDate" placeholder="提货日期"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">到货日期</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.arrivalDate" placeholder="到货日期"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">提货地点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.deliveryAddr" placeholder="提货地点"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">到货地点</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.arrivalAddr" placeholder="到货地点"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">货物名称</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.goodsName" placeholder="货物名称"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">装载车型</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.loadingModel" placeholder="装载车型"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">车牌号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.palteNo" placeholder="车牌号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">车次</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.trainNo" placeholder="车次"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">装载数量</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.shippedQuantity" placeholder="装载数量"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">重量</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.weight" placeholder="重量"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">单价</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.price" placeholder="单价"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">提货费</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.pickUpCharge" placeholder="提货费"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">送货费</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.deliveryFee" placeholder="送货费"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">费用合计</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.totalExpenses" placeholder="费用合计"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">备注</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="yiQiSiHuan.comment" placeholder="备注"/>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-2 control-label"></div>
                 <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
                 &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
