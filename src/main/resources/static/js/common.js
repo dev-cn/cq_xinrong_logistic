@@ -165,8 +165,8 @@ Date.prototype.Format = function (fmt) { //author: meizz
     return fmt;
 }
 
-function checkNull(value) {
-    if ((value == null || value == undefined)) {
+function isNullOrEmpty(value) {
+    if ((value == null || value == undefined || value == '' || value.length == 0)) {
         return true;
     }
     return false;
