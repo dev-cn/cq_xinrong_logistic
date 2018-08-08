@@ -11,10 +11,13 @@ import java.math.BigDecimal;
  *
  * @author tangzhonggui
  * @email java_tangzg@163.com
- * @date 2018-06-10 09:48:20
+ * @date 2018-08-08 11:48:38
  */
 public class BillEntity extends BaseEntity {
 
+    //
+    @Excel(name = "主键")
+    private Long id;
     //序号
     @Excel(name = "序号")
     private BigDecimal serialNo;
@@ -36,18 +39,9 @@ public class BillEntity extends BaseEntity {
     //货物名称
     @Excel(name = "货物名称")
     private String goodsName;
-    //装载车型
-    @Excel(name = "装载车型")
-    private String loadingModel;
-    //车牌号
-    @Excel(name = "车牌号")
-    private String palteNo;
     //车次
     @Excel(name = "车次")
     private String trainNo;
-    //BigDecimal装载数量
-    @Excel(name = "装载数量")
-    private BigDecimal shippedQuantity;
     //重量
     @Excel(name = "重量")
     private BigDecimal weight;
@@ -66,10 +60,29 @@ public class BillEntity extends BaseEntity {
     //备注
     @Excel(name = "备注")
     private String comment;
-
+    //
+    @Excel(name = "客户信息ID")
+    private Long tCustomerId;
+    //
+    @Excel(name = "车辆信息ID")
+    private Long tVehicleId;
     private String beginDate;
 
     private String endDate;
+
+    /**
+     * 设置：
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * 获取：
+     */
+    public Long getId() {
+        return id;
+    }
 
     /**
      * 设置：序号
@@ -170,34 +183,6 @@ public class BillEntity extends BaseEntity {
     }
 
     /**
-     * 设置：装载车型
-     */
-    public void setLoadingModel(String loadingModel) {
-        this.loadingModel = loadingModel;
-    }
-
-    /**
-     * 获取：装载车型
-     */
-    public String getLoadingModel() {
-        return loadingModel;
-    }
-
-    /**
-     * 设置：车牌号
-     */
-    public void setPalteNo(String palteNo) {
-        this.palteNo = palteNo;
-    }
-
-    /**
-     * 获取：车牌号
-     */
-    public String getPalteNo() {
-        return palteNo;
-    }
-
-    /**
      * 设置：车次
      */
     public void setTrainNo(String trainNo) {
@@ -209,20 +194,6 @@ public class BillEntity extends BaseEntity {
      */
     public String getTrainNo() {
         return trainNo;
-    }
-
-    /**
-     * 设置：装载数量
-     */
-    public void setShippedQuantity(BigDecimal shippedQuantity) {
-        this.shippedQuantity = shippedQuantity;
-    }
-
-    /**
-     * 获取：装载数量
-     */
-    public BigDecimal getShippedQuantity() {
-        return shippedQuantity;
     }
 
     /**
@@ -307,6 +278,34 @@ public class BillEntity extends BaseEntity {
      */
     public String getComment() {
         return comment;
+    }
+
+    /**
+     * 设置：
+     */
+    public void setTCustomerId(Long tCustomerId) {
+        this.tCustomerId = tCustomerId;
+    }
+
+    /**
+     * 获取：
+     */
+    public Long getTCustomerId() {
+        return tCustomerId;
+    }
+
+    /**
+     * 设置：
+     */
+    public void setTVehicleId(Long tVehicleId) {
+        this.tVehicleId = tVehicleId;
+    }
+
+    /**
+     * 获取：
+     */
+    public Long getTVehicleId() {
+        return tVehicleId;
     }
 
     public String getBeginDate() {

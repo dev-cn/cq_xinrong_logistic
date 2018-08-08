@@ -39,16 +39,6 @@ public class CustomerEntity extends BaseEntity {
     private String level;
     //备注
     private String comment;
-    //
-    private Date createAt;
-    //
-    private String createBy;
-    //
-    private Date updateAt;
-    //
-    private String updateBy;
-    //
-    private String isDelete;
 
     /**
      * 设置：

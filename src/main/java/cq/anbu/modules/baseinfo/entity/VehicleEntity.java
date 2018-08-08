@@ -30,16 +30,6 @@ public class VehicleEntity extends BaseEntity {
     private String belongArea;
     //备注
     private String comment;
-    //
-    private Date createAt;
-    //
-    private String createBy;
-    //
-    private Date updateAt;
-    //
-    private String updateBy;
-    //
-    private String isDelete;
 
     /**
      * 设置：

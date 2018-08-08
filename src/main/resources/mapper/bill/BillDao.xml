@@ -13,10 +13,7 @@
         <result property="deliveryAddr" column="delivery_addr"/>
         <result property="arrivalAddr" column="arrival_addr"/>
         <result property="goodsName" column="goods_name"/>
-        <result property="loadingModel" column="loading_model"/>
-        <result property="palteNo" column="palte_no"/>
         <result property="trainNo" column="train_no"/>
-        <result property="shippedQuantity" column="shipped_quantity"/>
         <result property="weight" column="weight"/>
         <result property="price" column="price"/>
         <result property="pickUpCharge" column="pick_up_charge"/>
@@ -28,6 +25,8 @@
         <result property="updateAt" column="update_at"/>
         <result property="updateBy" column="update_by"/>
         <result property="isDelete" column="is_delete"/>
+        <result property="tCustomerId" column="t_customer_id"/>
+        <result property="tVehicleId" column="t_vehicle_id"/>
     </resultMap>
 
     <select id="queryObject" resultType="cq.anbu.modules.bill.entity.BillEntity">
@@ -38,17 +37,18 @@
         select * from bill where tracking_no = #{trackingNo}
     </select>
 
-	<select id="queryList" resultType="cq.anbu.modules.bill.entity.BillEntity">
-		select * from bill
-		<where>
-			<if test="trackingNo != null and trackingNo.trim() != ''">
-				and `tracking_no` like concat('%',#{trackingNo},'%')
-			</if>
 
-			<if test="beginDate != null and beginDate.trim() != ''">
-				and `create_at` between #{beginDate} and #{endDate}
-			</if>
-		</where>
+    <select id="queryList" resultType="cq.anbu.modules.bill.entity.BillEntity">
+        select * from bill
+        <where>
+            <if test="trackingNo != null and trackingNo.trim() != ''">
+                and `tracking_no` like concat('%',#{trackingNo},'%')
+            </if>
+
+            <if test="beginDate != null and beginDate.trim() != ''">
+                and `create_at` between #{beginDate} and #{endDate}
+            </if>
+        </where>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
                 order by ${sidx} ${order}
@@ -76,10 +76,7 @@
         `delivery_addr`,
         `arrival_addr`,
         `goods_name`,
-        `loading_model`,
-        `palte_no`,
         `train_no`,
-        `shipped_quantity`,
         `weight`,
         `price`,
         `pick_up_charge`,
@@ -90,7 +87,9 @@
         `create_by`,
         `update_at`,
         `update_by`,
-        `is_delete`
+        `is_delete`,
+        `t_customer_id`,
+        `t_vehicle_id`
         )
         values
         (
@@ -101,10 +100,7 @@
         #{deliveryAddr},
         #{arrivalAddr},
         #{goodsName},
-        #{loadingModel},
-        #{palteNo},
         #{trainNo},
-        #{shippedQuantity},
         #{weight},
         #{price},
         #{pickUpCharge},
@@ -115,35 +111,36 @@
         #{createBy},
         #{updateAt},
         #{updateBy},
-        #{isDelete}
+        #{isDelete},
+        #{tCustomerId},
+        #{tVehicleId}
         )
     </insert>
 
     <update id="update" parameterType="cq.anbu.modules.bill.entity.BillEntity">
         update bill
         <set>
-            <if test="serialNo != null">`serial_no` = #{serialNo},</if>
-            <if test="trackingNo != null">`tracking_no` = #{trackingNo},</if>
-            <if test="deliveryDate != null">`delivery_date` = #{deliveryDate},</if>
-            <if test="arrivalDate != null">`arrival_date` = #{arrivalDate},</if>
-            <if test="deliveryAddr != null">`delivery_addr` = #{deliveryAddr},</if>
-            <if test="arrivalAddr != null">`arrival_addr` = #{arrivalAddr},</if>
-            <if test="goodsName != null">`goods_name` = #{goodsName},</if>
-            <if test="loadingModel != null">`loading_model` = #{loadingModel},</if>
-            <if test="palteNo != null">`palte_no` = #{palteNo},</if>
-            <if test="trainNo != null">`train_no` = #{trainNo},</if>
-            <if test="shippedQuantity != null">`shipped_quantity` = #{shippedQuantity},</if>
-            <if test="weight != null">`weight` = #{weight},</if>
-            <if test="price != null">`price` = #{price},</if>
-            <if test="pickUpCharge != null">`pick_up_charge` = #{pickUpCharge},</if>
-            <if test="deliveryFee != null">`delivery_fee` = #{deliveryFee},</if>
-            <if test="totalExpenses != null">`total_expenses` = #{totalExpenses},</if>
-            <if test="comment != null">`comment` = #{comment},</if>
-            <if test="createAt != null">`create_at` = #{createAt},</if>
-            <if test="createBy != null">`create_by` = #{createBy},</if>
-            <if test="updateAt != null">`update_at` = #{updateAt},</if>
-            <if test="updateBy != null">`update_by` = #{updateBy},</if>
-            <if test="isDelete != null">`is_delete` = #{isDelete}</if>
+            <if test="serialNo != null">`serial_no` = #{serialNo}, </if>
+            <if test="trackingNo != null">`tracking_no` = #{trackingNo}, </if>
+            <if test="deliveryDate != null">`delivery_date` = #{deliveryDate}, </if>
+            <if test="arrivalDate != null">`arrival_date` = #{arrivalDate}, </if>
+            <if test="deliveryAddr != null">`delivery_addr` = #{deliveryAddr}, </if>
+            <if test="arrivalAddr != null">`arrival_addr` = #{arrivalAddr}, </if>
+            <if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+            <if test="trainNo != null">`train_no` = #{trainNo}, </if>
+            <if test="weight != null">`weight` = #{weight}, </if>
+            <if test="price != null">`price` = #{price}, </if>
+            <if test="pickUpCharge != null">`pick_up_charge` = #{pickUpCharge}, </if>
+            <if test="deliveryFee != null">`delivery_fee` = #{deliveryFee}, </if>
+            <if test="totalExpenses != null">`total_expenses` = #{totalExpenses}, </if>
+            <if test="comment != null">`comment` = #{comment}, </if>
+            <if test="createAt != null">`create_at` = #{createAt}, </if>
+            <if test="createBy != null">`create_by` = #{createBy}, </if>
+            <if test="updateAt != null">`update_at` = #{updateAt}, </if>
+            <if test="updateBy != null">`update_by` = #{updateBy}, </if>
+            <if test="isDelete != null">`is_delete` = #{isDelete}, </if>
+            <if test="tCustomerId != null">`t_customer_id` = #{tCustomerId}, </if>
+            <if test="tVehicleId != null">`t_vehicle_id` = #{tVehicleId}</if>
         </set>
         where id = #{id}
     </update>
