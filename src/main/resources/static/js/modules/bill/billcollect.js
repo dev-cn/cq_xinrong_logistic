@@ -129,7 +129,7 @@ var vm = new Vue({
         },
         saveOrUpdate: function (event) {
 
-            if (isNullOrEmpty(vm.billCollect.status)) {
+            if (isBlank(vm.billCollect.status)) {
                 alert("请选择状态！");
                 return;
             }
