@@ -173,6 +173,9 @@ Menu.initColumn = function () {
             if (item.type === 2) {
                 return '<span class="label label-warning">按钮</span>';
             }
+            if (item.type === 3) {
+                return '<span class="label label-warning">金额</span>';
+            }
         }
         },
         {title: '排序号', field: 'orderNum', align: 'center', valign: 'middle', sortable: true, width: '100px'},

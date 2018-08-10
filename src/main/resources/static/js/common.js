@@ -1,3 +1,6 @@
+// 默认金额（屏蔽）返回值
+var AMOUNT_PERMISSION_NO = "#####.##";
+
 //jqGrid的配置信息
 $.jgrid.defaults.width = 1000;
 $.jgrid.defaults.responsive = true;
