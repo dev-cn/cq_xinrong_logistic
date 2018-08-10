@@ -28,6 +28,7 @@ CREATE TABLE `bill` (
   `delivery_addr` varchar(255) DEFAULT NULL COMMENT '提货地点',
   `arrival_addr` varchar(255) DEFAULT NULL COMMENT '到货地点',
   `goods_name` varchar(255) DEFAULT NULL COMMENT '货物名称',
+  `loading_capacity` decimal(20,2) DEFAULT NULL COMMENT '装载量',
   `train_no` varchar(255) DEFAULT NULL COMMENT '车次',
   `weight` decimal(20,2) DEFAULT NULL COMMENT '重量',
   `price` decimal(20,2) DEFAULT NULL COMMENT '单价',
