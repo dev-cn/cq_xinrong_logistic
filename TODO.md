@@ -13,3 +13,4 @@ SSL the verifyServerCertificate property is set to 'false'. You need either to e
 * 客户和车辆 下拉框提数，权限RequiresPermissions添加
 * ~~做`新增`操作时，搜索栏默认赋值了~~ 使用reset方法#template
 * bill 修改；导入；导出涉及到数据关联的需调整
+* bill 增加了 装载量 字段，需重新生成对应的mapper等信息
