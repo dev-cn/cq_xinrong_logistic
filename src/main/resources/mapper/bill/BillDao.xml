@@ -15,10 +15,10 @@
         <result property="goodsName" column="goods_name"/>
         <result property="trainNo" column="train_no"/>
         <result property="weight" column="weight"/>
-        <result property="price" column="price"/>
-        <result property="pickUpCharge" column="pick_up_charge"/>
-        <result property="deliveryFee" column="delivery_fee"/>
-        <result property="totalExpenses" column="total_expenses"/>
+        <result property="price" column="price" javaType="DECIMAL"/>
+        <result property="pickUpCharge" column="pick_up_charge" javaType="DECIMAL"/>
+        <result property="deliveryFee" column="delivery_fee" javaType="DECIMAL"/>
+        <result property="totalExpenses" column="total_expenses" javaType="DECIMAL"/>
         <result property="comment" column="comment"/>
         <result property="createAt" column="create_at"/>
         <result property="createBy" column="create_by"/>

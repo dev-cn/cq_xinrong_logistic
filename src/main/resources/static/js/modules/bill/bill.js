@@ -19,32 +19,24 @@ $(function () {
             {label: '重量', name: 'weight', index: 'weight', width: 80},
             {
                 label: '单价', name: 'price', index: 'price', width: 80,
-                formatter: function (cellvalue, options, rowObject) {
-                    if (!hasPermission('bill:bill:amount')) {
-                        return AMOUNT_PERMISSION_NO;
-                    }
-                    return cellvalue;
-                }
+                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
             },
             {
                 label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 80,
-                formatter: function (cellvalue, options, rowObject) {
-                    if (!hasPermission('bill:bill:amount')) {
-                        return AMOUNT_PERMISSION_NO;
-                    }
-                    return cellvalue;
-                }
+                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
             },
             {
                 label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 80,
-                formatter: function (cellvalue, options, rowObject) {
-                    if (!hasPermission('bill:bill:amount')) {
-                        return AMOUNT_PERMISSION_NO;
-                    }
-                    return cellvalue;
-                }
+                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
             },
-            {label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80},
+            {
+                label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80,
+                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
+            },
             {label: '备注', name: 'comment', index: 'comment', width: 180}
             // { label: '', name: 'createAt', index: 'create_at', width: 80 },
             // { label: '', name: 'createBy', index: 'create_by', width: 80 },
@@ -253,4 +245,11 @@ function Datetime() {
         vm.bill.deliveryDate = deliveryDate;
         vm.bill.arrivalDate = arrivalDate;
     });
+}
+
+function amountPermissionNo(cellvalue, options, rowObject) {
+    if (!hasPermission("bill:bill:amount")) {
+        return AMOUNT_PERMISSION_NO;
+    }
+    return cellvalue;
 }

@@ -14,3 +14,6 @@ SSL the verifyServerCertificate property is set to 'false'. You need either to e
 * ~~做`新增`操作时，搜索栏默认赋值了~~ 使用reset方法#template
 * bill 修改；导入；导出涉及到数据关联的需调整
 * bill 增加了 装载量 字段，需重新生成对应的mapper等信息
+* mapper 文件 javaType="DECIMAL"#template
+* 貌似给用户分配了权限，在查询对应菜单下列表时还是查询不到
+* select 下拉框权限把控
