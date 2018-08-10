@@ -55,8 +55,8 @@ $(function () {
         }
     });
     Datetime();
-    vm.getCustomerSelect();
-    vm.getVehicleSelect();
+    vm.getSelectForCustomer();
+    vm.getSelectForVehicle();
 
     new AjaxUpload('#excelImport', {
         action: baseURL + 'bill/bill/excelImport?token=' + token,
@@ -122,7 +122,7 @@ var vm = new Vue({
                 success: function (r) {
                     if (r.code === 0) {
                         alert('操作成功', function (index) {
-                            vm.reload();
+                            vm.reset();
                         });
                     } else {
                         alert(r.msg);
@@ -188,7 +188,7 @@ var vm = new Vue({
             $("#trackingNo").val("");
             vm.reload();
         },
-        getCustomerSelect: function (event) {
+        getSelectForCustomer: function (event) {
             $.ajax({
                 type: "POST",
                 url: baseURL + "baseinfo/customer/list/select",
@@ -198,7 +198,7 @@ var vm = new Vue({
                 }
             });
         },
-        getVehicleSelect: function (event) {
+        getSelectForVehicle: function (event) {
             $.ajax({
                 type: "POST",
                 url: baseURL + "baseinfo/vehicle/list/select",
