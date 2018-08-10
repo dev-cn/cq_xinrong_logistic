@@ -1,5 +1,5 @@
 # TODO LIST
-> 记录开发过程中临时遇到的问题、代办  #template注释：考虑制成模板
+> 记录开发过程中临时遇到的问题、代办  #template注释：考虑制成模板 
 * mapper文件中`queryTotal`查询总数需增加查询条件#template
 * 控制台出现如下WARN，貌似是没有配置证书，连接url后追加&useSSL=false，暂时添加了dev配置，其他根据环境配置
  url: jdbc:mysql://47.106.213.3:3306/xinrong?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false   
