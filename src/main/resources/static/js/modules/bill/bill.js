@@ -1,4 +1,5 @@
 $(function () {
+
     $("#jqGrid").jqGrid({
         url: baseURL + 'bill/bill/list',
         datatype: "json",
@@ -54,9 +55,6 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "srcoll"});
         }
     });
-    Datetime();
-    vm.getSelectForCustomer();
-    vm.getSelectForVehicle();
 
     new AjaxUpload('#excelImport', {
         action: baseURL + 'bill/bill/excelImport?token=' + token,
@@ -79,6 +77,11 @@ $(function () {
             }
         }
     });
+
+    Datetime();
+    vm.getSelectForCustomer();
+    vm.getSelectForVehicle();
+
 });
 
 var vm = new Vue({
