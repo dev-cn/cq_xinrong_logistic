@@ -10,6 +10,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
+import cq.anbu.modules.bill.entity.XinSiLuEntity;
 import cq.anbu.modules.bill.entity.YanFengEntity;
 import cq.anbu.modules.bill.service.YanFengService;
 import cq.anbu.modules.sys.controller.AbstractController;
@@ -27,8 +28,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +125,7 @@ public class YanFengController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<YanFengEntity> list = this.getYanFengEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("yanFengMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +160,14 @@ public class YanFengController extends AbstractController{
         List<YanFengEntity> yanFengEntityList = ExcelImportUtil.importExcel(excelFile, YanFengEntity.class, params);
         try {
             for (YanFengEntity yanFeng : yanFengEntityList) {
-                if (StringUtils.isNotBlank(yanFeng.getTrackingNo())) {
-                    YanFengEntity entity = yanFengService.queryObjectByTrackingNo(yanFeng.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        yanFengService.save(yanFeng);
-                    }
+                if (StringUtils.isBlank(yanFeng.getTrackingNo())) {
+                    yanFeng.setTrackingNo(UUID.randomUUID()+"");
+                }
+                YanFengEntity entity = yanFengService.queryObjectByTrackingNo(yanFeng.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    yanFengService.save(yanFeng);
                 }
             }
         } finally {

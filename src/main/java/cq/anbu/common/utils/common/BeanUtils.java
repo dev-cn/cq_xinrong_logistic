@@ -17,9 +17,10 @@ public class BeanUtils {
                     if (object == null || "null".equals(object)) {
                         declaredFields[i].set(bean, "");
                     }
-                } else if ("class java.math.BigDecimal".equalsIgnoreCase(declaredFields[i].getGenericType().toString())) {
+                }
+                else if ("class java.math.BigDecimal".equalsIgnoreCase(declaredFields[i].getGenericType().toString())) {
                     if (object == null || "null".equals(object)) {
-                        declaredFields[i].set(bean, new BigDecimal(0));
+                        declaredFields[i].set(bean,new BigDecimal(0));
                     }
                 }
             } catch (IllegalAccessException e) {

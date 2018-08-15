@@ -26,10 +26,10 @@ public class BoShiEntity extends BaseEntity {
     @Excel(name = "运单号")
 	private String trackingNo;
 	//提货日期
-    @Excel(name = "提货日期")
+    @Excel(name = "提货日期",format="yyyyMMdd")
 	private String deliveryDate;
 	//到货日期
-    @Excel(name = "到货日期")
+    @Excel(name = "到货日期",format="yyyyMMdd")
 	private String arrivalDate;
 	//提货地点
     @Excel(name = "提货地点")

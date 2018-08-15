@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.annotation.Excel;
 import cq.anbu.common.base.BaseEntity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -25,11 +26,11 @@ public class BoFanKeJiEntity extends BaseEntity {
     @Excel(name = "运单号")
 	private String trackingNo;
 	//提货日期
-    @Excel(name = "提货日期")
-	private String deliveryDate;
+    @Excel(name = "提货日期",format="yyyy-MM-dd")
+	private Date deliveryDate;
 	//到货日期
-    @Excel(name = "到货日期")
-	private String arrivalDate;
+    @Excel(name = "到货日期",format="yyyy-MM-dd")
+	private Date arrivalDate;
 	//提货地点
     @Excel(name = "提货地点")
 	private String deliveryAddr;
@@ -113,7 +114,7 @@ public class BoFanKeJiEntity extends BaseEntity {
 	/**
 	 * 设置：提货日期
 	 */
-	public void setDeliveryDate(String deliveryDate) {
+	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 	/**

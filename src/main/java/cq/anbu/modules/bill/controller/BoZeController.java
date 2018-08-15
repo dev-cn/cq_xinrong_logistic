@@ -10,6 +10,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
+import cq.anbu.modules.bill.entity.BoFanKeJiEntity;
 import cq.anbu.modules.bill.entity.BoZeEntity;
 import cq.anbu.modules.bill.service.BoZeService;
 import cq.anbu.modules.sys.controller.AbstractController;
@@ -27,8 +28,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +125,7 @@ public class BoZeController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<BoZeEntity> list = this.getBoZeEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("boZeMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +160,14 @@ public class BoZeController extends AbstractController{
         List<BoZeEntity> boZeEntityList = ExcelImportUtil.importExcel(excelFile, BoZeEntity.class, params);
         try {
             for (BoZeEntity boZe : boZeEntityList) {
-                if (StringUtils.isNotBlank(boZe.getTrackingNo())) {
-                    BoZeEntity entity = boZeService.queryObjectByTrackingNo(boZe.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        boZeService.save(boZe);
-                    }
+                if (StringUtils.isBlank(boZe.getTrackingNo())) {
+                    boZe.setTrackingNo(UUID.randomUUID()+"");
+                }
+                BoZeEntity entity = boZeService.queryObjectByTrackingNo(boZe.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    boZeService.save(boZe);
                 }
             }
         } finally {

@@ -10,6 +10,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
+import cq.anbu.modules.bill.entity.ShangHaiMingFangEntity;
 import cq.anbu.modules.bill.entity.SiWeiErEntity;
 import cq.anbu.modules.bill.service.SiWeiErService;
 import cq.anbu.modules.sys.controller.AbstractController;
@@ -27,8 +28,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +125,7 @@ public class SiWeiErController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<SiWeiErEntity> list = this.getSiWeiErEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("siWeiErMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +160,14 @@ public class SiWeiErController extends AbstractController{
         List<SiWeiErEntity> siWeiErEntityList = ExcelImportUtil.importExcel(excelFile, SiWeiErEntity.class, params);
         try {
             for (SiWeiErEntity siWeiEr : siWeiErEntityList) {
-                if (StringUtils.isNotBlank(siWeiEr.getTrackingNo())) {
-                    SiWeiErEntity entity = siWeiErService.queryObjectByTrackingNo(siWeiEr.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        siWeiErService.save(siWeiEr);
-                    }
+                if (StringUtils.isBlank(siWeiEr.getTrackingNo())) {
+                    siWeiEr.setTrackingNo(UUID.randomUUID()+"");
+                }
+                SiWeiErEntity entity = siWeiErService.queryObjectByTrackingNo(siWeiEr.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    siWeiErService.save(siWeiEr);
                 }
             }
         } finally {

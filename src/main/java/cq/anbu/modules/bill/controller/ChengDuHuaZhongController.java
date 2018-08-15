@@ -10,6 +10,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
+import cq.anbu.modules.bill.entity.BoShiEntity;
 import cq.anbu.modules.bill.entity.ChengDuHuaZhongEntity;
 import cq.anbu.modules.bill.service.ChengDuHuaZhongService;
 import cq.anbu.modules.sys.controller.AbstractController;
@@ -27,8 +28,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +125,7 @@ public class ChengDuHuaZhongController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<ChengDuHuaZhongEntity> list = this.getChengDuHuaZhongEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("chengDuHuaZhongMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +160,14 @@ public class ChengDuHuaZhongController extends AbstractController{
         List<ChengDuHuaZhongEntity> chengDuHuaZhongEntityList = ExcelImportUtil.importExcel(excelFile, ChengDuHuaZhongEntity.class, params);
         try {
             for (ChengDuHuaZhongEntity chengDuHuaZhong : chengDuHuaZhongEntityList) {
-                if (StringUtils.isNotBlank(chengDuHuaZhong.getTrackingNo())) {
-                    ChengDuHuaZhongEntity entity = chengDuHuaZhongService.queryObjectByTrackingNo(chengDuHuaZhong.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        chengDuHuaZhongService.save(chengDuHuaZhong);
-                    }
+                if (StringUtils.isBlank(chengDuHuaZhong.getTrackingNo())) {
+                    chengDuHuaZhong.setTrackingNo(UUID.randomUUID()+"");
+                }
+                ChengDuHuaZhongEntity entity = chengDuHuaZhongService.queryObjectByTrackingNo(chengDuHuaZhong.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    chengDuHuaZhongService.save(chengDuHuaZhong);
                 }
             }
         } finally {

@@ -10,6 +10,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
+import cq.anbu.modules.bill.entity.ChengDuHuaZhongEntity;
 import cq.anbu.modules.bill.entity.ChongQingYuanDingEntity;
 import cq.anbu.modules.bill.service.ChongQingYuanDingService;
 import cq.anbu.modules.sys.controller.AbstractController;
@@ -27,8 +28,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +125,7 @@ public class ChongQingYuanDingController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<ChongQingYuanDingEntity> list = this.getChongQingYuanDingEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("chongQingYuanDingMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +160,14 @@ public class ChongQingYuanDingController extends AbstractController{
         List<ChongQingYuanDingEntity> chongQingYuanDingEntityList = ExcelImportUtil.importExcel(excelFile, ChongQingYuanDingEntity.class, params);
         try {
             for (ChongQingYuanDingEntity chongQingYuanDing : chongQingYuanDingEntityList) {
-                if (StringUtils.isNotBlank(chongQingYuanDing.getTrackingNo())) {
-                    ChongQingYuanDingEntity entity = chongQingYuanDingService.queryObjectByTrackingNo(chongQingYuanDing.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        chongQingYuanDingService.save(chongQingYuanDing);
-                    }
+                if (StringUtils.isBlank(chongQingYuanDing.getTrackingNo())) {
+                    chongQingYuanDing.setTrackingNo(UUID.randomUUID()+"");
+                }
+                ChongQingYuanDingEntity entity = chongQingYuanDingService.queryObjectByTrackingNo(chongQingYuanDing.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    chongQingYuanDingService.save(chongQingYuanDing);
                 }
             }
         } finally {

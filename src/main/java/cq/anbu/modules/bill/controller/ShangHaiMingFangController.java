@@ -10,6 +10,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
+import cq.anbu.modules.bill.entity.SaWeiAoEntity;
 import cq.anbu.modules.bill.entity.ShangHaiMingFangEntity;
 import cq.anbu.modules.bill.service.ShangHaiMingFangService;
 import cq.anbu.modules.sys.controller.AbstractController;
@@ -27,8 +28,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +125,7 @@ public class ShangHaiMingFangController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<ShangHaiMingFangEntity> list = this.getShangHaiMingFangEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("shangHaiMingFangMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +160,14 @@ public class ShangHaiMingFangController extends AbstractController{
         List<ShangHaiMingFangEntity> shangHaiMingFangEntityList = ExcelImportUtil.importExcel(excelFile, ShangHaiMingFangEntity.class, params);
         try {
             for (ShangHaiMingFangEntity shangHaiMingFang : shangHaiMingFangEntityList) {
-                if (StringUtils.isNotBlank(shangHaiMingFang.getTrackingNo())) {
-                    ShangHaiMingFangEntity entity = shangHaiMingFangService.queryObjectByTrackingNo(shangHaiMingFang.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        shangHaiMingFangService.save(shangHaiMingFang);
-                    }
+                if (StringUtils.isBlank(shangHaiMingFang.getTrackingNo())) {
+                    shangHaiMingFang.setTrackingNo(UUID.randomUUID()+"");
+                }
+                ShangHaiMingFangEntity entity = shangHaiMingFangService.queryObjectByTrackingNo(shangHaiMingFang.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    shangHaiMingFangService.save(shangHaiMingFang);
                 }
             }
         } finally {

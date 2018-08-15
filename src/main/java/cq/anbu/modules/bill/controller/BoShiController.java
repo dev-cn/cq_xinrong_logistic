@@ -10,6 +10,7 @@ import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
 import cq.anbu.common.utils.common.BeanUtils;
 import cq.anbu.common.utils.excel.ExcelUtils;
+import cq.anbu.modules.bill.entity.BoFanKeJiEntity;
 import cq.anbu.modules.bill.entity.BoShiEntity;
 import cq.anbu.modules.bill.service.BoShiService;
 import cq.anbu.modules.sys.controller.AbstractController;
@@ -27,8 +28,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +125,7 @@ public class BoShiController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<BoShiEntity> list = this.getBoShiEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("boShiMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +160,14 @@ public class BoShiController extends AbstractController{
         List<BoShiEntity> boShiEntityList = ExcelImportUtil.importExcel(excelFile, BoShiEntity.class, params);
         try {
             for (BoShiEntity boShi : boShiEntityList) {
-                if (StringUtils.isNotBlank(boShi.getTrackingNo())) {
-                    BoShiEntity entity = boShiService.queryObjectByTrackingNo(boShi.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        boShiService.save(boShi);
-                    }
+                if (StringUtils.isBlank(boShi.getTrackingNo())) {
+                    boShi.setTrackingNo(UUID.randomUUID()+"");
+                }
+                BoShiEntity entity = boShiService.queryObjectByTrackingNo(boShi.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    boShiService.save(boShi);
                 }
             }
         } finally {

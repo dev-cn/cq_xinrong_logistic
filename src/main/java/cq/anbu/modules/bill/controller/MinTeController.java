@@ -27,8 +27,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-
+import java.util.UUID;
 
 
 /**
@@ -125,7 +124,7 @@ public class MinTeController extends AbstractController{
         Map<String, Object> map = Maps.newHashMap();
         List<MinTeEntity> list = this.getMinTeEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(BeanUtils.nullToBlankList(list));
-        map.put("minTeMap",listMap);
+        map.put("billMap",listMap);
 //        目前只需单sheet导出
         ExcelUtils.writeSingleExcel(response,billTemplatePath,billExcelName,map);
     }
@@ -160,15 +159,14 @@ public class MinTeController extends AbstractController{
         List<MinTeEntity> minTeEntityList = ExcelImportUtil.importExcel(excelFile, MinTeEntity.class, params);
         try {
             for (MinTeEntity minTe : minTeEntityList) {
-                if (StringUtils.isNotBlank(minTe.getTrackingNo())) {
-                    MinTeEntity entity = minTeService.queryObjectByTrackingNo(minTe.getTrackingNo());
-                    if (entity != null) {
-                        return R.error("数据已存在!");
-                    } else {
-                        minTeService.save(minTe);
-                    }
+                if (StringUtils.isBlank(minTe.getTrackingNo())) {
+                    minTe.setTrackingNo(UUID.randomUUID()+"");
+                }
+                MinTeEntity entity = minTeService.queryObjectByTrackingNo(minTe.getTrackingNo());
+                if (entity != null) {
+                    return R.error("数据已存在!");
                 } else {
-                    return R.error("导入的数据中运单号不存在,请检查数据是否正确");
+                    minTeService.save(minTe);
                 }
             }
         } finally {
