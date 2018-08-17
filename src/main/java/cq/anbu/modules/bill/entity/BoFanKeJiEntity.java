@@ -27,10 +27,10 @@ public class BoFanKeJiEntity extends BaseEntity {
 	private String trackingNo;
 	//提货日期
     @Excel(name = "提货日期",format="yyyy-MM-dd")
-	private Date deliveryDate;
+	private String deliveryDate;
 	//到货日期
     @Excel(name = "到货日期",format="yyyy-MM-dd")
-	private Date arrivalDate;
+	private String arrivalDate;
 	//提货地点
     @Excel(name = "提货地点")
 	private String deliveryAddr;
@@ -114,7 +114,7 @@ public class BoFanKeJiEntity extends BaseEntity {
 	/**
 	 * 设置：提货日期
 	 */
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 	/**
