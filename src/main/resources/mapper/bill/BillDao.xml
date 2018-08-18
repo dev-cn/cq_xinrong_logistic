@@ -13,7 +13,10 @@
         <result property="deliveryAddr" column="delivery_addr"/>
         <result property="arrivalAddr" column="arrival_addr"/>
         <result property="goodsName" column="goods_name"/>
+        <result property="loadingModel" column="loading_model"/>
+        <result property="palteNo" column="palte_no"/>
         <result property="trainNo" column="train_no"/>
+        <result property="shippedQuantity" column="shipped_quantity"/>
         <result property="weight" column="weight"/>
         <result property="price" column="price" javaType="DECIMAL"/>
         <result property="pickUpCharge" column="pick_up_charge" javaType="DECIMAL"/>
@@ -25,8 +28,6 @@
         <result property="updateAt" column="update_at"/>
         <result property="updateBy" column="update_by"/>
         <result property="isDelete" column="is_delete"/>
-        <result property="tCustomerId" column="t_customer_id"/>
-        <result property="tVehicleId" column="t_vehicle_id"/>
     </resultMap>
 
     <select id="queryObject" resultType="cq.anbu.modules.bill.entity.BillEntity">
@@ -76,7 +77,10 @@
         `delivery_addr`,
         `arrival_addr`,
         `goods_name`,
+        `loading_model`,
+        `palte_no`,
         `train_no`,
+        `shipped_quantity`,
         `weight`,
         `price`,
         `pick_up_charge`,
@@ -87,9 +91,7 @@
         `create_by`,
         `update_at`,
         `update_by`,
-        `is_delete`,
-        `t_customer_id`,
-        `t_vehicle_id`
+        `is_delete`
         )
         values
         (
@@ -100,7 +102,10 @@
         #{deliveryAddr},
         #{arrivalAddr},
         #{goodsName},
+        #{loadingModel},
+        #{palteNo},
         #{trainNo},
+        #{shippedQuantity},
         #{weight},
         #{price},
         #{pickUpCharge},
@@ -111,9 +116,7 @@
         #{createBy},
         #{updateAt},
         #{updateBy},
-        #{isDelete},
-        #{tCustomerId},
-        #{tVehicleId}
+        #{isDelete}
         )
     </insert>
 
@@ -127,7 +130,10 @@
             <if test="deliveryAddr != null">`delivery_addr` = #{deliveryAddr}, </if>
             <if test="arrivalAddr != null">`arrival_addr` = #{arrivalAddr}, </if>
             <if test="goodsName != null">`goods_name` = #{goodsName}, </if>
+            <if test="loadingModel != null">`loading_model` = #{loadingModel}, </if>
+            <if test="palteNo != null">`palte_no` = #{palteNo}, </if>
             <if test="trainNo != null">`train_no` = #{trainNo}, </if>
+            <if test="shippedQuantity != null">`shippedQuantity` = #{shippedQuantity}, </if>
             <if test="weight != null">`weight` = #{weight}, </if>
             <if test="price != null">`price` = #{price}, </if>
             <if test="pickUpCharge != null">`pick_up_charge` = #{pickUpCharge}, </if>
@@ -139,8 +145,6 @@
             <if test="updateAt != null">`update_at` = #{updateAt}, </if>
             <if test="updateBy != null">`update_by` = #{updateBy}, </if>
             <if test="isDelete != null">`is_delete` = #{isDelete}, </if>
-            <if test="tCustomerId != null">`t_customer_id` = #{tCustomerId}, </if>
-            <if test="tVehicleId != null">`t_vehicle_id` = #{tVehicleId}</if>
         </set>
         where id = #{id}
     </update>

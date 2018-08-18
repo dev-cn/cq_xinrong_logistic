@@ -39,9 +39,18 @@ public class BillEntity extends BaseEntity {
     //货物名称
     @Excel(name = "货物名称")
     private String goodsName;
+    //装载车型
+    @Excel(name = "装载车型")
+    private String loadingModel;
+    //车牌号
+    @Excel(name = "车牌号")
+    private String palteNo;
     //车次
     @Excel(name = "车次")
     private String trainNo;
+    //装载数量
+    @Excel(name = "装载数量")
+    private BigDecimal shippedQuantity;
     //重量
     @Excel(name = "重量")
     private BigDecimal weight;
@@ -60,12 +69,6 @@ public class BillEntity extends BaseEntity {
     //备注
     @Excel(name = "备注")
     private String comment;
-    //
-    @Excel(name = "客户信息ID")
-    private Long tCustomerId;
-    //
-    @Excel(name = "车辆信息ID")
-    private Long tVehicleId;
 
     private String beginDate;
 
@@ -184,6 +187,34 @@ public class BillEntity extends BaseEntity {
     }
 
     /**
+     * 设置：装载车型
+     */
+    public void setLoadingModel(String loadingModel) {
+        this.loadingModel = loadingModel;
+    }
+
+    /**
+     * 获取：装载车型
+     */
+    public String getLoadingModel() {
+        return loadingModel;
+    }
+
+    /**
+     * 设置：车牌号
+     */
+    public void setPalteNo(String palteNo) {
+        this.palteNo = palteNo;
+    }
+
+    /**
+     * 获取：车牌号
+     */
+    public String getPalteNo() {
+        return palteNo;
+    }
+
+    /**
      * 设置：车次
      */
     public void setTrainNo(String trainNo) {
@@ -195,6 +226,20 @@ public class BillEntity extends BaseEntity {
      */
     public String getTrainNo() {
         return trainNo;
+    }
+
+    /**
+     * 设置：装载数量
+     */
+    public void setShippedQuantity(BigDecimal shippedQuantity) {
+        this.shippedQuantity = shippedQuantity;
+    }
+
+    /**
+     * 获取：装载数量
+     */
+    public BigDecimal getShippedQuantity() {
+        return shippedQuantity;
     }
 
     /**
@@ -279,22 +324,6 @@ public class BillEntity extends BaseEntity {
      */
     public String getComment() {
         return comment;
-    }
-
-    public Long gettCustomerId() {
-        return tCustomerId;
-    }
-
-    public void settCustomerId(Long tCustomerId) {
-        this.tCustomerId = tCustomerId;
-    }
-
-    public Long gettVehicleId() {
-        return tVehicleId;
-    }
-
-    public void settVehicleId(Long tVehicleId) {
-        this.tVehicleId = tVehicleId;
     }
 
     public String getBeginDate() {

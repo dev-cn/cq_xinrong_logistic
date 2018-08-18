@@ -95,8 +95,8 @@ $(function () {
     });
 
     Datetime();
-    vm.getSelectForCustomer();
-    vm.getSelectForVehicle();
+/*    vm.getSelectForCustomer();
+    vm.getSelectForVehicle();*/
 
 });
 
@@ -107,9 +107,9 @@ var vm = new Vue({
         title: null,
         bill: {
             trackingNo: null
-        },
+        }/*,
         customerList: {},
-        vehicleList: {}
+        vehicleList: {}*/
     },
     methods: {
         query: function () {
@@ -206,7 +206,7 @@ var vm = new Vue({
             $("#endDate").val("");
             $("#trackingNo").val("");
             vm.reload();
-        },
+        }/*,
         getSelectForCustomer: function (event) {
             $.ajax({
                 type: "POST",
@@ -226,7 +226,7 @@ var vm = new Vue({
                     vm.vehicleList = r.select;
                 }
             });
-        }
+        }*/
     }
 });
 
