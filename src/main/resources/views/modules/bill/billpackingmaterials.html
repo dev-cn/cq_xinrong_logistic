@@ -35,8 +35,11 @@
                 <input id="transpotSupplier" type="text" class="form-control" v-model="billPackingMaterials.transpotSupplier" @keyup.enter="query"
                        placeholder="运输供应商">
             </div>
-            <div class="form-group col-sm-2" style="width:100px">
+            <!--<div class="form-group col-sm-2" style="width:100px">
                 <input id="status" type="text" class="form-control" v-model="billPackingMaterials.status" @keyup.enter="query" placeholder="状态">
+            </div>-->
+            <div class="form-group col-sm-2" style="width:150px">
+                <select name="status" v-model="billPackingMaterials.status" class="form-control"></select>
             </div>
             <a class="btn btn-default" @click="query">查询</a>
             <a class="btn btn-default" @click="reset">重置</a>
@@ -87,7 +90,8 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label">日期</div>
                 <a class='input-group date' style="float: left;">
-                    <input type='text' id='datetimepicker1' v-model="billPackingMaterials.date" class="form-control" style="width: 150px; height: 30px;"/>
+                    <input type='text' id='datetimepicker1' v-model="billPackingMaterials.date" class="form-control" style="width: 150px; height: 30px;"
+                           autocomplete="off"/>
                     <span class="input-group-addon" style="width: 50px; height: 30px;">
 						<span class="glyphicon glyphicon-calendar"></span>
 					 </span>
@@ -126,85 +130,85 @@
             <div class="form-group">
                 <div class="col-sm-2 control-label">运输单价(含税保险)</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.transpotPrice" placeholder="运输单价(含税保险)"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.transpotPrice" placeholder="运输单价(含税保险)"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">纸箱</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.carton" placeholder="纸箱"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.carton" placeholder="纸箱"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">1#泡棉</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.foamOne" placeholder="1#泡棉"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.foamOne" placeholder="1#泡棉"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">2#泡棉</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.foamTwo" placeholder="2#泡棉"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.foamTwo" placeholder="2#泡棉"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">3#泡棉</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.foamThree" placeholder="3#泡棉"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.foamThree" placeholder="3#泡棉"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">4#泡棉</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.foamFour" placeholder="4#泡棉"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.foamFour" placeholder="4#泡棉"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">纸角撑</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.paperBrace" placeholder="纸角撑"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.paperBrace" placeholder="纸角撑"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">数量</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.quantity" placeholder="数量"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.quantity" placeholder="数量"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">总体积</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.voluneSum" placeholder="总体积"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.voluneSum" placeholder="总体积"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">总重量</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.weightSum" placeholder="总重量"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.weightSum" placeholder="总重量"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">提送运费</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.deliveryFee" placeholder="提送运费"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.deliveryFee" placeholder="提送运费"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">预提运费合计（含税10%）</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.advanceFeeIncludeTax" placeholder="预提运费合计（含税10%）"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.advanceFeeIncludeTax" placeholder="预提运费合计（含税10%）"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">预提运费合计（不含税）</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.advanceFeeNoTax" placeholder="预提运费合计（不含税）"/>
+                    <input type="number" class="form-control" v-model="billPackingMaterials.advanceFeeNoTax" placeholder="预提运费合计（不含税）"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-2 control-label">状态</div>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" v-model="billPackingMaterials.status" placeholder=""/>
+                    <select name="status" v-model="billPackingMaterials.status" class="form-control"></select>
                 </div>
             </div>
             <div class="form-group">

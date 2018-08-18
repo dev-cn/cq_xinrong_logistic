@@ -15,28 +15,21 @@ $(function () {
             {label: '运输产品', name: 'transpotProduct', index: 'transpot_product', width: 120},
             {label: '运输方式', name: 'transpotMode', index: 'transpot_mode', width: 80},
             {label: '车型', name: 'motorcycleType', index: 'motorcycle_type', width: 80},
-            {label: '运输单价(含税保险)', name: 'transpotPrice', index: 'transpot_price', width: 180},
-            {label: '纸箱', name: 'carton', index: 'carton', width: 80},
-            {label: '1#泡棉', name: 'foamOne', index: 'foam_one', width: 80},
-            {label: '2#泡棉', name: 'foamTwo', index: 'foam_two', width: 80},
-            {label: '3#泡棉', name: 'foamThree', index: 'foam_three', width: 80},
-            {label: '4#泡棉', name: 'foamFour', index: 'foam_four', width: 80},
-            {label: '纸角撑', name: 'paperBrace', index: 'paper_brace', width: 80},
-            {label: '数量', name: 'quantity', index: 'quantity', width: 80},
-            {label: '总体积', name: 'voluneSum', index: 'volune_sum', width: 80},
-            {label: '总重量', name: 'weightSum', index: 'weight_sum', width: 80},
-            {label: '提送运费', name: 'deliveryFee', index: 'delivery_fee', width: 80},
-            {label: '预提合计(含税10%)', name: 'advanceFeeIncludeTax', index: 'advance_fee_include_tax', width: 180},
-            {label: '预提合计(不含税)', name: 'advanceFeeNoTax', index: 'advance_fee_no_tax', width: 180},
+            {label: '运输单价(含税保险)', name: 'transpotPrice', index: 'transpot_price', width: 180, formatter: amountPermissionNo},
+            {label: '纸箱', name: 'carton', index: 'carton', width: 80, formatter: "number"},
+            {label: '1#泡棉', name: 'foamOne', index: 'foam_one', width: 80, formatter: "number"},
+            {label: '2#泡棉', name: 'foamTwo', index: 'foam_two', width: 80, formatter: "number"},
+            {label: '3#泡棉', name: 'foamThree', index: 'foam_three', width: 80, formatter: "number"},
+            {label: '4#泡棉', name: 'foamFour', index: 'foam_four', width: 80, formatter: "number"},
+            {label: '纸角撑', name: 'paperBrace', index: 'paper_brace', width: 80, formatter: "number"},
+            {label: '数量', name: 'quantity', index: 'quantity', width: 80, formatter: "number"},
+            {label: '总体积', name: 'voluneSum', index: 'volune_sum', width: 80, formatter: "number"},
+            {label: '总重量', name: 'weightSum', index: 'weight_sum', width: 80, formatter: "number"},
+            {label: '提送运费', name: 'deliveryFee', index: 'delivery_fee', width: 80, formatter: amountPermissionNo},
+            {label: '预提合计(含税10%)', name: 'advanceFeeIncludeTax', index: 'advance_fee_include_tax', width: 180, formatter: amountPermissionNo},
+            {label: '预提合计(不含税)', name: 'advanceFeeNoTax', index: 'advance_fee_no_tax', width: 180, formatter: amountPermissionNo},
             {label: '状态', name: 'status', index: 'status', width: 80},
             {label: '备注', name: 'comment', index: 'comment', width: 80}
-            // { label: '预留字段1', name: 'reserveOne', index: 'reserve_one', width: 80 },
-            // { label: '预留字段2', name: 'reserveTwo', index: 'reserve_two', width: 80 },
-            // { label: '', name: 'createAt', index: 'create_at', width: 80 },
-            // { label: '', name: 'createBy', index: 'create_by', width: 80 },
-            // { label: '', name: 'updateAt', index: 'update_at', width: 80 },
-            // { label: '', name: 'updateBy', index: 'update_by', width: 80 },
-            // { label: '', name: 'isDelete', index: 'is_delete', width: 80 }
         ],
         viewrecords: true,
         height: 385,
@@ -126,7 +119,7 @@ var vm = new Vue({
                 success: function (r) {
                     if (r.code === 0) {
                         alert('操作成功', function (index) {
-                            vm.reload();
+                            vm.reset();
                         });
                     } else {
                         alert(r.msg);

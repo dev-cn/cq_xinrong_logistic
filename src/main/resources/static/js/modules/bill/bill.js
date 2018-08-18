@@ -17,32 +17,11 @@ $(function () {
             {label: '车次', name: 'trainNo', index: 'train_no', width: 80},
             {label: '装载数量', name: 'shippedQuantity', index: 'shipped_quantity', width: 80},
             {label: '重量', name: 'weight', index: 'weight', width: 80},
-            {
-                label: '单价', name: 'price', index: 'price', width: 80,
-                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
-                formatter: amountPermissionNo
-            },
-            {
-                label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 80,
-                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
-                formatter: amountPermissionNo
-            },
-            {
-                label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 80,
-                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
-                formatter: amountPermissionNo
-            },
-            {
-                label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80,
-                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
-                formatter: amountPermissionNo
-            },
+            {label: '单价', name: 'price', index: 'price', width: 80, formatter: amountPermissionNo},
+            {label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 80, formatter: amountPermissionNo},
+            {label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 80, formatter: amountPermissionNo},
+            {label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80, formatter: amountPermissionNo},
             {label: '备注', name: 'comment', index: 'comment', width: 180}
-            // { label: '', name: 'createAt', index: 'create_at', width: 80 },
-            // { label: '', name: 'createBy', index: 'create_by', width: 80 },
-            // { label: '', name: 'updateAt', index: 'update_at', width: 80 },
-            // { label: '', name: 'updateBy', index: 'update_by', width: 80 },
-            // { label: '', name: 'isDelete', index: 'is_delete', width: 80 }
         ],
         viewrecords: true,
         height: 385,
@@ -95,8 +74,8 @@ $(function () {
     });
 
     Datetime();
-/*    vm.getSelectForCustomer();
-    vm.getSelectForVehicle();*/
+    /*    vm.getSelectForCustomer();
+        vm.getSelectForVehicle();*/
 
 });
 
