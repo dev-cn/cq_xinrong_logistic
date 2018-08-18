@@ -16,8 +16,16 @@ $(function () {
             {label: '运输产品', name: 'transpotProduct', index: 'transpot_product', width: 120},
             {label: '运输方式', name: 'transpotMode', index: 'transpot_mode', width: 80},
             {label: '车型', name: 'motorcycleType', index: 'motorcycle_type', width: 80},
-            {label: '运输单价(含税保险)', name: 'transpotPrice', index: 'transpot_price', width: 180},
-            {label: '数量', name: 'quantity', index: 'quantity', width: 80},
+            {
+                label: '运输单价(含税保险)',
+                name: 'transpotPrice',
+                index: 'transpot_price',
+                width: 180,
+                formatter: "number",
+                formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
+            },
+            {label: '数量', name: 'quantity', index: 'quantity', width: 80, formatter: "number"},
             {label: '总体积', name: 'voluneSum', index: 'volune_sum', width: 80, formatter: "number"},
             {label: '总重量', name: 'weightSum', index: 'weight_sum', width: 80, formatter: "number"},
             {
@@ -164,7 +172,7 @@ var vm = new Vue({
                 success: function (r) {
                     if (r.code === 0) {
                         alert('操作成功', function (index) {
-                            vm.reload();
+                            vm.reset();
                         });
                     } else {
                         alert(r.msg);
