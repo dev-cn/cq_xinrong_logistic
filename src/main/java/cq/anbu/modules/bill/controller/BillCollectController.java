@@ -127,7 +127,7 @@ public class BillCollectController extends AbstractController {
         List<BillCollectEntity> list = this.getBillCollectEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
         map.put("billCollectMap", listMap);
-         ExcelUtils.writeSingleExcel(response, billCollectTemplatePath, billCollectExcelName, map);
+        ExcelUtils.writeSingleExcel(response, billCollectTemplatePath, billCollectExcelName, map);
     }
 
     private List<BillCollectEntity> getBillCollectEntityList(String ids) {
@@ -142,6 +142,7 @@ public class BillCollectController extends AbstractController {
 
     /**
      * 导入
+     *
      * @param multfile
      * @param request
      * @return
