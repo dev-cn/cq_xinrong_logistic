@@ -18,11 +18,32 @@ $(function () {
             {label: '车型', name: 'motorcycleType', index: 'motorcycle_type', width: 80},
             {label: '运输单价(含税保险)', name: 'transpotPrice', index: 'transpot_price', width: 180},
             {label: '数量', name: 'quantity', index: 'quantity', width: 80},
-            {label: '总体积', name: 'voluneSum', index: 'volune_sum', width: 80},
-            {label: '总重量', name: 'weightSum', index: 'weight_sum', width: 80},
-            {label: '提送运费', name: 'deliveryFee', index: 'delivery_fee', width: 80},
-            {label: '预提合计(含税10%)', name: 'advanceFeeIncludeTax', index: 'advance_fee_include_tax', width: 180},
-            {label: '预提合计(不含税)', name: 'advanceFeeNoTax', index: 'advance_fee_no_tax', width: 180},
+            {label: '总体积', name: 'voluneSum', index: 'volune_sum', width: 80, formatter: "number"},
+            {label: '总重量', name: 'weightSum', index: 'weight_sum', width: 80, formatter: "number"},
+            {
+                label: '提送运费',
+                name: 'deliveryFee',
+                index: 'delivery_fee',
+                width: 80,
+                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
+            },
+            {
+                label: '预提合计(含税10%)',
+                name: 'advanceFeeIncludeTax',
+                index: 'advance_fee_include_tax',
+                width: 180,
+                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
+            },
+            {
+                label: '预提合计(不含税)',
+                name: 'advanceFeeNoTax',
+                index: 'advance_fee_no_tax',
+                width: 180,
+                formatter: "number", formatoptions: {thousandsSeparator: ",", decimalPlaces: 2},
+                formatter: amountPermissionNo
+            },
             {
                 label: '状态', name: 'status', index: 'status', width: 80,
                 formatter: function (value, row, index) {
@@ -218,4 +239,3 @@ function Datetime() {
         vm.billCollect.date = date;
     });
 }
-

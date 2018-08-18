@@ -247,9 +247,3 @@ function Datetime() {
     });
 }
 
-function amountPermissionNo(cellvalue, options, rowObject) {
-    if (!hasPermission("bill:bill:amount")) {
-        return AMOUNT_PERMISSION_NO;
-    }
-    return cellvalue;
-}
