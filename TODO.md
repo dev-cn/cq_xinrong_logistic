@@ -17,3 +17,8 @@ SSL the verifyServerCertificate property is set to 'false'. You need either to e
 * mapper 文件 javaType="DECIMAL"#template
 * 貌似给用户分配了权限，在查询对应菜单下列表时还是查询不到
 * select 下拉框权限把控
+
+
+## 2018.08.19
+* 录入时，重量、费用等最大值业务限制
+* __在导出时，金额为保留两位数求和，无法自动四舍五入__

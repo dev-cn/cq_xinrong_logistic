@@ -5,6 +5,7 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.google.common.collect.Lists;
 import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.exception.RRException;
+import cq.anbu.common.utils.DateUtils;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
@@ -127,6 +128,7 @@ public class BillCollectController extends AbstractController {
         List<BillCollectEntity> list = this.getBillCollectEntityList(request.getParameter("ids"));
         List<Map<String, String>> listMap = ExcelUtils.getJavaBeanAttrAndValue(list);
         map.put("billCollectMap", listMap);
+        map.put("DATE_PATTERN_YYYYMM_CH", DateUtils.format(new Date(),DateUtils.DATE_PATTERN_YYYYMM_CH));
         ExcelUtils.writeSingleExcel(response, billCollectTemplatePath, billCollectExcelName, map);
     }
 

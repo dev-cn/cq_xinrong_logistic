@@ -5,6 +5,7 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.google.common.collect.Lists;
 import cq.anbu.common.annotation.SysLog;
 import cq.anbu.common.exception.RRException;
+import cq.anbu.common.utils.DateUtils;
 import cq.anbu.common.utils.PageUtils;
 import cq.anbu.common.utils.Query;
 import cq.anbu.common.utils.R;
@@ -123,7 +124,8 @@ public class BillPackingMaterialsController extends AbstractController {
         Map<String, Object> map = new HashMap<String, Object>();
         List<BillPackingMaterialsEntity> list = this.getBillPackingMaterialsEntityList(request.getParameter("ids"));
         map.put("billPackingMaterials", ExcelUtils.getJavaBeanAttrAndValue(list));
-         ExcelUtils.writeSingleExcel(response, billPackingMaterialsTemplatePath, billPackingMaterialsExcelName, map);
+        map.put("DATE_PATTERN_YYYYMM_CH", DateUtils.format(new Date(), DateUtils.DATE_PATTERN_YYYYMM_CH));
+        ExcelUtils.writeSingleExcel(response, billPackingMaterialsTemplatePath, billPackingMaterialsExcelName, map);
     }
 
     private List<BillPackingMaterialsEntity> getBillPackingMaterialsEntityList(String ids) {
@@ -138,6 +140,7 @@ public class BillPackingMaterialsController extends AbstractController {
 
     /**
      * 导入
+     *
      * @param multfile
      * @param request
      * @return

@@ -15,6 +15,7 @@ public class DateUtils {
     public final static String DATE_PATTERN = "yyyy-MM-dd";
     public final static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
     public final static String DATE_PATTERN_YYYYMMDD = "yyyyMMdd";
+    public final static String DATE_PATTERN_YYYYMM_CH = "yyyy年MM月";
 
     public static String format(Date date) {
         return format(date, DATE_PATTERN);
