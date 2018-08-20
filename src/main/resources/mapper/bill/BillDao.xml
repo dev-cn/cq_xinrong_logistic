@@ -65,6 +65,26 @@
 
     <select id="queryTotal" resultType="int">
         select count(*) from bill
+        <where>
+            <if test="trackingNo != null and trackingNo.trim() != ''">
+                and `tracking_no` like concat('%',#{trackingNo},'%')
+            </if>
+
+            <if test="beginDate != null and beginDate.trim() != ''">
+                and `create_at` between #{beginDate} and #{endDate}
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <insert id="save" parameterType="cq.anbu.modules.bill.entity.BillEntity" useGeneratedKeys="true" keyProperty="id">
@@ -133,7 +153,7 @@
             <if test="loadingModel != null">`loading_model` = #{loadingModel}, </if>
             <if test="palteNo != null">`palte_no` = #{palteNo}, </if>
             <if test="trainNo != null">`train_no` = #{trainNo}, </if>
-            <if test="shippedQuantity != null">`shippedQuantity` = #{shippedQuantity}, </if>
+            <if test="shippedQuantity != null">`shipped_quantity` = #{shippedQuantity}, </if>
             <if test="weight != null">`weight` = #{weight}, </if>
             <if test="price != null">`price` = #{price}, </if>
             <if test="pickUpCharge != null">`pick_up_charge` = #{pickUpCharge}, </if>

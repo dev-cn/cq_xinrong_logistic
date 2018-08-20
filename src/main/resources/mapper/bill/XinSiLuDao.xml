@@ -19,9 +19,9 @@
         <result property="shippedQuantity" column="shipped_quantity"/>
         <result property="weight" column="weight"/>
         <result property="price" column="price"/>
-        <result property="pickUpCharge" column="pick_up_charge"/>
-        <result property="deliveryFee" column="delivery_fee"/>
-        <result property="totalExpenses" column="total_expenses"/>
+        <result property="pickUpCharge" column="pick_up_charge" javaType="DECIMAL"/>
+        <result property="deliveryFee" column="delivery_fee" javaType="DECIMAL"/>
+        <result property="totalExpenses" column="total_expenses" javaType="DECIMAL"/>
         <result property="comment" column="comment"/>
         <result property="createAt" column="create_at"/>
         <result property="createBy" column="create_by"/>
@@ -64,7 +64,27 @@
 	</select>
 	
  	<select id="queryTotal" resultType="int">
-		select count(*) from ab_bill_xin_si_lu 
+		select count(*) from ab_bill_xin_si_lu
+		<where>
+			<if test="trackingNo != null and trackingNo.trim() != ''">
+				and `tracking_no` like concat('%',#{trackingNo},'%')
+			</if>
+
+			<if test="beginDate != null and beginDate.trim() != ''">
+				and `create_at` between #{beginDate} and #{endDate}
+			</if>
+		</where>
+		<choose>
+			<when test="sidx != null and sidx.trim() != ''">
+				order by ${sidx} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 	 
 	<insert id="save" parameterType="cq.anbu.modules.bill.entity.XinSiLuEntity" useGeneratedKeys="true" keyProperty="id">

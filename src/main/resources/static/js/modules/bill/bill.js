@@ -1,5 +1,4 @@
 $(function () {
-
     $("#jqGrid").jqGrid({
         url: baseURL + 'bill/bill/list',
         datatype: "json",
@@ -73,7 +72,7 @@ $(function () {
         }
     });
 
-    Datetime();
+
     /*    vm.getSelectForCustomer();
         vm.getSelectForVehicle();*/
 
@@ -97,6 +96,7 @@ var vm = new Vue({
         add: function () {
             vm.showList = false;
             vm.title = "新增";
+            vm.bill = {};
         },
         update: function (event) {
             var id = getSelectedRow();
@@ -105,7 +105,6 @@ var vm = new Vue({
             }
             vm.showList = false;
             vm.title = "修改";
-
             vm.getInfo(id)
         },
         saveOrUpdate: function (event) {
@@ -208,21 +207,4 @@ var vm = new Vue({
         }*/
     }
 });
-
-function Datetime() {
-    $('#datetimepicker1,#datetimepicker2').datetimepicker({
-        language: 'zh-CN',//显示中文
-        format: 'yyyy-mm-dd',//显示格式
-        minView: "month",//设置只显示到月份
-        initialDate: new Date(),
-        autoclose: true,//选中自动关闭
-        todayBtn: true,//显示今日按钮
-        locale: moment.locale('zh-cn')
-    }).on('hide', function (ev) {
-        var deliveryDate = $("#datetimepicker1").val();
-        var arrivalDate = $("#datetimepicker2").val();
-        vm.bill.deliveryDate = deliveryDate;
-        vm.bill.arrivalDate = arrivalDate;
-    });
-}
 

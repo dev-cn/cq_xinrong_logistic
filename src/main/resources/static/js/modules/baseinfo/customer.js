@@ -42,7 +42,7 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
         }
     });
-    Datetime();
+
 });
 
 var vm = new Vue({
@@ -79,9 +79,7 @@ var vm = new Vue({
                 data: JSON.stringify(vm.customer),
                 success: function (r) {
                     if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
+                        alert('操作成功', function (index) {                            vm.reset();                        });
                     } else {
                         alert(r.msg);
                     }
@@ -133,17 +131,3 @@ var vm = new Vue({
     }
 });
 
-function Datetime() {
-    $('#datetimepicker1').val("");
-    $('#datetimepicker1').datetimepicker({
-        language: 'zh-CN',//显示中文
-        format: 'yyyy-mm-dd',//显示格式
-        minView: "month",//设置只显示到月份
-        initialDate: new Date(),
-        autoclose: true,//选中自动关闭
-        todayBtn: true,//显示今日按钮
-        locale: moment.locale('zh-cn')
-    }).on('hide', function (ev) {
-        vm.customer.ctime = (new Date($("#datetimepicker1").val())).Format("yyyy-MM-dd");
-    });
-}

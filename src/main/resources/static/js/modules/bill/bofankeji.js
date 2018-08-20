@@ -3,7 +3,6 @@ $(function () {
         url: baseURL + 'bill/bofankeji/list',
         datatype: "json",
         colModel: [
-            // { label: 'id', name: 'id', index: 'id', width: 50, key: true },
             {label: '序号', name: 'serialNo', index: 'serial_no', width: 120},
             {label: '运单号', name: 'trackingNo', index: 'tracking_no', width: 120},
             {label: '提货日期', name: 'deliveryDate', index: 'delivery_date', width: 120},
@@ -16,11 +15,11 @@ $(function () {
             {label: '车次', name: 'trainNo', index: 'train_no', width: 120},
             {label: '装载数量', name: 'shippedQuantity', index: 'shipped_quantity', width: 120},
             {label: '重量', name: 'weight', index: 'weight', width: 120},
-            {label: '单价', name: 'price', index: 'price', width: 120},
-            {label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 120},
-            {label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 120},
-            {label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 120},
-            {label: '备注', name: 'comment', index: 'comment', width: 120}
+            {label: '单价', name: 'price', index: 'price', width: 80, formatter: amountPermissionNo},
+            {label: '提货费', name: 'pickUpCharge', index: 'pick_up_charge', width: 80, formatter: amountPermissionNo},
+            {label: '送货费', name: 'deliveryFee', index: 'delivery_fee', width: 80, formatter: amountPermissionNo},
+            {label: '费用合计', name: 'totalExpenses', index: 'total_expenses', width: 80, formatter: amountPermissionNo},
+            {label: '备注', name: 'comment', index: 'comment', width: 180}
         ],
         viewrecords: true,
         height: 385,
@@ -49,7 +48,7 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "srcoll"});
         }
     });
-    Datetime();
+
 
     new AjaxUpload('#excelImport', {
         action: baseURL + 'bill/bofankeji/excelImport?token=' + token,
@@ -113,7 +112,7 @@ var vm = new Vue({
                 success: function (r) {
                     if (r.code === 0) {
                         alert('操作成功', function (index) {
-                            vm.reload();
+                            vm.reset();
                         });
                     } else {
                         alert(r.msg);
@@ -181,20 +180,3 @@ var vm = new Vue({
         }
     }
 });
-
-function Datetime() {
-    $('#datetimepicker1,#datetimepicker2').datetimepicker({
-        language: 'zh-CN',//显示中文
-        format: 'yyyy-mm-dd',//显示格式
-        minView: "month",//设置只显示到月份
-        initialDate: new Date(),
-        autoclose: true,//选中自动关闭
-        todayBtn: true,//显示今日按钮
-        locale: moment.locale('zh-cn')
-    }).on('hide', function (ev) {
-        var deliveryDate = $("#datetimepicker1").val();
-        var arrivalDate = $("#datetimepicker2").val();
-        vm.boFanKeJi.deliveryDate = deliveryDate;
-        vm.boFanKeJi.arrivalDate = arrivalDate;
-    });
-}

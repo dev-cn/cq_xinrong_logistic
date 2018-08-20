@@ -21,9 +21,9 @@
         <result property="quantity" column="quantity"/>
         <result property="voluneSum" column="volune_sum"/>
         <result property="weightSum" column="weight_sum"/>
-        <result property="deliveryFee" column="delivery_fee"/>
-        <result property="advanceFeeIncludeTax" column="advance_fee_include_tax"/>
-        <result property="advanceFeeNoTax" column="advance_fee_no_tax"/>
+        <result property="deliveryFee" column="delivery_fee" javaType="DECIMAL"/>
+        <result property="advanceFeeIncludeTax" column="advance_fee_include_tax" javaType="DECIMAL"/>
+        <result property="advanceFeeNoTax" column="advance_fee_no_tax" javaType="DECIMAL"/>
         <result property="status" column="status"/>
         <result property="comment" column="comment"/>
         <result property="reserveOne" column="reserve_one"/>
@@ -72,6 +72,29 @@
 
     <select id="queryTotal" resultType="int">
         select count(*) from bill_collect
+        <where>
+            <if test="transpotNo != null and transpotNo.trim() != ''">
+                and `transpot_no` like concat('%',#{transpotNo},'%')
+            </if>
+            <if test="transpotSupplier != null and transpotSupplier.trim() != ''">
+                and `transpot_supplier` like concat('%',#{transpotSupplier},'%')
+            </if>
+            <if test="status != null and status.trim() != ''">
+                and `status` like concat('%',#{status},'%')
+            </if>
+        </where>
+
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
     <insert id="save" parameterType="cq.anbu.modules.bill.entity.BillCollectEntity" useGeneratedKeys="true" keyProperty="id">

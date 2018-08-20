@@ -40,13 +40,6 @@ $(function () {
                 }
             },
             {label: '备注', name: 'comment', index: 'comment', width: 80}
-            // { label: '预留字段1', name: 'reserveOne', index: 'reserve_one', width: 80 },
-            // { label: '预留字段2', name: 'reserveTwo', index: 'reserve_two', width: 80 },
-            // { label: '', name: 'createAt', index: 'create_at', width: 80 },
-            // { label: '', name: 'createBy', index: 'create_by', width: 80 },
-            // { label: '', name: 'updateAt', index: 'update_at', width: 80 },
-            // { label: '', name: 'updateBy', index: 'update_by', width: 80 },
-            // { label: '', name: 'isDelete', index: 'is_delete', width: 80 }
         ],
         viewrecords: true,
         height: 385,
@@ -75,7 +68,7 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "srcoll"});
         }
     });
-    Datetime();
+
 
     new AjaxUpload('#excelImport', {
         action: baseURL + 'bill/billcollect/excelImport?token=' + token,
@@ -202,18 +195,3 @@ var vm = new Vue({
     }
 });
 
-function Datetime() {
-    $('#datetimepicker1').val("");
-    $('#datetimepicker1').datetimepicker({
-        language: 'zh-CN',//显示中文
-        format: 'yyyy-mm-dd',//显示格式
-        minView: "month",//设置只显示到月份
-        initialDate: new Date(),
-        autoclose: true,//选中自动关闭
-        todayBtn: true,//显示今日按钮
-        locale: moment.locale('zh-cn')
-    }).on('hide', function (ev) {
-        var date = $("#datetimepicker1").val();
-        vm.billCollect.date = date;
-    });
-}

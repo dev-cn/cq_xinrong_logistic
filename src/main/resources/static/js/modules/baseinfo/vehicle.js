@@ -73,9 +73,7 @@ var vm = new Vue({
                 data: JSON.stringify(vm.vehicle),
                 success: function (r) {
                     if (r.code === 0) {
-                        alert('操作成功', function (index) {
-                            vm.reload();
-                        });
+                        alert('操作成功', function (index) {                            vm.reset();                        });
                     } else {
                         alert(r.msg);
                     }
