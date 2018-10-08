@@ -1,60 +1,56 @@
 package cq.anbu.modules.bill.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cq.anbu.modules.bill.dao.SiWeiErDao;
+import cq.anbu.modules.bill.entity.SiWeiErEntity;
+import cq.anbu.modules.bill.service.SiWeiErService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-import cq.anbu.modules.bill.dao.SiWeiErDao;
-import cq.anbu.modules.bill.entity.SiWeiErEntity;
-import cq.anbu.modules.bill.service.SiWeiErService;
-
 
 
 @Service("siWeiErService")
-public class SiWeiErServiceImpl implements SiWeiErService {
-	@Autowired
-	private SiWeiErDao siWeiErDao;
-	
+public class SiWeiErServiceImpl extends BaseBillServiceImpl<SiWeiErDao,SiWeiErEntity> implements SiWeiErService {
+
 	@Override
 	public SiWeiErEntity queryObject(Long id){
-		return siWeiErDao.queryObject(id);
+		return super.queryObject(id);
 	}
 	
 	@Override
 	public List<SiWeiErEntity> queryList(Map<String, Object> map){
-		return siWeiErDao.queryList(map);
+		return super.queryList(map);
 	}
 
     @Override
     public SiWeiErEntity queryObjectByTrackingNo(String trackingNo) {
-        return siWeiErDao.queryObjectByTrackingNo(trackingNo);
+        return super.queryObjectByTrackingNo(trackingNo);
     }
 
 	@Override
 	public int queryTotal(Map<String, Object> map){
-		return siWeiErDao.queryTotal(map);
+		return super.queryTotal(map);
 	}
 	
 	@Override
 	public void save(SiWeiErEntity siWeiEr){
-		siWeiErDao.save(siWeiEr);
+		super.save(siWeiEr);
 	}
 	
 	@Override
 	public void update(SiWeiErEntity siWeiEr){
-		siWeiErDao.update(siWeiEr);
+		super.update(siWeiEr);
 	}
 	
 	@Override
 	public void delete(Long id){
-		siWeiErDao.delete(id);
+		super.delete(id);
 	}
 	
 	@Override
 	public void deleteBatch(Long[] ids){
-		siWeiErDao.deleteBatch(ids);
+		super.deleteBatch(ids);
 	}
 	
 }

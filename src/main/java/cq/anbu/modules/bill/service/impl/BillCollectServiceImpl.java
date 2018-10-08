@@ -22,7 +22,7 @@ public class BillCollectServiceImpl implements BillCollectService {
 
     @Override
     public BillCollectEntity queryObjectByTranspotNo(String transpotNo) {
-        return billCollectDao.queryObjectByTranspotNo(transpotNo);
+        return billCollectDao.queryObjectByTrackingNo(transpotNo);
     }
 
     @Override

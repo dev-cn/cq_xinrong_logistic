@@ -22,7 +22,7 @@ public class BillPackingMaterialsServiceImpl implements BillPackingMaterialsServ
 
     @Override
     public BillPackingMaterialsEntity queryObjectByTranspotNo(String transpotNo) {
-        return billPackingMaterialsDao.queryObjectByTranspotNo(transpotNo);
+        return billPackingMaterialsDao.queryObjectByTrackingNo(transpotNo);
     }
 
     @Override

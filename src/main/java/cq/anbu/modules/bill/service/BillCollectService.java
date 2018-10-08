@@ -12,6 +12,7 @@ import java.util.Map;
  * @email java_tangzg@163.com
  * @date 2018-06-10 09:48:20
  */
+@Deprecated
 public interface BillCollectService {
 
     BillCollectEntity queryObject(Long id);

@@ -45,7 +45,7 @@
         select * from bill_packing_materials where id = #{value}
     </select>
 
-    <select id="queryObjectByTranspotNo" resultType="cq.anbu.modules.bill.entity.BillEntity">
+    <select id="queryObjectByTranspotNo" resultType="cq.anbu.modules.bill.entity.BillPackingMaterialsEntity">
         select * from bill_packing_materials where transpot_no = #{transpotNo}
     </select>
 

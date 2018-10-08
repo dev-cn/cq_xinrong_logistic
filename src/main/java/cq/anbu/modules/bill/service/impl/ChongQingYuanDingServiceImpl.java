@@ -1,60 +1,57 @@
 package cq.anbu.modules.bill.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cq.anbu.modules.bill.dao.ChongQingYuanDingDao;
+import cq.anbu.modules.bill.entity.ChongQingYuanDingEntity;
+import cq.anbu.modules.bill.service.ChongQingYuanDingService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-import cq.anbu.modules.bill.dao.ChongQingYuanDingDao;
-import cq.anbu.modules.bill.entity.ChongQingYuanDingEntity;
-import cq.anbu.modules.bill.service.ChongQingYuanDingService;
-
 
 
 @Service("chongQingYuanDingService")
-public class ChongQingYuanDingServiceImpl implements ChongQingYuanDingService {
-	@Autowired
-	private ChongQingYuanDingDao chongQingYuanDingDao;
-	
+public class ChongQingYuanDingServiceImpl extends BaseBillServiceImpl<ChongQingYuanDingDao,ChongQingYuanDingEntity>
+		implements ChongQingYuanDingService {
+
 	@Override
 	public ChongQingYuanDingEntity queryObject(Long id){
-		return chongQingYuanDingDao.queryObject(id);
+		return super.queryObject(id);
 	}
 	
 	@Override
 	public List<ChongQingYuanDingEntity> queryList(Map<String, Object> map){
-		return chongQingYuanDingDao.queryList(map);
+		return super.queryList(map);
 	}
 
     @Override
     public ChongQingYuanDingEntity queryObjectByTrackingNo(String trackingNo) {
-        return chongQingYuanDingDao.queryObjectByTrackingNo(trackingNo);
+        return super.queryObjectByTrackingNo(trackingNo);
     }
 
 	@Override
 	public int queryTotal(Map<String, Object> map){
-		return chongQingYuanDingDao.queryTotal(map);
+		return super.queryTotal(map);
 	}
 	
 	@Override
 	public void save(ChongQingYuanDingEntity chongQingYuanDing){
-		chongQingYuanDingDao.save(chongQingYuanDing);
+		super.save(chongQingYuanDing);
 	}
 	
 	@Override
 	public void update(ChongQingYuanDingEntity chongQingYuanDing){
-		chongQingYuanDingDao.update(chongQingYuanDing);
+		super.update(chongQingYuanDing);
 	}
 	
 	@Override
 	public void delete(Long id){
-		chongQingYuanDingDao.delete(id);
+		super.delete(id);
 	}
 	
 	@Override
 	public void deleteBatch(Long[] ids){
-		chongQingYuanDingDao.deleteBatch(ids);
+		super.deleteBatch(ids);
 	}
 	
 }

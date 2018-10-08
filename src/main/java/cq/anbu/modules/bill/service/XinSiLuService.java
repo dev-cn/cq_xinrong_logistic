@@ -12,7 +12,7 @@ import java.util.Map;
  * @email java_tangzg@163.com
  * @date 2018-07-28 15:58:00
  */
-public interface XinSiLuService {
+public interface XinSiLuService extends BaseBillService<XinSiLuEntity>{
 	
 	XinSiLuEntity queryObject(Long id);
 	

@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface SaWeiAoDao extends BaseDao<SaWeiAoEntity> {
-    SaWeiAoEntity queryObjectByTrackingNo(String trackingNo);
 }

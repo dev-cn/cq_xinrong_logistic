@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ShangHaiMingFangDao extends BaseDao<ShangHaiMingFangEntity> {
-    ShangHaiMingFangEntity queryObjectByTrackingNo(String trackingNo);
 }

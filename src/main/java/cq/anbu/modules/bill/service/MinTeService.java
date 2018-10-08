@@ -12,21 +12,6 @@ import java.util.Map;
  * @email java_tangzg@163.com
  * @date 2018-07-28 15:58:00
  */
-public interface MinTeService {
-	
-	MinTeEntity queryObject(Long id);
-	
-	List<MinTeEntity> queryList(Map<String, Object> map);
+public interface MinTeService extends BaseBillService<MinTeEntity>{
 
-	MinTeEntity queryObjectByTrackingNo(String trackingNo);
-	
-	int queryTotal(Map<String, Object> map);
-	
-	void save(MinTeEntity minTe);
-	
-	void update(MinTeEntity minTe);
-	
-	void delete(Long id);
-	
-	void deleteBatch(Long[] ids);
 }

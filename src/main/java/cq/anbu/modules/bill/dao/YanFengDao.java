@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface YanFengDao extends BaseDao<YanFengEntity> {
-    YanFengEntity queryObjectByTrackingNo(String trackingNo);
 }

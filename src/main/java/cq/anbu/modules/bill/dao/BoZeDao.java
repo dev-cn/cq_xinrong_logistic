@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface BoZeDao extends BaseDao<BoZeEntity> {
-    BoZeEntity queryObjectByTrackingNo(String trackingNo);
 }

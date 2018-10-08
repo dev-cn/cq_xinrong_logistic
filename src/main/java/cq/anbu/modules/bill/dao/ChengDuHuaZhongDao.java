@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ChengDuHuaZhongDao extends BaseDao<ChengDuHuaZhongEntity> {
-    ChengDuHuaZhongEntity queryObjectByTrackingNo(String trackingNo);
 }

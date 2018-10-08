@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface BillPackingMaterialsDao extends BaseDao<BillPackingMaterialsEntity> {
-    BillPackingMaterialsEntity queryObjectByTranspotNo(String transpotNo);
 }

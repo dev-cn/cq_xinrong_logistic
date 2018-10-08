@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface BoFanKeJiDao extends BaseDao<BoFanKeJiEntity> {
-    BoFanKeJiEntity queryObjectByTrackingNo(String trackingNo);
 }

@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface MinTeDao extends BaseDao<MinTeEntity> {
-    MinTeEntity queryObjectByTrackingNo(String trackingNo);
+
 }

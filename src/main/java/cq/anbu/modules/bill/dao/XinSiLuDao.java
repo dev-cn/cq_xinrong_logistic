@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface XinSiLuDao extends BaseDao<XinSiLuEntity> {
-    XinSiLuEntity queryObjectByTrackingNo(String trackingNo);
 }

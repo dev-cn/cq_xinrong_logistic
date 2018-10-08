@@ -13,5 +13,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ChongQingYuanDingDao extends BaseDao<ChongQingYuanDingEntity> {
-    ChongQingYuanDingEntity queryObjectByTrackingNo(String trackingNo);
 }

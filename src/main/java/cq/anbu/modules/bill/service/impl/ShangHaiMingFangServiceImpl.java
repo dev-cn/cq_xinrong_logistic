@@ -1,60 +1,57 @@
 package cq.anbu.modules.bill.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cq.anbu.modules.bill.dao.ShangHaiMingFangDao;
+import cq.anbu.modules.bill.entity.ShangHaiMingFangEntity;
+import cq.anbu.modules.bill.service.ShangHaiMingFangService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-import cq.anbu.modules.bill.dao.ShangHaiMingFangDao;
-import cq.anbu.modules.bill.entity.ShangHaiMingFangEntity;
-import cq.anbu.modules.bill.service.ShangHaiMingFangService;
-
 
 
 @Service("shangHaiMingFangService")
-public class ShangHaiMingFangServiceImpl implements ShangHaiMingFangService {
-	@Autowired
-	private ShangHaiMingFangDao shangHaiMingFangDao;
-	
+public class ShangHaiMingFangServiceImpl extends BaseBillServiceImpl<ShangHaiMingFangDao,ShangHaiMingFangEntity>
+		implements ShangHaiMingFangService {
+
 	@Override
 	public ShangHaiMingFangEntity queryObject(Long id){
-		return shangHaiMingFangDao.queryObject(id);
+		return super.queryObject(id);
 	}
 	
 	@Override
 	public List<ShangHaiMingFangEntity> queryList(Map<String, Object> map){
-		return shangHaiMingFangDao.queryList(map);
+		return super.queryList(map);
 	}
 
     @Override
     public ShangHaiMingFangEntity queryObjectByTrackingNo(String trackingNo) {
-        return shangHaiMingFangDao.queryObjectByTrackingNo(trackingNo);
+        return super.queryObjectByTrackingNo(trackingNo);
     }
 
 	@Override
 	public int queryTotal(Map<String, Object> map){
-		return shangHaiMingFangDao.queryTotal(map);
+		return super.queryTotal(map);
 	}
 	
 	@Override
 	public void save(ShangHaiMingFangEntity shangHaiMingFang){
-		shangHaiMingFangDao.save(shangHaiMingFang);
+		super.save(shangHaiMingFang);
 	}
 	
 	@Override
 	public void update(ShangHaiMingFangEntity shangHaiMingFang){
-		shangHaiMingFangDao.update(shangHaiMingFang);
+		super.update(shangHaiMingFang);
 	}
 	
 	@Override
 	public void delete(Long id){
-		shangHaiMingFangDao.delete(id);
+		super.delete(id);
 	}
 	
 	@Override
 	public void deleteBatch(Long[] ids){
-		shangHaiMingFangDao.deleteBatch(ids);
+		super.deleteBatch(ids);
 	}
 	
 }

@@ -1,60 +1,56 @@
 package cq.anbu.modules.bill.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import cq.anbu.modules.bill.dao.BoFanKeJiDao;
+import cq.anbu.modules.bill.entity.BoFanKeJiEntity;
+import cq.anbu.modules.bill.service.BoFanKeJiService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-import cq.anbu.modules.bill.dao.BoFanKeJiDao;
-import cq.anbu.modules.bill.entity.BoFanKeJiEntity;
-import cq.anbu.modules.bill.service.BoFanKeJiService;
-
 
 
 @Service("boFanKeJiService")
-public class BoFanKeJiServiceImpl implements BoFanKeJiService {
-	@Autowired
-	private BoFanKeJiDao boFanKeJiDao;
-	
+public class BoFanKeJiServiceImpl extends BaseBillServiceImpl<BoFanKeJiDao,BoFanKeJiEntity> implements BoFanKeJiService {
+
 	@Override
 	public BoFanKeJiEntity queryObject(Long id){
-		return boFanKeJiDao.queryObject(id);
+		return super.queryObject(id);
 	}
 	
 	@Override
 	public List<BoFanKeJiEntity> queryList(Map<String, Object> map){
-		return boFanKeJiDao.queryList(map);
+		return super.queryList(map);
 	}
 
     @Override
     public BoFanKeJiEntity queryObjectByTrackingNo(String trackingNo) {
-        return boFanKeJiDao.queryObjectByTrackingNo(trackingNo);
+        return super.queryObjectByTrackingNo(trackingNo);
     }
 
 	@Override
 	public int queryTotal(Map<String, Object> map){
-		return boFanKeJiDao.queryTotal(map);
+		return super.queryTotal(map);
 	}
 	
 	@Override
 	public void save(BoFanKeJiEntity boFanKeJi){
-		boFanKeJiDao.save(boFanKeJi);
+		super.save(boFanKeJi);
 	}
 	
 	@Override
 	public void update(BoFanKeJiEntity boFanKeJi){
-		boFanKeJiDao.update(boFanKeJi);
+		super.update(boFanKeJi);
 	}
 	
 	@Override
 	public void delete(Long id){
-		boFanKeJiDao.delete(id);
+		super.delete(id);
 	}
 	
 	@Override
 	public void deleteBatch(Long[] ids){
-		boFanKeJiDao.deleteBatch(ids);
+		super.deleteBatch(ids);
 	}
 	
 }
